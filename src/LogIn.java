@@ -28,8 +28,8 @@ public class LogIn extends javax.swing.JFrame {
         initComponents();
          final String port="1521";
         final String db="xe";
-        final String user="emon49";
-        final String password="emon49";
+        final String user="Faria Alam";
+        final String password="4736910";
         
         final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
         try{
@@ -37,7 +37,7 @@ public class LogIn extends javax.swing.JFrame {
             if(conn!=null)
             {
                 
-                System.out.println("hellooo");
+                System.out.println("Connection Sucessful in LogIn");
                  statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                 
                 
@@ -66,7 +66,7 @@ public class LogIn extends javax.swing.JFrame {
         userNameTextField = new javax.swing.JTextField();
         password = new javax.swing.JLabel();
         passwordTextField = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        apply_button = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel4");
 
@@ -151,9 +151,15 @@ public class LogIn extends javax.swing.JFrame {
         rightPanel.add(passwordTextField);
         passwordTextField.setBounds(475, 303, 208, 58);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Admin\\Desktop\\Test\\Database_project_1\\images\\apply_seat_btn.png")); // NOI18N
-        rightPanel.add(jLabel1);
-        jLabel1.setBounds(440, 560, 280, 60);
+        apply_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/apply_seat_btn.png"))); // NOI18N
+        apply_button.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        apply_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                apply_buttonMouseClicked(evt);
+            }
+        });
+        rightPanel.add(apply_button);
+        apply_button.setBounds(430, 560, 266, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +197,7 @@ public class LogIn extends javax.swing.JFrame {
         //System.out.println("ID:"+id);
        // System.out.println("Pass:"+pass);
        
-        String query=String.format("select S_ID,S_Name from student_information where S_ID='%s' and S_Pass='%s'",id,pass);
+        String query=String.format("select * from student_information where S_ID='%s' and S_Pass='%s'",id,pass);
        try {
            resultSet = statement.executeQuery(query);
            if(resultSet.next()==false)
@@ -205,10 +211,13 @@ public class LogIn extends javax.swing.JFrame {
            else 
            {
            resultSet.beforeFirst();//if statement 
+           Student_Interface st=new Student_Interface(resultSet);
+           this.setVisible(false);
+           st.setVisible(true);
            
-           while(resultSet.next()){
-               System.out.println(resultSet.getString("S_ID")+resultSet.getString("S_Name"));
-           }
+//           while(resultSet.next()){
+//               System.out.println(resultSet.getString("S_ID")+resultSet.getString("S_Name"));
+//           }
            }
         } catch (SQLException ex) {
            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -227,11 +236,19 @@ public class LogIn extends javax.swing.JFrame {
 
     }//GEN-LAST:event_logInButtonMouseClicked
 
+    private void apply_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apply_buttonMouseClicked
+        ApplicationForm apf=new ApplicationForm();
+     this.setVisible(false);
+     apf.setVisible(true);
+        
+    }//GEN-LAST:event_apply_buttonMouseClicked
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+       
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -254,7 +271,8 @@ public class LogIn extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+      
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
               LogIn  l=new LogIn();
@@ -265,7 +283,7 @@ public class LogIn extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel apply_button;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JLabel logInButton;
