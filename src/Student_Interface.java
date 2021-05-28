@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,8 +27,10 @@ public class Student_Interface extends javax.swing.JFrame {
         initComponents();
         final String port="1521";
         final String db="xe";
-        final String user="Faria Alam";
-        final String password="4736910";
+//        final String user="Faria Alam";
+//        final String password="4736910";
+        final String user="emon49";
+        final String password="emon49";
         
         final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
         try{
@@ -217,6 +220,7 @@ public class Student_Interface extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     void showInfo()
@@ -233,14 +237,20 @@ public class Student_Interface extends javax.swing.JFrame {
          String mother=resultSet.getString("S_Mother_Name");
          String gender=resultSet.getString("S_Gender");
          String address=resultSet.getString("S_Home_Address");
-         String dob=resultSet.getString("S_DOB");
+         
+         //java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
+         java.sql.Date sDate=resultSet.getDate("S_DOB");
+         java.util.Date utilDate = new java.util.Date(sDate.getTime());
+         SimpleDateFormat sdf1 = new SimpleDateFormat("MMM dd,yyyy");
+         
+         String DOB_String = sdf1.format(utilDate);
          
          nameLabel.setText(name);
          IdLabel.setText(id);
          emailLabel.setText(email);
          deptLabel.setText(dept);
          regularityLabel.setText(regularity);
-         dobLabel.setText(dob);
+         dobLabel.setText(DOB_String);
          genderLabel.setText(gender);
          fatherLabel.setText(father);
          motherLabel.setText(mother);
