@@ -21,10 +21,10 @@ public class ApplicationForm extends javax.swing.JFrame {
         initComponents();
         final String port="1521";
         final String db="xe";
-//        final String user="Faria Alam";
-//        final String password="4736910";
-        final String user="emon49";
-        final String password="emon49";
+        final String user="Faria Alam";
+        final String password="4736910";
+//        final String user="emon49";
+//        final String password="emon49";
         
         final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
         try{
@@ -389,7 +389,7 @@ public class ApplicationForm extends javax.swing.JFrame {
         
         if(flag==1)
         {
-            String query=String.format("insert into student_information values('%s','%s','#123@','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0')",id,name,email,dept,reg,father,mother,sDate,gen,add);
+            String query=String.format("insert into student_information values('%s','%s','#123@','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0','NA')",id,name,email,dept,reg,father,mother,sDate,gen,add);
             
             
             try {

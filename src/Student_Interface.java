@@ -27,10 +27,10 @@ public class Student_Interface extends javax.swing.JFrame {
         initComponents();
         final String port="1521";
         final String db="xe";
-//        final String user="Faria Alam";
-//        final String password="4736910";
-        final String user="emon49";
-        final String password="emon49";
+        final String user="Faria Alam";
+        final String password="4736910";
+//        final String user="emon49";
+//        final String password="emon49";
         
         final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
         try{
@@ -40,6 +40,7 @@ public class Student_Interface extends javax.swing.JFrame {
                 
                 System.out.println("Connection Sucessful in Student_Interface");
                  statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+              
                  resultSet=res;
                  
                 
@@ -81,9 +82,15 @@ public class Student_Interface extends javax.swing.JFrame {
         homeLabel = new javax.swing.JLabel();
         Gender_Title = new javax.swing.JLabel();
         genderLabel = new javax.swing.JLabel();
+        phoneno_Title = new javax.swing.JLabel();
+        phonennoLabel = new javax.swing.JLabel();
+        Alternate_Title = new javax.swing.JLabel();
+        AlternateLabel = new javax.swing.JLabel();
+        room_Title = new javax.swing.JLabel();
+        roomLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(740, 560));
+        setPreferredSize(new java.awt.Dimension(740, 590));
 
         fullPanel.setBackground(new java.awt.Color(255, 255, 255));
         fullPanel.setLayout(null);
@@ -121,12 +128,12 @@ public class Student_Interface extends javax.swing.JFrame {
         ID_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ID_Title.setText("ID:");
         fullPanel.add(ID_Title);
-        ID_Title.setBounds(20, 220, 20, 30);
+        ID_Title.setBounds(20, 240, 20, 30);
 
         IdLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         IdLabel.setText("id");
         fullPanel.add(IdLabel);
-        IdLabel.setBounds(130, 220, 90, 30);
+        IdLabel.setBounds(130, 240, 90, 30);
 
         Email_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Email_Title.setText("Email:");
@@ -171,52 +178,82 @@ public class Student_Interface extends javax.swing.JFrame {
         father_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         father_Title.setText("Father's Name:");
         fullPanel.add(father_Title);
-        father_Title.setBounds(400, 230, 90, 30);
+        father_Title.setBounds(370, 240, 90, 30);
 
         fatherLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         fatherLabel.setText("fa");
         fullPanel.add(fatherLabel);
-        fatherLabel.setBounds(520, 230, 130, 30);
+        fatherLabel.setBounds(520, 240, 130, 30);
 
         Mother_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Mother_Title.setText("Mother's Name:");
         fullPanel.add(Mother_Title);
-        Mother_Title.setBounds(400, 280, 100, 30);
+        Mother_Title.setBounds(370, 280, 100, 30);
 
         motherLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         motherLabel.setText("mom");
         fullPanel.add(motherLabel);
-        motherLabel.setBounds(516, 280, 150, 30);
+        motherLabel.setBounds(520, 280, 150, 30);
 
         Home_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Home_Title.setText("Home Address:");
         fullPanel.add(Home_Title);
-        Home_Title.setBounds(400, 340, 100, 30);
+        Home_Title.setBounds(370, 330, 100, 30);
 
         homeLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         homeLabel.setText("home");
         fullPanel.add(homeLabel);
-        homeLabel.setBounds(520, 340, 180, 30);
+        homeLabel.setBounds(520, 330, 180, 30);
 
         Gender_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Gender_Title.setText("Gender:");
         fullPanel.add(Gender_Title);
-        Gender_Title.setBounds(20, 470, 70, 30);
+        Gender_Title.setBounds(20, 460, 70, 30);
 
         genderLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         genderLabel.setText("gen");
         fullPanel.add(genderLabel);
-        genderLabel.setBounds(130, 470, 70, 30);
+        genderLabel.setBounds(130, 460, 70, 30);
+
+        phoneno_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        phoneno_Title.setText("Phone No:");
+        fullPanel.add(phoneno_Title);
+        phoneno_Title.setBounds(370, 370, 100, 30);
+
+        phonennoLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        phonennoLabel.setText("ph");
+        fullPanel.add(phonennoLabel);
+        phonennoLabel.setBounds(520, 370, 170, 30);
+
+        Alternate_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Alternate_Title.setText("Alternate Phone No:");
+        fullPanel.add(Alternate_Title);
+        Alternate_Title.setBounds(370, 420, 130, 30);
+
+        AlternateLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        AlternateLabel.setText("alt");
+        fullPanel.add(AlternateLabel);
+        AlternateLabel.setBounds(520, 420, 160, 30);
+
+        room_Title.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        room_Title.setText("Room No:");
+        fullPanel.add(room_Title);
+        room_Title.setBounds(20, 510, 80, 20);
+
+        roomLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        roomLabel.setText("ro");
+        fullPanel.add(roomLabel);
+        roomLabel.setBounds(130, 510, 80, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fullPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
         );
 
         pack();
@@ -237,6 +274,7 @@ public class Student_Interface extends javax.swing.JFrame {
          String mother=resultSet.getString("S_Mother_Name");
          String gender=resultSet.getString("S_Gender");
          String address=resultSet.getString("S_Home_Address");
+         String roomno=resultSet.getString("Room_No");
          
          //java.util.Date utilDate = new java.util.Date(sqlDate.getTime());
          java.sql.Date sDate=resultSet.getDate("S_DOB");
@@ -244,7 +282,36 @@ public class Student_Interface extends javax.swing.JFrame {
          SimpleDateFormat sdf1 = new SimpleDateFormat("MMM dd,yyyy");
          
          String DOB_String = sdf1.format(utilDate);
+         //Counting rows of incoming contact table 
+         String query2=String.format("select count(*) as c from Student_Information SI inner join Student_Contact SC on SI.S_ID='%s' and SI.S_ID=SC.S_ID",id);
+         resultSet = statement.executeQuery(query2);
+         resultSet.next();
+         int rowcount=resultSet.getInt("c");
          
+         //For fetching info from Student_contact table
+         
+         String query3=String.format("select SC.phone_no from Student_Information SI inner join Student_Contact SC on SI.S_ID='%s' and SI.S_ID=SC.S_ID",id);
+          resultSet = statement.executeQuery(query3);
+         
+          int i=0;
+          String phn1="",altphn="";
+          while(resultSet.next())
+          {
+              if(i==0)
+              {
+                  phn1=resultSet.getString("phone_no");
+              }
+              else 
+              {
+                  altphn=resultSet.getString("phone_no");
+              }
+              i++;
+          }
+          
+          //System.out.println(phn1);
+         // System.out.println(altphn);
+          
+         //Setting on corresponding label
          nameLabel.setText(name);
          IdLabel.setText(id);
          emailLabel.setText(email);
@@ -255,9 +322,25 @@ public class Student_Interface extends javax.swing.JFrame {
          fatherLabel.setText(father);
          motherLabel.setText(mother);
          homeLabel.setText(address);
+         roomLabel.setText(roomno);
+         
+         if(rowcount==1)
+         {
+             phonennoLabel.setText(phn1);
+             Alternate_Title.setVisible(false);
+              AlternateLabel.setVisible(false);
+         }
+         else
+         {
+             phonennoLabel.setText(phn1);
+             AlternateLabel.setText(altphn);
+         }
+         
      } catch (SQLException ex) {
          Logger.getLogger(Student_Interface.class.getName()).log(Level.SEVERE, null, ex);
      }
+     
+     
      
      
      
@@ -293,6 +376,8 @@ public class Student_Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AlternateLabel;
+    private javax.swing.JLabel Alternate_Title;
     private javax.swing.JLabel DOB_Tiitle;
     private javax.swing.JLabel Dept_Tiltle;
     private javax.swing.JLabel Email_Title;
@@ -313,7 +398,11 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel homeLabel;
     private javax.swing.JLabel motherLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel phonennoLabel;
+    private javax.swing.JLabel phoneno_Title;
     private javax.swing.JLabel regularityLabel;
+    private javax.swing.JLabel roomLabel;
+    private javax.swing.JLabel room_Title;
     private javax.swing.JLabel yourInfoLabel;
     // End of variables declaration//GEN-END:variables
 }
