@@ -15,9 +15,10 @@ public class ManagerInterface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet;
-   int rowcount;
+   ResultSet resultSet,resultSet2,resultSet3;
+   
    ResultSetMetaData resultsetMetaData;
+   int rowcount;
    
     public ManagerInterface() {
         initComponents();
@@ -102,6 +103,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pendinglist = new javax.swing.JTable();
         addStdBtn = new javax.swing.JButton();
+        vacantRoomButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,7 +148,16 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addStdBtn);
-        addStdBtn.setBounds(500, 490, 190, 23);
+        addStdBtn.setBounds(500, 490, 190, 21);
+
+        vacantRoomButton.setText("Vacant Rooms");
+        vacantRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vacantRoomButtonMouseClicked(evt);
+            }
+        });
+        jPanel1.add(vacantRoomButton);
+        vacantRoomButton.setBounds(90, 590, 160, 21);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +174,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //Add All the approved students
     private void addStdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStdBtnActionPerformed
         
         for(int i=0;i<rowcount;i++)
@@ -171,22 +183,34 @@ public class ManagerInterface extends javax.swing.JFrame {
             String room_noo=((String)pendinglist.getValueAt(i,10)).toString();
             room_noo=room_noo.substring(1);  // Removing extra space for the front of the string
             Boolean chk= ((Boolean)pendinglist.getValueAt(i,11)).booleanValue();
-            for(int j=0;j< room_noo.length();j++)
-            {
-                System.out.println(j+"->"+room_noo.charAt(j));
-            }
-            System.out.println();
+            int count_seat=0;
             if(chk)
             {
+                
                 String query=String.format("update student_information set S_Status='1',Room_No='%s' where S_ID='%s'",room_noo,idd);
+              
                 try {
                     resultSet = statement.executeQuery(query);
+                      String query2=String.format("select Cur_No_Seat from Room_Information where Room_No='%s'",room_noo);
+                      resultSet2 = statement.executeQuery(query2);
+                      resultSet2.next();
+                    count_seat=resultSet2.getInt("Cur_No_Seat");
+                    System.out.println(count_seat);
+                    count_seat++;
+                    String query3=String.format("update Room_Information set Cur_No_Seat='%d' where Room_No='%s'",count_seat,room_noo);
+                    resultSet3 = statement.executeQuery(query3);
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }//GEN-LAST:event_addStdBtnActionPerformed
+
+    private void vacantRoomButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacantRoomButtonMouseClicked
+        VacantRoomList vr=new VacantRoomList();
+        vr.setVisible(true);
+    }//GEN-LAST:event_vacantRoomButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -229,5 +253,6 @@ public class ManagerInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pendinglist;
+    private javax.swing.JButton vacantRoomButton;
     // End of variables declaration//GEN-END:variables
 }
