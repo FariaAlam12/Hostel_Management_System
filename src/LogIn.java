@@ -18,23 +18,18 @@ import javax.swing.JOptionPane;
 
 
 public class LogIn extends javax.swing.JFrame {
-
-   //private static LogIn l;
     Connection conn;
    Statement statement;
    ResultSet resultSet;
    ResultSetMetaData resultsetMetaData;
     public LogIn() {
         initComponents();
-         final String port="1521";
-        final String db="xe";
-        final String user="Faria Alam";
-        final String password="4736910";
-//        final String user="emon49";
-//        final String password="emon49";
-        final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
+        
+        OracleConnection OC=new OracleConnection();
+        String[] stringArray = OC.connection();
+        
         try{
-            conn=DriverManager.getConnection(jdbcUrl,user,password);
+            conn=DriverManager.getConnection(stringArray[0],stringArray[1],stringArray[2]);
             if(conn!=null)
             {
                 
@@ -198,6 +193,10 @@ public class LogIn extends javax.swing.JFrame {
         //System.out.println("ID:"+id);
        // System.out.println("Pass:"+pass);
        
+       // Student login
+       if(id.charAt(0)=='2')
+       {
+       
         String query=String.format("select * from student_information where S_ID='%s' and S_Pass='%s'",id,pass);
        try {
            resultSet = statement.executeQuery(query);
@@ -223,7 +222,38 @@ public class LogIn extends javax.swing.JFrame {
         } catch (SQLException ex) {
            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
        }
-      
+       } 
+       
+       
+       
+       else
+       {
+           String query=String.format("select * from Stuff_Information where Stuff_ID='%s' and Stuff_Pass='%s'",id,pass);
+       try {
+           resultSet = statement.executeQuery(query);
+           if(resultSet.next()==false)
+           {
+               System.out.println("Not found");
+               JFrame f=new JFrame();  
+               JOptionPane.showMessageDialog(f,"Incorrect Id or Pass","Alert",JOptionPane.WARNING_MESSAGE);
+               userNameTextField.setText("");
+               passwordTextField.setText("");
+           }
+           else 
+           {
+           resultSet.beforeFirst();//if statement 
+           Stuff_Interface stu=new Stuff_Interface(resultSet);
+           this.setVisible(false);
+           stu.setVisible(true);
+           
+//           while(resultSet.next()){
+//               System.out.println(resultSet.getString("S_ID")+resultSet.getString("S_Name"));
+//           }
+           }
+        } catch (SQLException ex) {
+           java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+       }
+       }
       
        
        
