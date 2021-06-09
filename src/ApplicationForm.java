@@ -263,24 +263,146 @@ public class ApplicationForm extends javax.swing.JFrame {
         java.util.Date date=jDateChooser1.getDate();
         //SimpleDateFormat sdf1 = new SimpleDateFormat("dd-mom-yy");
         java.sql.Date sDate = new java.sql.Date(date.getTime()); // Convert to sql date
-        System.out.println("Date    :   "+ sDate);
+        //System.out.println("Date    :   "+ sDate);
         
- 
+        int flag=1;
+        JFrame f=new JFrame(); 
+        
+        //  Checking Name format
+        for(int i=0;i<name.length();i++)
+        {
+            if ((name.charAt(i)>='A' && name.charAt(i)<='Z') || (name.charAt(i)>='a' && name.charAt(i)<='z') || (name.charAt(i)=='.')|| (name.charAt(i)==' ') )
+            {
+                continue;
+            }
+            else
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Format of name is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
+                namefeild.setText("");
+                break;
+            }
+        }
+        //  Checking ID format
+        for(int i=0;i<id.length();i++)
+        {
+            if (id.charAt(i)>='0' && id.charAt(i)<='9')
+            {
+                continue;
+            }
+            else
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Id should contain only number","Alert",JOptionPane.WARNING_MESSAGE);
+                idfeild.setText("");
+                break;
+            }
+        }
+        //  Checking Email format
+        if(! email.contains("@gmail.com"))
+        {
+            flag=0;
+            JOptionPane.showMessageDialog(f,"Format of email is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
+            emailfeild.setText("");
+        }
+        
+        //  Checking Phone Number format
+        if(phone.length()==11)
+        {
+            String phnstrt="";
+            phnstrt=phnstrt+phone.charAt(0);
+            phnstrt=phnstrt+phone.charAt(1);
+            phnstrt=phnstrt+phone.charAt(2);
+            if(!(phnstrt!="013"|| phnstrt!="015"||phnstrt!="016"|| phnstrt!="017"||phnstrt!="018"|| phnstrt!="019"))
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Invalid format of phone number","Alert",JOptionPane.WARNING_MESSAGE);
+                phonefeild.setText("");
+            }
+        }
+        
+       
+        else
+        {
+            flag=0;
+            JOptionPane.showMessageDialog(f,"Phone number should contain 11 digit","Alert",JOptionPane.WARNING_MESSAGE);
+            phonefeild.setText("");
+        }
+        
+        //  Checking Alternative Phone Number format
+        if(altphone.length()>0)
+        {
+            String altphnstrt="";
+            altphnstrt=altphnstrt+altphone.charAt(0);
+            altphnstrt=altphnstrt+altphone.charAt(1);
+            altphnstrt=altphnstrt+altphone.charAt(2);
+            if(!(altphnstrt!="013"|| altphnstrt!="015"||altphnstrt!="016"|| altphnstrt!="017"||altphnstrt!="018"|| altphnstrt!="019"))
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Invalid format of alternate phone number","Alert",JOptionPane.WARNING_MESSAGE);
+                alternatefeild.setText("");
+            }
+        }
+
+        //  Checking Father's Name format
+        for(int i=0;i<father.length();i++)
+        {
+            if ((father.charAt(i)>='A' && father.charAt(i)<='Z')||(father.charAt(i)>='a' && father.charAt(i)<='z')||father.charAt(i)=='.'|| father.charAt(i)==' ')
+            {
+                continue;
+            }
+            else
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Format of Father's name is incorrect","Alert",JOptionPane.PLAIN_MESSAGE);
+                fatherfeild.setText("");
+                break;
+            }
+        }
+        
+        //  Checking mother's Name format
+        for(int i=0;i<mother.length();i++)
+        {
+            if ((mother.charAt(i)>='A' && mother.charAt(i)<='Z')||(mother.charAt(i)>='a' && mother.charAt(i)<='z')||mother.charAt(i)=='.'|| mother.charAt(i)==' ')
+            {
+                continue;
+            }
+            else
+            {
+                flag=0;
+                JOptionPane.showMessageDialog(f,"Format of Mother's name is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
+                motherfeild.setText("");
+                break;
+            }
+        }
+        
+               
+        
         
         if(name.isEmpty() || id.isEmpty() || email.isEmpty() || phone.isEmpty() || father.isEmpty() || mother.isEmpty() || add.isEmpty())
         {
-            JFrame f=new JFrame();  
+            flag=0;
             JOptionPane.showMessageDialog(f,"One of the required field is empty","Alert",JOptionPane.WARNING_MESSAGE);
         }
-        else
+        
+        
+        
+        if(flag==1)
         {
             String query=String.format("insert into student_information values('%s','%s','#123@','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0')",id,name,email,dept,reg,father,mother,sDate,gen,add);
+            
+            
             try {
            resultSet = statement.executeQuery(query);
+           this.setVisible(false);
+           JOptionPane.showMessageDialog(f,"Registered!!!");
             } catch (SQLException ex) {
-                System.out.println("Failed to insert");
-                Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
+                //System.out.println("Failed to insert");
+                JOptionPane.showMessageDialog(f,"ID already exist","Alert",JOptionPane.WARNING_MESSAGE);
+                idfeild.setText("");
+                //Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
        }
         
 //        System.out.println("Name: "+name);
