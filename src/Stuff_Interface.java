@@ -42,9 +42,7 @@ public class Stuff_Interface extends javax.swing.JFrame {
                 statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                 resultSet=res;
    
-            }
-            
-            
+            } 
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
@@ -173,7 +171,7 @@ public class Stuff_Interface extends javax.swing.JFrame {
         jPanel1.add(phnfield);
         phnfield.setBounds(140, 220, 200, 14);
 
-        altphnlabel.setText("A:lternative Phn :");
+        altphnlabel.setText("Alternative Phn :");
         jPanel1.add(altphnlabel);
         altphnlabel.setBounds(40, 280, 90, 14);
 
@@ -202,6 +200,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
             ManagerInterface MI=new ManagerInterface(id);
             this.setVisible(false);
             MI.setVisible(true);
+        }
+        else
+        {
+            AssignedWorkInterface AWI=new AssignedWorkInterface(id);
+            this.setVisible(false);
+            AWI.setVisible(true);
         }
         
         

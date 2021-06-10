@@ -15,7 +15,7 @@ public class ManagerInterface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2,resultSet3;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4;
    
    ResultSetMetaData resultsetMetaData;
    int rowcount;
@@ -48,8 +48,8 @@ public class ManagerInterface extends javax.swing.JFrame {
     }
     
     void showInfo()
-    {
-         String query=String.format("select count(*) as c from Student_Information where S_Status='0'");
+    {     // Show Info for apllicant
+       String query=String.format("select count(*) as c from Student_Information where S_Status='0'");
        try {
            resultSet = statement.executeQuery(query);
            resultSet.next();
@@ -86,7 +86,29 @@ public class ManagerInterface extends javax.swing.JFrame {
        } catch (SQLException ex) {
            Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
        }
-         
+       
+       
+       
+       // Show info for issue
+       DefaultTableModel model2;
+       model2=(DefaultTableModel) issueTable.getModel(); 
+       String query2=String.format("select RI.S_ID,RI.Issue_Name,RI.Issue_Descr,SI.Room_No from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and ri.issue_status=0");
+       try {
+           resultSet4 = statement.executeQuery(query2);
+            String stuid,issuename,issuedescription,roomno;
+           while(resultSet4.next())
+           {
+               stuid=resultSet4.getString("S_ID");
+               issuename=resultSet4.getString("Issue_Name");
+               issuedescription=resultSet4.getString("Issue_Descr");
+               roomno=resultSet4.getString("Room_No");
+               model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename," ",issuedescription});
+           }
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+       }
+   
     }
     
     /**
@@ -104,6 +126,11 @@ public class ManagerInterface extends javax.swing.JFrame {
         pendinglist = new javax.swing.JTable();
         addStdBtn = new javax.swing.JButton();
         vacantRoomButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        assignworkbtn = new javax.swing.JButton();
+        stufflistbtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        issueTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,7 +175,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addStdBtn);
-        addStdBtn.setBounds(500, 490, 190, 21);
+        addStdBtn.setBounds(500, 490, 190, 23);
 
         vacantRoomButton.setText("Vacant Rooms");
         vacantRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,17 +184,67 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(vacantRoomButton);
-        vacantRoomButton.setBounds(90, 590, 160, 21);
+        vacantRoomButton.setBounds(310, 490, 160, 23);
+
+        jLabel2.setText("Student Complain Or Seat Cancellation");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(90, 520, 220, 20);
+
+        assignworkbtn.setText("Assign Work");
+        assignworkbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignworkbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(assignworkbtn);
+        assignworkbtn.setBounds(540, 880, 110, 23);
+
+        stufflistbtn.setText("Show Stuff List");
+        stufflistbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stufflistbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(stufflistbtn);
+        stufflistbtn.setBounds(340, 880, 120, 23);
+
+        issueTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Student ID", "Room No", "Issue Name", "Stuff ID", "Issue Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(issueTable);
+
+        jPanel1.add(jScrollPane3);
+        jScrollPane3.setBounds(40, 560, 930, 280);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1176, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
         );
 
         pack();
@@ -186,11 +263,12 @@ public class ManagerInterface extends javax.swing.JFrame {
             int count_seat=0;
             if(chk)
             {
-                
+                // Updating student information table
                 String query=String.format("update student_information set S_Status='1',Room_No='%s' where S_ID='%s'",room_noo,idd);
               
                 try {
                     resultSet = statement.executeQuery(query);
+                    // Fetching current seat no of assigned room
                       String query2=String.format("select Cur_No_Seat from Room_Information where Room_No='%s'",room_noo);
                       resultSet2 = statement.executeQuery(query2);
                       resultSet2.next();
@@ -199,6 +277,17 @@ public class ManagerInterface extends javax.swing.JFrame {
                     count_seat++;
                     String query3=String.format("update Room_Information set Cur_No_Seat='%d' where Room_No='%s'",count_seat,room_noo);
                     resultSet3 = statement.executeQuery(query3);
+                    
+                        // Using procedure to update room information table
+//                      String query3=String.format("DECLARE\n" +
+//                       "rooms Room_Information.Room_No%TYPE:='%s';\n" +
+//                       "value Integer :='%d';"
+//                              + "BEGIN\n" +
+//                       "incre('%s','%d');\n" +
+//                       "END ",room_noo,count_seat,room_noo,count_seat);
+//                        resultSet3 = statement.executeQuery(query3);
+
+
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,6 +300,32 @@ public class ManagerInterface extends javax.swing.JFrame {
         VacantRoomList vr=new VacantRoomList();
         vr.setVisible(true);
     }//GEN-LAST:event_vacantRoomButtonMouseClicked
+
+    private void stufflistbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stufflistbtnActionPerformed
+        StuffListInterface sl=new StuffListInterface();
+        sl.setVisible(true);
+    }//GEN-LAST:event_stufflistbtnActionPerformed
+
+    private void assignworkbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignworkbtnActionPerformed
+      String query=String.format("select count(*) as c from Response_Issue where Issue_Status=0");
+       try {
+           resultSet = statement.executeQuery(query);
+            resultSet.next();
+           int no_of_row=resultSet.getInt("c");
+           System.out.println(no_of_row);
+           for(int i=0;i<no_of_row;i++)
+           {
+               //Object ob = issueTable.getModel().getValueAt(i,3);
+               String stuffid=((String)issueTable.getValueAt(i,3)).toString();
+               System.out.println(stuffid);
+           }
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+       }
+          
+        
+    }//GEN-LAST:event_assignworkbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,10 +364,15 @@ public class ManagerInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStdBtn;
+    private javax.swing.JButton assignworkbtn;
+    private javax.swing.JTable issueTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable pendinglist;
+    private javax.swing.JButton stufflistbtn;
     private javax.swing.JButton vacantRoomButton;
     // End of variables declaration//GEN-END:variables
 }

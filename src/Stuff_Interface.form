@@ -134,7 +134,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="altphnlabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="A:lternative Phn :"/>
+            <Property name="text" type="java.lang.String" value="Alternative Phn :"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

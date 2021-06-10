@@ -20,6 +20,7 @@ public class Student_Interface extends javax.swing.JFrame {
    Statement statement;
    ResultSet resultSet;
    ResultSetMetaData resultsetMetaData;
+   String id;
     public Student_Interface() {
         initComponents();
     }
@@ -83,9 +84,12 @@ public class Student_Interface extends javax.swing.JFrame {
         AlternateLabel = new javax.swing.JLabel();
         room_Title = new javax.swing.JLabel();
         roomLabel = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        ComplainButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(740, 590));
+        setPreferredSize(new java.awt.Dimension(740, 830));
 
         fullPanel.setBackground(new java.awt.Color(255, 255, 255));
         fullPanel.setLayout(null);
@@ -240,20 +244,68 @@ public class Student_Interface extends javax.swing.JFrame {
         fullPanel.add(roomLabel);
         roomLabel.setBounds(130, 510, 80, 20);
 
+        jPanel1.setBackground(new java.awt.Color(24, 44, 97));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Other Activities");
+
+        ComplainButton.setText("Complain");
+        ComplainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComplainButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(294, 294, 294)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(ComplainButton)))
+                .addContainerGap(326, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ComplainButton)
+                .addContainerGap(186, Short.MAX_VALUE))
+        );
+
+        fullPanel.add(jPanel1);
+        jPanel1.setBounds(0, 560, 740, 270);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ComplainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplainButtonActionPerformed
+        
+        this.setVisible(false);
+        ComplainInterface CI=new ComplainInterface(id);
+        CI.setVisible(true);
+           
+    }//GEN-LAST:event_ComplainButtonActionPerformed
 
     void showInfo()
     {
@@ -261,7 +313,7 @@ public class Student_Interface extends javax.swing.JFrame {
      try {
          resultSet.next();
          String name=resultSet.getString("S_Name");
-         String id=resultSet.getString("S_ID");
+         id=resultSet.getString("S_ID");
          String email=resultSet.getString("S_Email");
          String dept=resultSet.getString("S_Dept");
          String regularity=resultSet.getString("S_Regularity_Status");
@@ -373,6 +425,7 @@ public class Student_Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlternateLabel;
     private javax.swing.JLabel Alternate_Title;
+    private javax.swing.JButton ComplainButton;
     private javax.swing.JLabel DOB_Tiitle;
     private javax.swing.JLabel Dept_Tiltle;
     private javax.swing.JLabel Email_Title;
@@ -391,6 +444,8 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel genderLabel;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel homeLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel motherLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel phonennoLabel;
