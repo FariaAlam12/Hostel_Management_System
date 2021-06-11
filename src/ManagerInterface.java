@@ -1,4 +1,5 @@
 
+import com.email.durgesh.Email;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -267,6 +268,9 @@ public class ManagerInterface extends javax.swing.JFrame {
         for(int i=0;i<rowcount;i++)
         {
             String idd= ((String)pendinglist.getValueAt(i,0)).toString();
+            String S_name= ((String)pendinglist.getValueAt(i,1)).toString();
+             String mail= ((String)pendinglist.getValueAt(i,2)).toString();
+             System.out.println(mail);
             String room_noo=((String)pendinglist.getValueAt(i,10)).toString();
             room_noo=room_noo.substring(1);  // Removing extra space for the front of the string
             Boolean chk= ((Boolean)pendinglist.getValueAt(i,11)).booleanValue();
@@ -297,6 +301,24 @@ public class ManagerInterface extends javax.swing.JFrame {
 //                       "END ",room_noo,count_seat,room_noo,count_seat);
 //                        resultSet3 = statement.executeQuery(query3);
 
+                    
+                    try
+                     {
+                        Email email=new Email("pseudohall@gmail.com","@#Pseudo123");
+                        email.setFrom("pseudohall@gmail.com","Pseudo Hall");
+           
+                         email.setSubject("Seat Allotment Confirmation");
+                         String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\n Your login id : "+idd
+                                 +"\nYour Login pass : "+idd+"\n Your Room No: "+room_noo
+                                 +"\n You can change your pass later\n Thanks \nBest Regards\n Pseudo Hall Authority";
+                        email.setContent("<p>Helloooo</p>", "text/html");
+                        email.addRecipient("rafiemon71@gmail.com");
+                         email.send();
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
 
                     
                 } catch (SQLException ex) {
