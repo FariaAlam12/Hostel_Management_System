@@ -15,7 +15,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     String id;
     Connection conn;
     Statement statement;
-    ResultSet resultSet;
+    ResultSet resultSet,resultSet2;
     ResultSetMetaData resultsetMetaData;
     public AssignedWorkInterface() {
         initComponents();
@@ -147,6 +147,30 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbtnActionPerformed
+       
+            String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
+           try {
+            resultSet = statement.executeQuery(query);
+            resultSet.next();
+            int no_of_row=resultSet.getInt("c");
+          
+            for(int i=0;i<no_of_row;i++)
+            {
+               
+                String stuid= ((String)assignedworklisttable.getValueAt(i,0)).toString();
+                Integer cost= (Integer)assignedworklisttable.getValueAt(i, 3);
+                 Boolean chk= ((Boolean)assignedworklisttable.getValueAt(i,4)).booleanValue();
+                 if(chk)
+                 {
+                     //updating response issue table
+                      String query2=String.format("update Response_Issue set Issue_Status=2,Issue_Cost=%d where S_ID='%s'",cost,stuid);
+                       resultSet2 = statement.executeQuery(query2);
+                 }
+               
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_submitbtnActionPerformed
 
