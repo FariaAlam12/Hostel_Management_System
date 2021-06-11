@@ -1,5 +1,6 @@
 
 import com.email.durgesh.Email;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -278,7 +279,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             if(chk)
             {
                 // Updating student information table
-                String query=String.format("update student_information set S_Status='1',Room_No='%s' where S_ID='%s'",room_noo,idd);
+                String query=String.format("update student_information set S_Status='1',Room_No='%s',S_Pass='%s' where S_ID='%s'",room_noo,idd,idd);
               
                 try {
                     resultSet = statement.executeQuery(query);
@@ -288,37 +289,49 @@ public class ManagerInterface extends javax.swing.JFrame {
                       resultSet2.next();
                     count_seat=resultSet2.getInt("Cur_No_Seat");
                     System.out.println(count_seat);
-                    count_seat++;
-                    String query3=String.format("update Room_Information set Cur_No_Seat='%d' where Room_No='%s'",count_seat,room_noo);
-                    resultSet3 = statement.executeQuery(query3);
+//                    count_seat++;
+//                    String query3=String.format("update Room_Information set Cur_No_Seat='%d' where Room_No='%s'",count_seat,room_noo);
+//                    resultSet3 = statement.executeQuery(query3);
                     
                         // Using procedure to update room information table
-//                      String query3=String.format("DECLARE\n" +
-//                       "rooms Room_Information.Room_No%TYPE:='%s';\n" +
-//                       "value Integer :='%d';"
-//                              + "BEGIN\n" +
-//                       "incre('%s','%d');\n" +
-//                       "END ",room_noo,count_seat,room_noo,count_seat);
-//                        resultSet3 = statement.executeQuery(query3);
-
+                         CallableStatement cstmt = null;
+                           try {
+                                 String SQL = "{call incre (?, ?)}";
+                                 cstmt = conn.prepareCall (SQL);
+                                cstmt.setString(1,room_noo);
+                                cstmt.setInt(2,count_seat);
+                                System.out.println("Executing stored procedure..." );
+                                 cstmt.execute();
+   
+                            }
+                            catch (SQLException e) {
+   
+                                }
+                            finally {
+                                try {
+                                    cstmt.close();
+                                } catch (SQLException ex) {
+                                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                        }
                     
-                    try
-                     {
-                        Email email=new Email("pseudohall@gmail.com","@#Pseudo123");
-                        email.setFrom("pseudohall@gmail.com","Pseudo Hall");
-           
-                         email.setSubject("Seat Allotment Confirmation");
-                         String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\n Your login id : "+idd
-                                 +"\nYour Login pass : "+idd+"\n Your Room No: "+room_noo
-                                 +"\n You can change your pass later\n Thanks \nBest Regards\n Pseudo Hall Authority";
-                        email.setContent("<p>Helloooo</p>", "text/html");
-                        email.addRecipient("rafiemon71@gmail.com");
-                         email.send();
-                    }
-                    catch(Exception e)
-                    {
-                        e.printStackTrace();
-                    }
+//                    try
+//                     {
+//                        Email email=new Email("pseudohall@gmail.com","@#Pseudo123");
+//                        email.setFrom("pseudohall@gmail.com","Pseudo Hall");
+//           
+//                         email.setSubject("Seat Allotment Confirmation");
+//                         String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\n Your login id : "+idd
+//                                 +"\nYour Login pass : "+idd+"\n Your Room No: "+room_noo
+//                                 +"\n You can change your pass later\n Thanks \nBest Regards\n Pseudo Hall Authority";
+//                        email.setContent("<p>Helloooo</p>", "text/html");
+//                        email.addRecipient("rafiemon71@gmail.com");
+//                         email.send();
+//                    }
+//                    catch(Exception e)
+//                    {
+//                        e.printStackTrace();
+//                    }
 
                     
                 } catch (SQLException ex) {
