@@ -102,7 +102,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                issuename=resultSet4.getString("Issue_Name");
                issuedescription=resultSet4.getString("Issue_Descr");
                roomno=resultSet4.getString("Room_No");
-               model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename," ",issuedescription});
+               model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename,issuedescription," "});
            }
            
        } catch (SQLException ex) {
@@ -213,14 +213,14 @@ public class ManagerInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Room No", "Issue Name", "Stuff ID", "Issue Status"
+                "Student ID", "Room No", "Issue Name", "Issue Status", "Stuff ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -315,9 +315,15 @@ public class ManagerInterface extends javax.swing.JFrame {
            System.out.println(no_of_row);
            for(int i=0;i<no_of_row;i++)
            {
-               //Object ob = issueTable.getModel().getValueAt(i,3);
-               String stuffid=((String)issueTable.getValueAt(i,3)).toString();
-               System.out.println(stuffid);
+               
+               String stuid= ((String)issueTable.getValueAt(i,0)).toString();
+            //System.out.println(stuid);
+            
+            String stuffid=((String)issueTable.getValueAt(i,4)).toString();
+            stuffid=stuffid.substring(1);
+            //System.out.println(stuffid);
+            String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
+            resultSet4 = statement.executeQuery(query5);
            }
            
        } catch (SQLException ex) {

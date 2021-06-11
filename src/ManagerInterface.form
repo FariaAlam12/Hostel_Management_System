@@ -164,8 +164,8 @@
                     <Column editable="false" title="Student ID" type="java.lang.Object"/>
                     <Column editable="false" title="Room No" type="java.lang.Object"/>
                     <Column editable="false" title="Issue Name" type="java.lang.Object"/>
-                    <Column editable="true" title="Stuff ID" type="java.lang.String"/>
                     <Column editable="false" title="Issue Status" type="java.lang.Object"/>
+                    <Column editable="true" title="Stuff ID" type="java.lang.String"/>
                   </Table>
                 </Property>
               </Properties>
