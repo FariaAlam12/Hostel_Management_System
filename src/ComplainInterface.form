@@ -50,10 +50,10 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           <Component id="seatcancelbtn" min="-2" pref="124" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="complainbtm" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="complainbtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
@@ -63,12 +63,12 @@
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="267" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
                           <Component id="submitBtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="267" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="146" max="32767" attributes="0"/>
@@ -81,9 +81,9 @@
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="seatcancelbtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="complainbtm" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="complainbtn" min="-2" max="-2" attributes="0"/>
+                      <Component id="seatcancelbtn" min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="25" max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
             <Property name="text" type="java.lang.String" value="Seat Cancellation"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="complainbtm">
+        <Component class="javax.swing.JRadioButton" name="complainbtn">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="IssueBtnGrp"/>

@@ -59,7 +59,7 @@ public class ManagerInterface extends javax.swing.JFrame {
            query=String.format("select * from student_information where S_Status='0'");
            resultSet = statement.executeQuery(query);
            
-           resultsetMetaData =resultSet.getMetaData();
+           
            
            String name,id,email,dept,regularity,father,mother,gender,address,DOB_String;
            while(resultSet.next())
@@ -131,6 +131,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         stufflistbtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         issueTable = new javax.swing.JTable();
+        assignedworklistbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +176,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addStdBtn);
-        addStdBtn.setBounds(500, 490, 190, 23);
+        addStdBtn.setBounds(500, 490, 190, 21);
 
         vacantRoomButton.setText("Vacant Rooms");
         vacantRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -184,7 +185,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(vacantRoomButton);
-        vacantRoomButton.setBounds(310, 490, 160, 23);
+        vacantRoomButton.setBounds(310, 490, 160, 21);
 
         jLabel2.setText("Student Complain Or Seat Cancellation");
         jPanel1.add(jLabel2);
@@ -197,7 +198,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(assignworkbtn);
-        assignworkbtn.setBounds(540, 880, 110, 23);
+        assignworkbtn.setBounds(540, 880, 110, 21);
 
         stufflistbtn.setText("Show Stuff List");
         stufflistbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -206,14 +207,14 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(stufflistbtn);
-        stufflistbtn.setBounds(340, 880, 120, 23);
+        stufflistbtn.setBounds(340, 880, 120, 21);
 
         issueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Student ID", "Room No", "Issue Name", "Issue Status", "Stuff ID"
+                "Student ID", "Room No", "Issue Name", "Issue Name", "Stuff ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -235,6 +236,15 @@ public class ManagerInterface extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane3);
         jScrollPane3.setBounds(40, 560, 930, 280);
+
+        assignedworklistbtn.setText("Assigned Work Status");
+        assignedworklistbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignedworklistbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(assignedworklistbtn);
+        assignedworklistbtn.setBounds(730, 881, 180, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,6 +343,11 @@ public class ManagerInterface extends javax.swing.JFrame {
         
     }//GEN-LAST:event_assignworkbtnActionPerformed
 
+    private void assignedworklistbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignedworklistbtnActionPerformed
+       Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface();
+       aws.setVisible(true);
+    }//GEN-LAST:event_assignedworklistbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +385,7 @@ public class ManagerInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStdBtn;
+    private javax.swing.JButton assignedworklistbtn;
     private javax.swing.JButton assignworkbtn;
     private javax.swing.JTable issueTable;
     private javax.swing.JLabel jLabel1;

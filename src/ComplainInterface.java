@@ -37,7 +37,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         }
         id=idd;
         seatcancelbtn.setActionCommand("seatcancel");
-        complainbtm.setActionCommand("cancel");
+        complainbtn.setActionCommand("complain");
         
     }
 
@@ -54,7 +54,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         seatcancelbtn = new javax.swing.JRadioButton();
-        complainbtm = new javax.swing.JRadioButton();
+        complainbtn = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         decriptionArea = new javax.swing.JTextArea();
@@ -73,8 +73,8 @@ public class ComplainInterface extends javax.swing.JFrame {
         IssueBtnGrp.add(seatcancelbtn);
         seatcancelbtn.setText("Seat Cancellation");
 
-        IssueBtnGrp.add(complainbtm);
-        complainbtm.setText("Complain");
+        IssueBtnGrp.add(complainbtn);
+        complainbtn.setText("Complain");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,21 +98,21 @@ public class ComplainInterface extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
+                        .addGap(91, 91, 91)
                         .addComponent(seatcancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(complainbtm))
+                        .addGap(55, 55, 55)
+                        .addComponent(complainbtn))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(198, 198, 198)
-                        .addComponent(submitBtn)))
+                        .addComponent(submitBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,9 +121,9 @@ public class ComplainInterface extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(seatcancelbtn)
-                    .addComponent(complainbtm))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(complainbtn)
+                    .addComponent(seatcancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,7 +134,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 520, 471);
+        jPanel1.setBounds(0, 0, 520, 467);
 
         pack();
         setLocationRelativeTo(null);
@@ -142,7 +142,7 @@ public class ComplainInterface extends javax.swing.JFrame {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String issusename=IssueBtnGrp.getSelection().getActionCommand();
-        //System.out.println(sel);
+        System.out.println(issusename);
         String description=decriptionArea.getText();
         try {
             String query="insert into Response_Issue values(?,?,?,?,?,?)";
@@ -199,7 +199,7 @@ public class ComplainInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup IssueBtnGrp;
-    private javax.swing.JRadioButton complainbtm;
+    private javax.swing.JRadioButton complainbtn;
     private javax.swing.JTextArea decriptionArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
