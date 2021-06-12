@@ -148,7 +148,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
 
     private void submitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbtnActionPerformed
        
-            String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
+           String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
            try {
             resultSet = statement.executeQuery(query);
             resultSet.next();

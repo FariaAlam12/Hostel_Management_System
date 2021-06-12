@@ -134,6 +134,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         issueTable = new javax.swing.JTable();
         assignedworklistbtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -141,7 +142,7 @@ public class ManagerInterface extends javax.swing.JFrame {
 
         jLabel1.setText("Seat Applicant List");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 40, 130, 40);
+        jLabel1.setBounds(10, 100, 130, 40);
 
         pendinglist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,7 +179,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(addStdBtn);
-        addStdBtn.setBounds(500, 490, 190, 21);
+        addStdBtn.setBounds(500, 490, 190, 23);
 
         vacantRoomButton.setText("Vacant Rooms");
         vacantRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -187,7 +188,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(vacantRoomButton);
-        vacantRoomButton.setBounds(310, 490, 160, 21);
+        vacantRoomButton.setBounds(310, 490, 160, 23);
 
         jLabel2.setText("Student Complain Or Seat Cancellation");
         jPanel1.add(jLabel2);
@@ -200,7 +201,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(assignworkbtn);
-        assignworkbtn.setBounds(540, 880, 110, 21);
+        assignworkbtn.setBounds(540, 880, 110, 23);
 
         stufflistbtn.setText("Show Stuff List");
         stufflistbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +210,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(stufflistbtn);
-        stufflistbtn.setBounds(340, 880, 120, 21);
+        stufflistbtn.setBounds(340, 880, 120, 23);
 
         issueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,6 +248,15 @@ public class ManagerInterface extends javax.swing.JFrame {
         });
         jPanel1.add(assignedworklistbtn);
         assignedworklistbtn.setBounds(730, 881, 180, 30);
+
+        jButton1.setText("Add Bills");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(460, 30, 90, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -383,6 +393,12 @@ public class ManagerInterface extends javax.swing.JFrame {
        aws.setVisible(true);
     }//GEN-LAST:event_assignedworklistbtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MonthlyBillAdd MDA=new MonthlyBillAdd();
+        this.setVisible(false);
+        MDA.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -423,6 +439,7 @@ public class ManagerInterface extends javax.swing.JFrame {
     private javax.swing.JButton assignedworklistbtn;
     private javax.swing.JButton assignworkbtn;
     private javax.swing.JTable issueTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
