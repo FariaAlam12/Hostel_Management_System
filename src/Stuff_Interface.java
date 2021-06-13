@@ -201,6 +201,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
             this.setVisible(false);
             MI.setVisible(true);
         }
+        else if(rank.equals("Office Employee"))
+        {
+            AssignedWorkInterface AWI=new AssignedWorkInterface(id);
+            this.setVisible(false);
+            AWI.setVisible(true);
+        }
         else
         {
             AssignedWorkInterface AWI=new AssignedWorkInterface(id);

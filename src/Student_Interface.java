@@ -10,7 +10,13 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -87,9 +93,9 @@ public class Student_Interface extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         ComplainButton = new javax.swing.JButton();
+        Selectmillbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(740, 830));
 
         fullPanel.setBackground(new java.awt.Color(255, 255, 255));
         fullPanel.setLayout(null);
@@ -257,18 +263,24 @@ public class Student_Interface extends javax.swing.JFrame {
             }
         });
 
+        Selectmillbtn.setText("Add Meal");
+        Selectmillbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectmillbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(ComplainButton)
+                .addGap(150, 150, 150)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(294, 294, 294)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(ComplainButton)))
+                    .addComponent(Selectmillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -277,7 +289,9 @@ public class Student_Interface extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ComplainButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComplainButton)
+                    .addComponent(Selectmillbtn))
                 .addContainerGap(186, Short.MAX_VALUE))
         );
 
@@ -306,6 +320,20 @@ public class Student_Interface extends javax.swing.JFrame {
         CI.setVisible(true);
            
     }//GEN-LAST:event_ComplainButtonActionPerformed
+
+    private void SelectmillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectmillbtnActionPerformed
+        
+       
+        
+        MenuSelection MS=new MenuSelection(id);
+        MS.setVisible(true);
+    }//GEN-LAST:event_SelectmillbtnActionPerformed
+
+
+
+
+
+
 
     void showInfo()
     {
@@ -435,6 +463,7 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel IdLabel;
     private javax.swing.JLabel Mother_Title;
     private javax.swing.JLabel Regularity_Title;
+    private javax.swing.JButton Selectmillbtn;
     private javax.swing.JLabel deptLabel;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JLabel emailLabel;
