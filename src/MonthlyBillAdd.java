@@ -1,4 +1,5 @@
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -136,11 +137,38 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addfinebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfinebtnActionPerformed
-        //String query=String.format("select count(*) as c from Bills");
+//         String query=String.format("select count(*) as c from Student_Information where S_Status!='0'");
+//            try {
+//                resultSet = statement.executeQuery(query);
+//                resultSet.next();
+//                int rowcount=resultSet.getInt("c");
+//                
+//            } catch (SQLException ex) {
+//                Logger.getLogger(MonthlyBillAdd.class.getName()).log(Level.SEVERE, null, ex);
+//            }    
     }//GEN-LAST:event_addfinebtnActionPerformed
 
     private void addmonthlybillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmonthlybillbtnActionPerformed
-        
+       //   Adding Monthly Bill to all Student
+        CallableStatement cstmt = null;
+        try {
+             String SQL = "{call addbills}";
+             cstmt = conn.prepareCall (SQL);
+             //cstmt.setString(1,room_noo);
+             //cstmt.setInt(2,count_seat);
+             System.out.println("Executing Add bills procedure..." );
+             cstmt.execute();
+            }
+        catch (SQLException e) {
+   
+            }
+        finally {
+            try {
+                cstmt.close();
+            } catch (SQLException ex) {
+             Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+         }
     }//GEN-LAST:event_addmonthlybillbtnActionPerformed
 
     /**

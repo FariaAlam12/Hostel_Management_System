@@ -134,7 +134,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         issueTable = new javax.swing.JTable();
         assignedworklistbtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        mothlybilladdbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,14 +249,14 @@ public class ManagerInterface extends javax.swing.JFrame {
         jPanel1.add(assignedworklistbtn);
         assignedworklistbtn.setBounds(730, 881, 180, 30);
 
-        jButton1.setText("Add Bills");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        mothlybilladdbtn.setText("Add Bills");
+        mothlybilladdbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                mothlybilladdbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(460, 30, 90, 30);
+        jPanel1.add(mothlybilladdbtn);
+        mothlybilladdbtn.setBounds(460, 30, 90, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -393,11 +393,11 @@ public class ManagerInterface extends javax.swing.JFrame {
        aws.setVisible(true);
     }//GEN-LAST:event_assignedworklistbtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void mothlybilladdbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mothlybilladdbtnActionPerformed
         MonthlyBillAdd MDA=new MonthlyBillAdd();
         this.setVisible(false);
         MDA.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_mothlybilladdbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,12 +439,12 @@ public class ManagerInterface extends javax.swing.JFrame {
     private javax.swing.JButton assignedworklistbtn;
     private javax.swing.JButton assignworkbtn;
     private javax.swing.JTable issueTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton mothlybilladdbtn;
     private javax.swing.JTable pendinglist;
     private javax.swing.JButton stufflistbtn;
     private javax.swing.JButton vacantRoomButton;
