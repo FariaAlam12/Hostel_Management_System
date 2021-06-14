@@ -203,9 +203,9 @@ public class Stuff_Interface extends javax.swing.JFrame {
         }
         else if(rank.equals("Office Employee"))
         {
-            AssignedWorkInterface AWI=new AssignedWorkInterface(id);
+            Office_Employee_Interface OEI=new Office_Employee_Interface(id);
             this.setVisible(false);
-            AWI.setVisible(true);
+            OEI.setVisible(true);
         }
         else
         {

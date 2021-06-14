@@ -1,4 +1,5 @@
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5;
     ResultSetMetaData resultsetMetaData;
     int rowcount;
     public Assigned_Work_Status_interface() {
@@ -66,11 +67,14 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 {
                     model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Pending",Issue_des,issue_cost,false});
                 }
-                else 
+                else if(Issue_status==2)
                 {
                      model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Done",Issue_des,issue_cost,false});
                 }
-                 
+                else if(Issue_status==3)
+                {
+                     model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Payment Not clear",Issue_des,issue_cost,false});
+                }
                 
                 
            }
@@ -136,36 +140,32 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(340, 340, 340))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(405, 405, 405)
-                        .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(376, 376, 376)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(470, 470, 470)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
+                .addGap(30, 30, 30)
+                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1086, 559);
+        jPanel1.setBounds(0, 0, 998, 550);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -176,14 +176,59 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
            rowcount=resultSet.getInt("c");
             for(int i=0;i<rowcount;i++)
             {
+                String issue_name=((String)pending_complete_table.getValueAt(i,0)).toString();
                 String studidd= ((String)pending_complete_table.getValueAt(i,1)).toString();
                 String stuffid= ((String)pending_complete_table.getValueAt(i,2)).toString();
+                
                 Boolean chk= ((Boolean)pending_complete_table.getValueAt(i,6)).booleanValue();
                 
                 if(chk)
                 {
-                     String query2=String.format("Delete from Response_Issue where S_ID='%s' and Stuff_ID='%s'",studidd,stuffid);
-                     resultSet2 = statement.executeQuery(query2);
+                    if(issue_name.equals("complain"))
+                    {
+                        String query2=String.format("Delete from Response_Issue where S_ID='%s' and Stuff_ID='%s'",studidd,stuffid);
+                       resultSet2 = statement.executeQuery(query2);
+                    }
+                    else if(issue_name.equals("seatcancel"))
+                    {
+                        ///took the room no of cancelled student
+                        String queryforseat=String.format("Select Room_No from Student_Information where S_ID='%s'",studidd);
+                        resultSet3=statement.executeQuery(queryforseat);
+                        resultSet3.next();
+                         String room_no=resultSet3.getString("Room_No");
+                        ///Deleting from all table except roon_seat
+                        String query3=String.format("Delete from Student_Information where S_ID='%s'",studidd);
+                        resultSet4 = statement.executeQuery(query3);
+                        
+                       
+                        //cur seat of room
+                        String query4=String.format("select Cur_No_Seat from Room_Information where Room_No='%s'",room_no);
+                        resultSet5= statement.executeQuery(query4);
+                        resultSet5.next();
+                        int count_seat=resultSet5.getInt("Cur_No_Seat");
+                        CallableStatement cstmt = null;
+                           try {
+                                 //String SQL = "{call incre (?, ?)}";
+                                 String SQL = "{call seatdecr (?, ?)}";
+                                 cstmt = conn.prepareCall (SQL);
+                                cstmt.setString(1,room_no);
+                                cstmt.setInt(2,count_seat);
+                                System.out.println("Executing stored procedure...");
+                                 cstmt.execute();
+   
+                            }
+                            catch (SQLException e) {
+   
+                                }
+                            finally {
+                                try {
+                                    cstmt.close();
+                                } catch (SQLException ex) {
+                                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                        }
+                    }
+                     
                 }
                 
             }
