@@ -340,24 +340,12 @@ public class ManagerInterface extends javax.swing.JFrame {
                          ps.executeUpdate();
                          
                     
-//                    try
-//                     {
-//                        Email email=new Email("pseudohall@gmail.com","@#Pseudo123");
-//                        email.setFrom("pseudohall@gmail.com","Pseudo Hall");
-//           
-//                         email.setSubject("Seat Allotment Confirmation");
-//                         String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\n Your login id : "+idd
-//                                 +"\nYour Login pass : "+idd+"\n Your Room No: "+room_noo
-//                                 +"\n You can change your pass later\n Thanks \nBest Regards\n Pseudo Hall Authority";
-//                        email.setContent("<p>Helloooo</p>", "text/html");
-//                        email.addRecipient("rafiemon71@gmail.com");
-//                         email.send();
-//                    }
-//                    catch(Exception e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-
+                      String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\nYour login id : "+idd
+                                +"\nYour Login pass : "+idd+"\nYour Room No: "+room_noo
+                                 +"\nYou can change your pass later\nThanks \nBest Regards\nPseudo Hall Authority";
+                      String sub="Seat Allotment Confirmation";
+                      SendEmail SE=new SendEmail();
+                      SE.main(mail,sub,message);
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);

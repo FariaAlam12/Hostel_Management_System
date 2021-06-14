@@ -35,6 +35,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
+        
         id=idd;
          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE );
         seatcancelbtn.setActionCommand("seatcancel");

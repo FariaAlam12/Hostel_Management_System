@@ -14,7 +14,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2;
+   ResultSet resultSet,resultSet2,resultSet5;
    String St_id,stuff_id;
    int total_cost=0,total_breakfast=0,total_lunch=0,total_dinner=0;
      public Office_Employee_Interface() {
@@ -251,12 +251,24 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
                  Boolean chk= ((Boolean)seatcanceltable.getValueAt(i,2)).booleanValue();
                  if(chk)
                  {
-                      String query4=String.format("update Response_Issue set Issue_Status=2 where S_ID='%s'",stuid);
+                      String query4=String.format("update Response_Issue set Issue_Status=4 where S_ID='%s'",stuid);
                       resultSet2 = statement.executeQuery(query4);
                  }
                  else
                  {
-                      String query4=String.format("update Response_Issue set Issue_Status=3 where S_ID='%s'",stuid);
+                      String query5=String.format("select * from Bills where S_ID='%s'",stuid);
+                      resultSet5=statement.executeQuery(query5);
+                      resultSet5.next();
+           
+                      int hallbill=resultSet5.getInt("Hall_Bill");
+                      int messbill=resultSet5.getInt("Mess_Bill");
+                      int laundrybill=resultSet5.getInt("Laundary_Bill");
+                      int fine=resultSet5.getInt("Fine");
+                      int addbill=resultSet5.getInt("Additional_Bill");
+                      int total=hallbill+messbill+laundrybill+fine+addbill;
+                      System.out.println(total);
+ 
+                      String query4=String.format("update Response_Issue set Issue_Status=3,Issue_Cost='%d' where S_ID='%s'",total,stuid);
                       resultSet2 = statement.executeQuery(query4);
                  }
             }

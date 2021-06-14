@@ -284,8 +284,8 @@ public class Student_Interface extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(ComplainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141)
+                .addComponent(ComplainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Selectmillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,7 +327,6 @@ public class Student_Interface extends javax.swing.JFrame {
 
     private void ComplainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplainButtonActionPerformed
         
-        this.setVisible(false);
         ComplainInterface CI=new ComplainInterface(id);
         CI.setVisible(true);
            

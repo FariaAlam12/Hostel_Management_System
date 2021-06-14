@@ -18,7 +18,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5,resultSet6,resultSet7,resultSet8;
     ResultSetMetaData resultsetMetaData;
     int rowcount;
     public Assigned_Work_Status_interface() {
@@ -74,6 +74,10 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 else if(Issue_status==3)
                 {
                      model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Payment Not clear",Issue_des,issue_cost,false});
+                }
+                else if(Issue_status==4)
+                {
+                    model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Payment Clear",Issue_des,issue_cost,false});
                 }
                 
                 
@@ -179,18 +183,45 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 String issue_name=((String)pending_complete_table.getValueAt(i,0)).toString();
                 String studidd= ((String)pending_complete_table.getValueAt(i,1)).toString();
                 String stuffid= ((String)pending_complete_table.getValueAt(i,2)).toString();
-                
+                String issue_st= ((String)pending_complete_table.getValueAt(i,3)).toString();
                 Boolean chk= ((Boolean)pending_complete_table.getValueAt(i,6)).booleanValue();
                 
                 if(chk)
                 {
                     if(issue_name.equals("complain"))
                     {
+                        int issue_cost=((Integer)pending_complete_table.getValueAt(i,5));
+                        String query7=String.format("select Additional_Bill from Bills where S_ID='%s'",studidd);
+                        resultSet8= statement.executeQuery(query7);
+                        resultSet8.next();
+                        int addi_bill=resultSet8.getInt("Additional_Bill");
+                        addi_bill+=issue_cost;
+                        query7=String.format("update Bills set Additional_Bill='%d' where S_ID='%s'",addi_bill,studidd);
+                        resultSet8= statement.executeQuery(query7);
+                        
                         String query2=String.format("Delete from Response_Issue where S_ID='%s' and Stuff_ID='%s'",studidd,stuffid);
                        resultSet2 = statement.executeQuery(query2);
                     }
                     else if(issue_name.equals("seatcancel"))
                     {
+                        if(issue_st.equals("Payment Clear"))
+                        {
+                            // Send seat cancel confirmation mail
+                        String query5=String.format("select S_Name,S_Email from Student_Information where S_ID='%s'",studidd);
+                        resultSet6= statement.executeQuery(query5);
+                        resultSet6.next();
+                        String s_name=resultSet6.getString("S_Name");
+                        String mail=resultSet6.getString("S_Email");
+                           
+                           
+                           
+                        String message="Hello Dear "+s_name+",\n"+"Your Application for hall seat cancellation has been approved. Vacant the room within this week."
+                           +"\nThanks \nBest Regards\nPseudo Hall Authority";
+                      String sub="Seat Cancellation Confirm";
+                      SendEmail SE=new SendEmail();
+                      SE.main(mail,sub,message);
+                            
+                         
                         ///took the room no of cancelled student
                         String queryforseat=String.format("Select Room_No from Student_Information where S_ID='%s'",studidd);
                         resultSet3=statement.executeQuery(queryforseat);
@@ -227,6 +258,33 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                                      Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                         }
+                           
+                           
+                           
+                        }
+                        else if(issue_st.equals("Payment Not clear"))
+                        {
+                            // Send seat can not cancel mail
+                        int issue_cost=((Integer)pending_complete_table.getValueAt(i,5));
+                        String query5=String.format("select S_Name,S_Email from Student_Information where S_ID='%s'",studidd);
+                        resultSet6= statement.executeQuery(query5);
+                        resultSet6.next();
+                        String s_name=resultSet6.getString("S_Name");
+                        String mail=resultSet6.getString("S_Email");
+                           
+                           
+                           
+                        String message="Hello Dear "+s_name+",\n"+"Your Application for hall seat cancellation is declined.Your due : "+issue_cost+" taka. Please clear the due first and apply again."
+                           +"\nThanks \nBest Regards\nPseudo Hall Authority";
+                      String sub="Seat Cancellation Confirm";
+                      SendEmail SE=new SendEmail();
+                      SE.main(mail,sub,message);
+                      
+                      String query6=String.format("Delete from Response_Issue where S_ID='%s'",studidd);
+                      resultSet7= statement.executeQuery(query6);
+                      
+                        }
+                        
                     }
                      
                 }

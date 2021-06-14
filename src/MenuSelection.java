@@ -20,7 +20,7 @@ public class MenuSelection extends javax.swing.JFrame {
 
    Connection conn;
    Statement statement;
-   ResultSet resultSet;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4;
    ResultSetMetaData resultsetMetaData;
    int break_cost,launch_cost,dinner_cost;
    String id,next_day;
@@ -62,6 +62,8 @@ public class MenuSelection extends javax.swing.JFrame {
         next_day=day.get(pos);
         System.out.println(next_day);
         tomorrowtitle.setText(next_day+"'s");
+        
+        // For showing tomorrow's menu and cost
          String query=String.format("select * from Mill_Information where Day='%s'",next_day);
        try {
            resultSet = statement.executeQuery(query);
@@ -82,6 +84,44 @@ public class MenuSelection extends javax.swing.JFrame {
            cost_dinner.setText(dinner_cost+"");
            
            
+       } catch (SQLException ex) {
+           Logger.getLogger(MenuSelection.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       
+       // Checking if Meal is perviously selected
+        String query4=String.format("select * from Student_Mill where S_ID='%s'",id);
+        
+       try {
+           resultSet4 = statement.executeQuery(query4);
+           if(resultSet4.next())
+           {
+               System.out.println("kaj kore");
+               int bs=0,ls=0,ds=0;
+               bs=resultSet4.getInt("Breakfast_Status");
+               ls=resultSet4.getInt("Launch_Status");
+               ds=resultSet4.getInt("Dinner_Status");
+               if(bs==1)
+               {
+                   break_check.setSelected(true);
+                   
+               }
+               if(ls==1)
+               {
+                   launch_check.setSelected(true);
+               }
+               if(ds==1)
+               {
+                   dinner_check.setSelected(true);
+               }
+               break_check.setEnabled(false);
+               launch_check.setEnabled(false);
+               dinner_check.setEnabled(false);
+               add_mill_btn.setEnabled(false);
+           }
+           else
+           {
+               System.out.println("kaj kore na");
+           }
        } catch (SQLException ex) {
            Logger.getLogger(MenuSelection.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -119,19 +159,18 @@ public class MenuSelection extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(502, 381));
-        setPreferredSize(new java.awt.Dimension(502, 381));
 
         jPanel1.setLayout(null);
 
         tomorrowtitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         tomorrowtitle.setText("Tom");
         jPanel1.add(tomorrowtitle);
-        tomorrowtitle.setBounds(41, 36, 70, 22);
+        tomorrowtitle.setBounds(41, 36, 110, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText(" Menu & Cost");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(130, 40, 120, 17);
+        jLabel2.setBounds(150, 40, 120, 17);
 
         jLabel1.setText("Breakfast:");
         jPanel1.add(jLabel1);
@@ -220,39 +259,54 @@ public class MenuSelection extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void add_mill_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_mill_btnActionPerformed
-        int cost=0,break_st=0,launch_st=0,dinner_st=0;    
-        if(break_check.isSelected())
-        {
-            cost+=break_cost;
-            break_st=1;
-        }
-             
-        if(launch_check.isSelected())
-        {
-            cost+=launch_cost;
-            launch_st=1;
-        }
-             
-        if(dinner_check.isSelected())
-        {
-            cost+=dinner_cost;
-            dinner_st=1;
-        }
-        
-        try {
-            String query="insert into Student_Mill values(?,?,?,?,?,?)";
-            PreparedStatement ps=conn.prepareStatement(query);
-            ps.setString(1,id);
-            ps.setString(2,next_day);
-            ps.setInt(3,cost);
-            ps.setInt(4,break_st);
-            ps.setInt(5,launch_st);
-            ps.setInt(6,dinner_st);
-            ps.executeUpdate();
+        try {                                             
+            int cost=0,break_st=0,launch_st=0,dinner_st=0;
+            if(break_check.isSelected())
+            {
+                cost+=break_cost;
+                break_st=1;
+            }
+            
+            if(launch_check.isSelected())
+            {
+                cost+=launch_cost;
+                launch_st=1;
+            }
+            
+            if(dinner_check.isSelected())
+            {
+                cost+=dinner_cost;
+                dinner_st=1;
+            }
+            
+            try {
+                String query="insert into Student_Mill values(?,?,?,?,?,?)";
+                PreparedStatement ps=conn.prepareStatement(query);
+                ps.setString(1,id);
+                ps.setString(2,next_day);
+                ps.setInt(3,cost);
+                ps.setInt(4,break_st);
+                ps.setInt(5,launch_st);
+                ps.setInt(6,dinner_st);
+                ps.executeUpdate();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(ComplainInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String query2=String.format("select Mess_Bill from Bills where S_ID='%s'",id);
+            resultSet2 = statement.executeQuery(query2);
+            resultSet2.next();
+            int prev_mess_bill=resultSet2.getInt("Mess_Bill");
+            prev_mess_bill+=cost;
+            
+            String query3=String.format("update Bills set Mess_Bill='%d' where S_ID='%s'",prev_mess_bill,id);
+            resultSet3= statement.executeQuery(query3);
             
         } catch (SQLException ex) {
-            Logger.getLogger(ComplainInterface.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuSelection.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
     }//GEN-LAST:event_add_mill_btnActionPerformed
 
