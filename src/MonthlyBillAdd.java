@@ -69,6 +69,8 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         monthlyBill = new javax.swing.JTable();
         addfinebtn = new javax.swing.JButton();
         addmonthlybillbtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(874, 424));
@@ -101,7 +103,7 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         jScrollPane1.setViewportView(monthlyBill);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 90, 772, 279);
+        jScrollPane1.setBounds(30, 120, 772, 180);
 
         addfinebtn.setText("Add To Fine");
         addfinebtn.addActionListener(new java.awt.event.ActionListener() {
@@ -112,14 +114,24 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         jPanel1.add(addfinebtn);
         addfinebtn.setBounds(340, 380, 110, 23);
 
-        addmonthlybillbtn.setText("Add Monthly Bill");
+        addmonthlybillbtn.setText("ADD");
         addmonthlybillbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addmonthlybillbtnActionPerformed(evt);
             }
         });
         jPanel1.add(addmonthlybillbtn);
-        addmonthlybillbtn.setBounds(350, 30, 160, 23);
+        addmonthlybillbtn.setBounds(270, 30, 160, 23);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Fine Table");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(30, 80, 80, 20);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Add monthly Bill for All Student");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 30, 240, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,6 +221,8 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addfinebtn;
     private javax.swing.JButton addmonthlybillbtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable monthlyBill;

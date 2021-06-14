@@ -430,14 +430,18 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="ComplainButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="ComplainButton" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="Selectmillbtn" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="Selectmillbtn" min="-2" pref="93" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="billcheckbtn" min="-2" pref="92" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel1" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="326" max="32767" attributes="0"/>
+                      <EmptySpace pref="80" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -450,6 +454,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="ComplainButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Selectmillbtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="billcheckbtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="186" max="32767" attributes="0"/>
                   </Group>
@@ -470,7 +475,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="ComplainButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Complain"/>
+                <Property name="text" type="java.lang.String" value="Complain/Seat Cancel"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComplainButtonActionPerformed"/>
@@ -482,6 +487,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SelectmillbtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="billcheckbtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="See Bills"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="billcheckbtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

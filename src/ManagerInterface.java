@@ -3,6 +3,7 @@
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -324,6 +325,20 @@ public class ManagerInterface extends javax.swing.JFrame {
                                      Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                         }
+                         
+                           
+                         //Add the id to bill table
+                         String query3="insert into Bills values(?,?,?,?,?,?,?)";
+                         PreparedStatement ps=conn.prepareStatement(query3);
+                         ps.setString(1,idd);
+                         ps.setInt(2,0);
+                         ps.setInt(3,0);
+                         ps.setInt(4,0);
+                         ps.setInt(5,0);
+                         ps.setInt(6,0);
+                         ps.setInt(7,0);
+                         ps.executeUpdate();
+                         
                     
 //                    try
 //                     {

@@ -94,6 +94,7 @@ public class Student_Interface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ComplainButton = new javax.swing.JButton();
         Selectmillbtn = new javax.swing.JButton();
+        billcheckbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -256,7 +257,7 @@ public class Student_Interface extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Other Activities");
 
-        ComplainButton.setText("Complain");
+        ComplainButton.setText("Complain/Seat Cancel");
         ComplainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComplainButtonActionPerformed(evt);
@@ -270,18 +271,28 @@ public class Student_Interface extends javax.swing.JFrame {
             }
         });
 
+        billcheckbtn.setText("See Bills");
+        billcheckbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                billcheckbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(ComplainButton)
-                .addGap(150, 150, 150)
+                .addGap(65, 65, 65)
+                .addComponent(ComplainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Selectmillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Selectmillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addComponent(billcheckbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +302,8 @@ public class Student_Interface extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ComplainButton)
-                    .addComponent(Selectmillbtn))
+                    .addComponent(Selectmillbtn)
+                    .addComponent(billcheckbtn))
                 .addContainerGap(186, Short.MAX_VALUE))
         );
 
@@ -328,6 +340,12 @@ public class Student_Interface extends javax.swing.JFrame {
         MenuSelection MS=new MenuSelection(id);
         MS.setVisible(true);
     }//GEN-LAST:event_SelectmillbtnActionPerformed
+
+    private void billcheckbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billcheckbtnActionPerformed
+       
+       Student_Bill_details sbd=new Student_Bill_details(id);
+       sbd.setVisible(true);
+    }//GEN-LAST:event_billcheckbtnActionPerformed
 
 
 
@@ -464,6 +482,7 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel Mother_Title;
     private javax.swing.JLabel Regularity_Title;
     private javax.swing.JButton Selectmillbtn;
+    private javax.swing.JButton billcheckbtn;
     private javax.swing.JLabel deptLabel;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JLabel emailLabel;

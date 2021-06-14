@@ -122,6 +122,9 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         seatcanceltable = new javax.swing.JTable();
         CancelRequestUpdateBtn = new javax.swing.JButton();
+        studentID_Search_field = new javax.swing.JTextField();
+        idSearchBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +204,22 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         });
         jPanel1.add(CancelRequestUpdateBtn);
         CancelRequestUpdateBtn.setBounds(300, 633, 90, 30);
+        jPanel1.add(studentID_Search_field);
+        studentID_Search_field.setBounds(680, 420, 180, 40);
+
+        idSearchBtn.setText("Search");
+        idSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idSearchBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(idSearchBtn);
+        idSearchBtn.setBounds(890, 430, 110, 23);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Show Bill Details");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(690, 360, 160, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,6 +266,12 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             
     }//GEN-LAST:event_CancelRequestUpdateBtnActionPerformed
 
+    private void idSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idSearchBtnActionPerformed
+       String St_id=studentID_Search_field.getText();
+       Student_Bill_details sbd=new Student_Bill_details(St_id);
+       sbd.setVisible(true);
+    }//GEN-LAST:event_idSearchBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,11 +310,14 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelRequestUpdateBtn;
     private javax.swing.JTable MillDetailTable;
+    private javax.swing.JButton idSearchBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable seatcanceltable;
+    private javax.swing.JTextField studentID_Search_field;
     // End of variables declaration//GEN-END:variables
 }
