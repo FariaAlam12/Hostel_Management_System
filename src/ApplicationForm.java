@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -398,6 +399,40 @@ public class ApplicationForm extends javax.swing.JFrame {
                 idfeild.setText("");
                 //Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+              
+            ///Phone no insert
+             String query3="insert into Student_Contact values(?,?)";
+            try {
+                PreparedStatement ps=conn.prepareStatement(query3);
+                 ps.setString(1,id);
+                 ps.setString(2,phone);
+                 ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                System.out.println("Phone no not inserted");
+                Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            ///AlternativePhone no insert(if any)
+            if(altphone.length()>0)
+            {
+                 String query4="insert into Student_Contact values(?,?)";
+                try {
+                    PreparedStatement ps2=conn.prepareStatement(query4);
+                      ps2.setString(1,id);
+                    ps2.setString(2,altphone);
+                    ps2.executeUpdate();
+
+                } catch (SQLException ex) {
+                    System.out.println("Alt Phone no not inserted");
+                    Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+
+
             
        }
         
