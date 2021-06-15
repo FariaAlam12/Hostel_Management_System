@@ -521,6 +521,10 @@ public class ApplicationForm extends javax.swing.JFrame {
                 //Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             
+<<<<<<< HEAD
+=======
+              
+>>>>>>> e0d7b8fab274582bb0306b99af1dfcc9055931e6
             ///Phone no insert
              String query3="insert into Student_Contact values(?,?)";
             try {
@@ -550,6 +554,12 @@ public class ApplicationForm extends javax.swing.JFrame {
                 }
 
             }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> e0d7b8fab274582bb0306b99af1dfcc9055931e6
             
        }
        
