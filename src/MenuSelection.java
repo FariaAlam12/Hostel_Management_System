@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class MenuSelection extends javax.swing.JFrame {
@@ -259,6 +261,14 @@ public class MenuSelection extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void add_mill_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_mill_btnActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+           break_check.setSelected(false);
+           launch_check.setSelected(false);
+           dinner_check.setSelected(false);
+       }
+        else if (response == JOptionPane.YES_OPTION) {
         try {                                             
             int cost=0,break_st=0,launch_st=0,dinner_st=0;
             if(break_check.isSelected())
@@ -306,8 +316,13 @@ public class MenuSelection extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MenuSelection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+       JFrame f=new JFrame();  
+       JOptionPane.showMessageDialog(f,"Meal Added"); 
+       break_check.setEnabled(false);
+       launch_check.setEnabled(false);
+       dinner_check.setEnabled(false);
+       add_mill_btn.setEnabled(false); 
+       }
     }//GEN-LAST:event_add_mill_btnActionPerformed
 
     /**

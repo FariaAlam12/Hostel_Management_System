@@ -65,6 +65,7 @@ public class ManagerInterface extends javax.swing.JFrame {
            rowcount=resultSet.getInt("c");
            DefaultTableModel model;
            model=(DefaultTableModel) pendinglist.getModel(); 
+           model.setRowCount(0);
            query=String.format("select * from student_information where S_Status='0'");
            resultSet = statement.executeQuery(query);
            
@@ -114,6 +115,7 @@ public class ManagerInterface extends javax.swing.JFrame {
        // Show info for issue
        DefaultTableModel model2;
        model2=(DefaultTableModel) issueTable.getModel(); 
+       model2.setRowCount(0);
        String query2=String.format("select RI.S_ID,RI.Issue_Name,RI.Issue_Descr,SI.Room_No from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and ri.issue_status=0");
        
    //    String query2=String.format("select count(*) as c from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and ri.issue_status=0");
@@ -354,7 +356,8 @@ public class ManagerInterface extends javax.swing.JFrame {
 
     //Add All the approved students
     private void addStdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStdBtnActionPerformed
-        
+       
+       
         for(int i=0;i<rowcount;i++)
         {
             String idd= ((String)pendinglist.getValueAt(i,0)).toString();
@@ -366,7 +369,12 @@ public class ManagerInterface extends javax.swing.JFrame {
             Boolean chk= ((Boolean)pendinglist.getValueAt(i,11)).booleanValue();
             int count_seat=0;
             if(chk && !room_noo.equals("--Select Room--"))
-            {
+            {   
+                
+                int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (response == JOptionPane.YES_OPTION) {
+                
+            
                 // Updating student information table
                 String query=String.format("update student_information set S_Status='1',Room_No='%s',S_Pass='%s' where S_ID='%s'",room_noo,idd,idd);
               
@@ -416,7 +424,9 @@ public class ManagerInterface extends javax.swing.JFrame {
                          ps.setInt(6,0);
                          ps.setInt(7,0);
                          ps.executeUpdate();
-                         
+                        JFrame f=new JFrame();  
+                        JOptionPane.showMessageDialog(f,"Added To Database");  
+                    
                     
                       String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\nYour login id : "+idd
                                 +"\nYour Login pass : "+idd+"\nYour Room No: "+room_noo
@@ -429,6 +439,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            }
             else if(((chk==false) && !room_noo.equals("--Select Room--"))||((chk==true) && room_noo.equals("--Select Room--")))
             {
                JFrame f;
@@ -436,6 +447,9 @@ public class ManagerInterface extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(f,"Select the fields properly.","Alert",JOptionPane.WARNING_MESSAGE);
             }
         }
+      
+      showInfo();
+       
     }//GEN-LAST:event_addStdBtnActionPerformed
 
     private void vacantRoomButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacantRoomButtonMouseClicked
@@ -449,7 +463,11 @@ public class ManagerInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_stufflistbtnActionPerformed
 
     private void assignworkbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignworkbtnActionPerformed
-      String query=String.format("select count(*) as c from Response_Issue where Issue_Status=0");
+      int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+        
+        String query=String.format("select count(*) as c from Response_Issue where Issue_Status=0");
        try {
            resultSet = statement.executeQuery(query);
             resultSet.next();
@@ -468,13 +486,17 @@ public class ManagerInterface extends javax.swing.JFrame {
                 System.out.println(stuffid);
                 String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
                 resultSet6 = statement.executeQuery(query5);
+                JFrame f=new JFrame();  
+                JOptionPane.showMessageDialog(f,"Assigned To Stuff");  
+
              }
            }
            
        } catch (SQLException ex) {
            Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
        }
-          
+     } 
+     showInfo();     
         
     }//GEN-LAST:event_assignworkbtnActionPerformed
 

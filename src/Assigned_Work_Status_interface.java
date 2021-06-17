@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -48,7 +50,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
        
         DefaultTableModel model;
         model=(DefaultTableModel) pending_complete_table.getModel(); 
-        
+        model.setRowCount(0);
         String  query=String.format("select * from Response_Issue where Issue_Status!=0");
         String issue_name,stu_id,stuff_id,Issue_des;
         int Issue_status,issue_cost;
@@ -78,9 +80,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 else if(Issue_status==4)
                 {
                     model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Payment Clear",Issue_des,issue_cost,false});
-                }
-                
-                
+                }           
            }
        } catch (SQLException ex) {
            Logger.getLogger(Assigned_Work_Status_interface.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +110,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Issue Name", "Student ID", "Stuff Id", "Issue Status", "Issue Descr", "Issue Cost", "Approval"
+                "Issue Name", "Student ID", "Stuff Id", "Issue Status", "Issue Descr", "Issue Cost", "Issue Checked"
             }
         ) {
             Class[] types = new Class [] {
@@ -173,6 +173,10 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+       JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       if (response == JOptionPane.YES_OPTION) {
+        
        String query=String.format("select count(*) as c from Response_Issue where Issue_Status!=0");
        try {
            resultSet = statement.executeQuery(query);
@@ -188,7 +192,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 
                 if(chk)
                 {
-                    if(issue_name.equals("complain"))
+                    if((issue_name.equals("Clean Issue"))||(issue_name.equals("Food Issue"))||(issue_name.equals("Electricity Issue"))||(issue_name.equals("Internet Issue"))||(issue_name.equals("Laundry Issue")))
                     {
                         int issue_cost=((Integer)pending_complete_table.getValueAt(i,5));
                         String query7=String.format("select Additional_Bill from Bills where S_ID='%s'",studidd);
@@ -202,7 +206,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                         String query2=String.format("Delete from Response_Issue where S_ID='%s' and Stuff_ID='%s'",studidd,stuffid);
                        resultSet2 = statement.executeQuery(query2);
                     }
-                    else if(issue_name.equals("seatcancel"))
+                    else if(issue_name.equals("Seat Cancel"))
                     {
                         if(issue_st.equals("Payment Clear"))
                         {
@@ -257,7 +261,8 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                                 } catch (SQLException ex) {
                                      Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                        }
+                        
+                           }
                            
                            
                            
@@ -286,7 +291,9 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                         }
                         
                     }
-                     
+                JFrame f=new JFrame();  
+                JOptionPane.showMessageDialog(f,"Checked!");
+                
                 }
                 
             }
@@ -294,6 +301,8 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
            Logger.getLogger(Assigned_Work_Status_interface.class.getName()).log(Level.SEVERE, null, ex);
        }
        
+        }
+       showData();
     }//GEN-LAST:event_updateBtnActionPerformed
 
     /**

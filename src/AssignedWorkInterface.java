@@ -42,7 +42,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     {
        DefaultTableModel model;
        model=(DefaultTableModel) assignedworklisttable.getModel(); 
-       String query1=String.format("select RI.S_ID,SI.Room_No,RI.Issue_Descr,RI.Issue_Cost from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and RI.issue_status=1");
+       String query1=String.format("select RI.S_ID,SI.Room_No,RI.Issue_Descr,RI.Issue_Cost from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and RI.issue_status=1 and RI.Stuff_ID in(select Stuff_ID from Response_Issue where Stuff_ID='%s')",id);
         try {
             resultSet = statement.executeQuery(query1);
             String stuid,sturoom,issue;

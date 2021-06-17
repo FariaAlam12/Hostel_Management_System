@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class ComplainInterface extends javax.swing.JFrame {
@@ -184,6 +186,14 @@ public class ComplainInterface extends javax.swing.JFrame {
         String issusename=IssueBtnGrp.getSelection().getActionCommand();
         System.out.println(issusename);
         String description=decriptionArea.getText();
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            //System.out.println("No button clicked");
+            decriptionArea.setText("");
+            IssueBtnGrp.clearSelection();
+       }
+        else if (response == JOptionPane.YES_OPTION) {
         try {
             String query="insert into Response_Issue values(?,?,?,?,?,?)";
             //System.out.println(description);
@@ -199,7 +209,11 @@ public class ComplainInterface extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ComplainInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        JFrame f=new JFrame();  
+        JOptionPane.showMessageDialog(f,"Issue Acknowledge");  
+        IssueBtnGrp.clearSelection();
+        decriptionArea.setText("");
+        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     private void cleanbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanbtnActionPerformed
