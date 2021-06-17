@@ -11,14 +11,19 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 public class ManagerInterface extends javax.swing.JFrame {
     
    Connection conn;
-   Statement statement;
-   ResultSet resultSet,resultSet2,resultSet3,resultSet4;
+   Statement statement,statement2;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet6,resultSet4,resultSet7,resultSet5;
    
    ResultSetMetaData resultsetMetaData;
    int rowcount;
@@ -39,6 +44,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                 
                 System.out.println("Connection Sucessful in Manager Interface");
                 statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                statement2=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
             }
             
             
@@ -83,8 +89,21 @@ public class ManagerInterface extends javax.swing.JFrame {
                 
                 DOB_String = sdf1.format(utilDate);
                 
-                model.insertRow(model.getRowCount(),new Object[]{id,name,email,dept,regularity,father,mother,DOB_String,gender,address," ",false});
+                model.insertRow(model.getRowCount(),new Object[]{id,name,email,dept,regularity,father,mother,DOB_String,gender,address,"--Select Room--",false});
            }
+           
+           TableColumn stuffColumn = pendinglist.getColumnModel().getColumn(10);
+           JComboBox comboBox = new JComboBox();
+            String query4=String.format("select Room_No from Room_Information where Cur_No_Seat>0 and Room_No!='NA'");
+               resultSet5 = statement2.executeQuery(query4);
+               while(resultSet5.next())
+               {
+                   String room_no=resultSet5.getString("Room_No");
+                  // System.out.println(stuff_name);
+                   comboBox.addItem(room_no);
+               }
+                stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
+           
 
        } catch (SQLException ex) {
            Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,20 +115,86 @@ public class ManagerInterface extends javax.swing.JFrame {
        DefaultTableModel model2;
        model2=(DefaultTableModel) issueTable.getModel(); 
        String query2=String.format("select RI.S_ID,RI.Issue_Name,RI.Issue_Descr,SI.Room_No from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and ri.issue_status=0");
+       
+   //    String query2=String.format("select count(*) as c from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and ri.issue_status=0");
+       
        try {
-           resultSet4 = statement.executeQuery(query2);
+          resultSet4 = statement2.executeQuery(query2);
+          //int rowcnt=resultSet4.getInt("c");
+           //System.out.println(rowcnt);
             String stuid,issuename,issuedescription,roomno;
+            TableColumn stuffColumn = issueTable.getColumnModel().getColumn(4);
+             JComboBox comboBox = new JComboBox();
            while(resultSet4.next())
-           {
+           {    
+               //Taking for stuff combolist
+           //    TableColumn stuffColumn = issueTable.getColumnModel().getColumn(4);
+              
+               
                stuid=resultSet4.getString("S_ID");
                issuename=resultSet4.getString("Issue_Name");
                issuedescription=resultSet4.getString("Issue_Descr");
                roomno=resultSet4.getString("Room_No");
-               model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename,issuedescription," "});
+               model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename,issuedescription,"     --Select Stuff-- "});
+               
+               /*
+               //Considering on Issue Status and room no extracting suff
+               String query4 = null;
+               
+               if(issuename.equals("Seat Cancel"))
+               {
+                  query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Office Employee' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+               else if(issuename.equals("Clean Issue"))
+               {
+                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Cleaner' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+                else if(issuename.equals("Food Issue"))
+               {
+                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Cook' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+                else if(issuename.equals("Electricity Issue"))
+               {
+                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Electrician' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+                else if(issuename.equals("Internet Issue"))
+               {
+                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='ISP' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+               //else if(issuename.equals("Laundry Issue"))
+               else
+                {
+                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Laundry Man' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
+               }
+               
+              resultSet5= statement.executeQuery(query4);
+               
+             //  String stuff_name;
+               while(resultSet5.next())
+               {
+                   String stuff_name=resultSet5.getString("Stuff_Name");
+                   System.out.println(stuff_name);
+                   comboBox.addItem(stuff_name);
+               }
+               stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
+               */
+               String query4=String.format("select Stuff_ID from Stuff_Information where Manager_ID='101914004'");
+               resultSet5 = statement.executeQuery(query4);
+               while(resultSet5.next())
+               {
+                   String stuff_name=resultSet5.getString("Stuff_ID");
+                  // System.out.println(stuff_name);
+                   comboBox.addItem(stuff_name);
+               }
+                stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
            }
+          
+           
+           
            
        } catch (SQLException ex) {
-           Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+           //Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
+           System.out.println("Resultset4");
        }
    
     }
@@ -218,19 +303,12 @@ public class ManagerInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Room No", "Issue Name", "Issue Name", "Stuff ID"
+                "Student ID", "Room No", "Issue Name", "Issue Description", "Stuff ID"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, true
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -284,10 +362,10 @@ public class ManagerInterface extends javax.swing.JFrame {
              String mail= ((String)pendinglist.getValueAt(i,2)).toString();
              System.out.println(mail);
             String room_noo=((String)pendinglist.getValueAt(i,10)).toString();
-            room_noo=room_noo.substring(1);  // Removing extra space for the front of the string
+            //room_noo=room_noo.substring(1);  // Removing extra space for the front of the string
             Boolean chk= ((Boolean)pendinglist.getValueAt(i,11)).booleanValue();
             int count_seat=0;
-            if(chk)
+            if(chk && !room_noo.equals("--Select Room--"))
             {
                 // Updating student information table
                 String query=String.format("update student_information set S_Status='1',Room_No='%s',S_Pass='%s' where S_ID='%s'",room_noo,idd,idd);
@@ -351,6 +429,12 @@ public class ManagerInterface extends javax.swing.JFrame {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            else if(((chk==false) && !room_noo.equals("--Select Room--"))||((chk==true) && room_noo.equals("--Select Room--")))
+            {
+               JFrame f;
+               f=new JFrame();  
+               JOptionPane.showMessageDialog(f,"Select the fields properly.","Alert",JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_addStdBtnActionPerformed
 
@@ -378,10 +462,13 @@ public class ManagerInterface extends javax.swing.JFrame {
             //System.out.println(stuid);
             
             String stuffid=((String)issueTable.getValueAt(i,4)).toString();
-            stuffid=stuffid.substring(1);
-            //System.out.println(stuffid);
-            String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
-            resultSet4 = statement.executeQuery(query5);
+            //stuffid=stuffid.substring(1);
+            if(!stuffid.equals("     --Select Stuff-- "))
+             {
+                System.out.println(stuffid);
+                String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
+                resultSet6 = statement.executeQuery(query5);
+             }
            }
            
        } catch (SQLException ex) {
