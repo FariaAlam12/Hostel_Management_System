@@ -1,11 +1,20 @@
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 
@@ -102,6 +111,13 @@ public class Student_Bill_details extends javax.swing.JFrame {
         finalabel = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         totalbilllabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        imagefield = new javax.swing.JTextField();
+        choosebtn = new javax.swing.JButton();
+        seechoosedreciptbtn = new javax.swing.JButton();
+        imagelabel = new javax.swing.JLabel();
+        Pay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(770, 470));
@@ -111,12 +127,12 @@ public class Student_Bill_details extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Bill  Details of ");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(170, 70, 100, 40);
+        jLabel1.setBounds(20, 70, 100, 40);
 
         namelabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         namelabel.setText("name");
         jPanel1.add(namelabel);
-        namelabel.setBounds(270, 70, 450, 40);
+        namelabel.setBounds(120, 70, 230, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Hall Bill");
@@ -172,6 +188,47 @@ public class Student_Bill_details extends javax.swing.JFrame {
         jPanel1.add(totalbilllabel);
         totalbilllabel.setBounds(220, 400, 80, 30);
 
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(352, 70, 2, 660);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Pay Bill :");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(370, 30, 70, 20);
+        jPanel1.add(imagefield);
+        imagefield.setBounds(370, 80, 230, 30);
+
+        choosebtn.setText("Choose File");
+        choosebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choosebtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(choosebtn);
+        choosebtn.setBounds(610, 90, 130, 20);
+
+        seechoosedreciptbtn.setText("See Choosed Receipt");
+        seechoosedreciptbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seechoosedreciptbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(seechoosedreciptbtn);
+        seechoosedreciptbtn.setBounds(380, 130, 150, 23);
+        jPanel1.add(imagelabel);
+        imagelabel.setBounds(380, 170, 340, 618);
+
+        Pay.setText("Pay");
+        Pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Pay);
+        Pay.setBounds(550, 130, 130, 23);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,12 +237,54 @@ public class Student_Bill_details extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 816, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void choosebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosebtnActionPerformed
+        JFileChooser choose=new JFileChooser();
+        choose.showOpenDialog(null);
+        File fl=choose.getSelectedFile();
+        String filename=fl.getAbsolutePath();
+        imagefield.setText(filename);
+    }//GEN-LAST:event_choosebtnActionPerformed
+
+    private void seechoosedreciptbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seechoosedreciptbtnActionPerformed
+         String filename=imagefield.getText();
+         ImageIcon image = new ImageIcon(filename);
+         imagelabel.setIcon(image);
+    }//GEN-LAST:event_seechoosedreciptbtnActionPerformed
+
+    private void PayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayActionPerformed
+        String filename=imagefield.getText();
+        if(filename.equals(""))
+        {
+            JFrame f=new JFrame();  
+            JOptionPane.showMessageDialog(f,"Please Choose the Receipt First!"); 
+        }
+        else
+        {
+            int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.YES_OPTION) {
+                try {
+                    PreparedStatement pstmt = conn.prepareStatement("update Bills set RECEIPT=? where S_ID=?");
+                    InputStream in = new FileInputStream(filename);
+                    pstmt.setBlob(1, in);
+                    pstmt.setString(2, Stu_id);
+                    pstmt.execute();
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(Student_Bill_details.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Student_Bill_details.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_PayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,9 +322,13 @@ public class Student_Bill_details extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Pay;
     private javax.swing.JLabel additionalbill;
+    private javax.swing.JButton choosebtn;
     private javax.swing.JLabel finalabel;
     private javax.swing.JLabel hallbilllabel;
+    private javax.swing.JTextField imagefield;
+    private javax.swing.JLabel imagelabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -233,10 +336,13 @@ public class Student_Bill_details extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel laundrybilllabel;
     private javax.swing.JLabel messbilllabel;
     private javax.swing.JLabel namelabel;
+    private javax.swing.JButton seechoosedreciptbtn;
     private javax.swing.JLabel totalbilllabel;
     // End of variables declaration//GEN-END:variables
 }
