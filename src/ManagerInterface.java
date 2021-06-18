@@ -356,7 +356,8 @@ public class ManagerInterface extends javax.swing.JFrame {
 
     //Add All the approved students
     private void addStdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStdBtnActionPerformed
-       
+       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
        
         for(int i=0;i<rowcount;i++)
         {
@@ -371,8 +372,7 @@ public class ManagerInterface extends javax.swing.JFrame {
             if(chk && !room_noo.equals("--Select Room--"))
             {   
                 
-                int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                if (response == JOptionPane.YES_OPTION) {
+                
                 
             
                 // Updating student information table
@@ -424,8 +424,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                          ps.setInt(6,0);
                          ps.setInt(7,0);
                          ps.executeUpdate();
-                        JFrame f=new JFrame();  
-                        JOptionPane.showMessageDialog(f,"Added To Database");  
+                        
                     
                     
                       String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\nYour login id : "+idd
@@ -438,7 +437,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+             
             }
             else if(((chk==false) && !room_noo.equals("--Select Room--"))||((chk==true) && room_noo.equals("--Select Room--")))
             {
@@ -447,6 +446,9 @@ public class ManagerInterface extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(f,"Select the fields properly.","Alert",JOptionPane.WARNING_MESSAGE);
             }
         }
+        }
+        JFrame f=new JFrame();  
+        JOptionPane.showMessageDialog(f,"Added To Database");  
       
       showInfo();
        
@@ -486,8 +488,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                 System.out.println(stuffid);
                 String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
                 resultSet6 = statement.executeQuery(query5);
-                JFrame f=new JFrame();  
-                JOptionPane.showMessageDialog(f,"Assigned To Stuff");  
+                 
 
              }
            }
@@ -495,7 +496,9 @@ public class ManagerInterface extends javax.swing.JFrame {
        } catch (SQLException ex) {
            Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
        }
-     } 
+     }
+        JFrame f=new JFrame();  
+         JOptionPane.showMessageDialog(f,"Assigned To Stuff"); 
      showInfo();     
         
     }//GEN-LAST:event_assignworkbtnActionPerformed
