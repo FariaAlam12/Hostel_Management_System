@@ -504,14 +504,14 @@ public class ApplicationForm extends javax.swing.JFrame {
         else
         {
             warning.setVisible(false);
-            String query=String.format("insert into student_information values('%s','%s','#123@','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0','NA')",id,name,email,dept,reg,father,mother,sDate,gen,add);
+            String query=String.format("insert into student_information values('%s','%s','@'||hall_pass_seq.nextval||'#','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0','NA')",id,name,email,dept,reg,father,mother,sDate,gen,add);
             
             
             try {
                 id_invalid.setVisible(false);
                 resultSet = statement.executeQuery(query);
                 this.setVisible(false);
-           JOptionPane.showMessageDialog(f,"Application Received!!!");
+                JOptionPane.showMessageDialog(f,"Application Received!!!");
             } catch (SQLException ex) {
                 //System.out.println("Failed to insert");
                 id_invalid.setText("ID already exist");
