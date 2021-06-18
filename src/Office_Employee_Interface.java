@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -14,7 +15,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2,resultSet5;
+   ResultSet resultSet,resultSet2,resultSet5,resultSet6;
    String St_id,stuff_id;
    int total_cost=0,total_breakfast=0,total_lunch=0,total_dinner=0;
      public Office_Employee_Interface() {
@@ -125,6 +126,8 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         studentID_Search_field = new javax.swing.JTextField();
         idSearchBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        dispatchbtn = new javax.swing.JButton();
+        paidbillsbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,6 +224,24 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(690, 360, 160, 40);
 
+        dispatchbtn.setText("Dispatch");
+        dispatchbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dispatchbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(dispatchbtn);
+        dispatchbtn.setBounds(420, 320, 120, 30);
+
+        paidbillsbtn.setText("Paid Bills");
+        paidbillsbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paidbillsbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(paidbillsbtn);
+        paidbillsbtn.setBounds(690, 520, 160, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -284,6 +305,26 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
        sbd.setVisible(true);
     }//GEN-LAST:event_idSearchBtnActionPerformed
 
+    private void dispatchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispatchbtnActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            DefaultTableModel model;
+            model=(DefaultTableModel) MillDetailTable.getModel(); 
+            model.setRowCount(0);
+            String query5=String.format("Delete from Student_Mill");
+            try {
+                resultSet6=statement.executeQuery(query5);
+            } catch (SQLException ex) {
+                Logger.getLogger(Office_Employee_Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_dispatchbtnActionPerformed
+
+    private void paidbillsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidbillsbtnActionPerformed
+        PaidReceipts PR=new PaidReceipts();
+        PR.setVisible(true);
+    }//GEN-LAST:event_paidbillsbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -322,6 +363,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelRequestUpdateBtn;
     private javax.swing.JTable MillDetailTable;
+    private javax.swing.JButton dispatchbtn;
     private javax.swing.JButton idSearchBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -329,6 +371,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton paidbillsbtn;
     private javax.swing.JTable seatcanceltable;
     private javax.swing.JTextField studentID_Search_field;
     // End of variables declaration//GEN-END:variables

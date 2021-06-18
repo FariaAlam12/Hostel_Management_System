@@ -216,7 +216,7 @@ public class Student_Bill_details extends javax.swing.JFrame {
             }
         });
         jPanel1.add(seechoosedreciptbtn);
-        seechoosedreciptbtn.setBounds(380, 130, 150, 23);
+        seechoosedreciptbtn.setBounds(380, 130, 200, 23);
         jPanel1.add(imagelabel);
         imagelabel.setBounds(380, 170, 340, 618);
 
@@ -227,7 +227,7 @@ public class Student_Bill_details extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Pay);
-        Pay.setBounds(550, 130, 130, 23);
+        Pay.setBounds(600, 130, 130, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
