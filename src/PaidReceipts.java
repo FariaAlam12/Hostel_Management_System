@@ -79,13 +79,14 @@ public class PaidReceipts extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         PaidReceiptTable = new javax.swing.JTable();
         imageLabel = new javax.swing.JLabel();
-        viewBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        clearBillBtn = new javax.swing.JButton();
+        viewreceiptLabel = new javax.swing.JLabel();
+        clearbilllabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(857, 479));
 
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
         jPanel1.setLayout(null);
 
         PaidReceiptTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -111,6 +112,7 @@ public class PaidReceipts extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        PaidReceiptTable.setRowHeight(30);
         jScrollPane1.setViewportView(PaidReceiptTable);
 
         jPanel1.add(jScrollPane1);
@@ -118,27 +120,31 @@ public class PaidReceipts extends javax.swing.JFrame {
         jPanel1.add(imageLabel);
         imageLabel.setBounds(630, 30, 340, 618);
 
-        viewBtn.setText("View Receipt");
-        viewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(viewBtn);
-        viewBtn.setBounds(90, 470, 120, 30);
-
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Paid Bill List");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(50, 20, 170, 30);
+        jLabel1.setBounds(30, 20, 170, 30);
 
-        clearBillBtn.setText("Clear Bill");
-        clearBillBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBillBtnActionPerformed(evt);
+        viewreceiptLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewreceipt.png"))); // NOI18N
+        viewreceiptLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        viewreceiptLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewreceiptLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(clearBillBtn);
-        clearBillBtn.setBounds(250, 470, 120, 30);
+        jPanel1.add(viewreceiptLabel);
+        viewreceiptLabel.setBounds(60, 480, 150, 40);
+
+        clearbilllabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clearbill.png"))); // NOI18N
+        clearbilllabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearbilllabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearbilllabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(clearbilllabel);
+        clearbilllabel.setBounds(260, 480, 130, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,14 +161,14 @@ public class PaidReceipts extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
-        String query=String.format("select count(*) as c from Bills where RECEIPT IS NOT NULL");
-       try {
-           resultSet = statement.executeQuery(query);
-           resultSet.next();
-           int rowcount=resultSet.getInt("c");
-            for(int i=0;i<rowcount;i++)
-            {
+    private void viewreceiptLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewreceiptLabelMouseClicked
+             String query=String.format("select count(*) as c from Bills where RECEIPT IS NOT NULL");
+             try {
+             resultSet = statement.executeQuery(query);
+             resultSet.next();
+             int rowcount=resultSet.getInt("c");
+             for(int i=0;i<rowcount;i++)
+             {
                 Boolean chk= ((Boolean)PaidReceiptTable.getValueAt(i,2)).booleanValue();
                 if(chk)
                 {
@@ -183,11 +189,10 @@ public class PaidReceipts extends javax.swing.JFrame {
        } catch (SQLException ex) {
            Logger.getLogger(PaidReceipts.class.getName()).log(Level.SEVERE, null, ex);
        }
-           
-    }//GEN-LAST:event_viewBtnActionPerformed
+    }//GEN-LAST:event_viewreceiptLabelMouseClicked
 
-    private void clearBillBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBillBtnActionPerformed
-         int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    private void clearbilllabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearbilllabelMouseClicked
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
             String query=String.format("select count(*) as c from Bills where RECEIPT IS NOT NULL");
        try {
@@ -294,7 +299,7 @@ public class PaidReceipts extends javax.swing.JFrame {
            Logger.getLogger(PaidReceipts.class.getName()).log(Level.SEVERE, null, ex);
        }
         }
-    }//GEN-LAST:event_clearBillBtnActionPerformed
+    }//GEN-LAST:event_clearbilllabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -333,11 +338,11 @@ public class PaidReceipts extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PaidReceiptTable;
-    private javax.swing.JButton clearBillBtn;
+    private javax.swing.JLabel clearbilllabel;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton viewBtn;
+    private javax.swing.JLabel viewreceiptLabel;
     // End of variables declaration//GEN-END:variables
 }

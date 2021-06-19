@@ -97,7 +97,7 @@ public class ManagerInterface extends javax.swing.JFrame {
            
            TableColumn stuffColumn = pendinglist.getColumnModel().getColumn(10);
            JComboBox comboBox = new JComboBox();
-            String query4=String.format("select Room_No from Room_Information where Cur_No_Seat>0 and Room_No!='NA'");
+            String query4=String.format("select Room_No from Room_Information where Cur_No_Seat<4 and Room_No!='NA'");
                resultSet5 = statement2.executeQuery(query4);
                while(resultSet5.next())
                {
@@ -536,9 +536,11 @@ public class ManagerInterface extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(f,"Select the fields properly.","Alert",JOptionPane.WARNING_MESSAGE);
             }
         }
-        }
+        
         JFrame f=new JFrame();  
-        JOptionPane.showMessageDialog(f,"Added To Database");  
+        JOptionPane.showMessageDialog(f,"Added To Database"); 
+        }
+         
       
       showInfo();
     }//GEN-LAST:event_addStudentBtnLabelMouseClicked

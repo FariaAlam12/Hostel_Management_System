@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,7 +16,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2,resultSet5,resultSet6;
+   ResultSet resultSet,resultSet2,resultSet5,resultSet6,resultSet7;
    String St_id,stuff_id;
    int total_cost=0,total_breakfast=0,total_lunch=0,total_dinner=0;
      public Office_Employee_Interface() {
@@ -48,6 +49,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         ///For Mill tabele
         DefaultTableModel model,model2;
         model=(DefaultTableModel) MillDetailTable.getModel(); 
+         model.setRowCount(0);
         String query=String.format("select * from Student_Mill");
        try {
            resultSet = statement.executeQuery(query);
@@ -89,6 +91,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
        
        //For Seat cancel table 
          model2=(DefaultTableModel) seatcanceltable.getModel();
+         model2.setRowCount(0);
          String query2=String.format("select S_ID,Issue_Descr from Response_Issue where Stuff_ID='%s' and Issue_Status=1",stuff_id);
          
        try {
@@ -122,18 +125,22 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         seatcanceltable = new javax.swing.JTable();
-        CancelRequestUpdateBtn = new javax.swing.JButton();
         studentID_Search_field = new javax.swing.JTextField();
-        idSearchBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        dispatchbtn = new javax.swing.JButton();
-        paidbillsbtn = new javax.swing.JButton();
+        mealdispatchLabel = new javax.swing.JLabel();
+        UpdateseatcancelLabel = new javax.swing.JLabel();
+        searchIDLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        totalbillshow = new javax.swing.JLabel();
+        paidbillLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Student Mill Details");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(40, 30, 200, 40);
@@ -161,12 +168,14 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        MillDetailTable.setRowHeight(30);
         jScrollPane1.setViewportView(MillDetailTable);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(70, 80, 870, 220);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Seat Calcellation Requests:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 350, 210, 40);
@@ -194,53 +203,72 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        seatcanceltable.setRowHeight(30);
         jScrollPane2.setViewportView(seatcanceltable);
 
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(60, 420, 490, 150);
-
-        CancelRequestUpdateBtn.setText("Update");
-        CancelRequestUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelRequestUpdateBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(CancelRequestUpdateBtn);
-        CancelRequestUpdateBtn.setBounds(300, 633, 90, 30);
         jPanel1.add(studentID_Search_field);
         studentID_Search_field.setBounds(680, 420, 180, 40);
 
-        idSearchBtn.setText("Search");
-        idSearchBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                idSearchBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(idSearchBtn);
-        idSearchBtn.setBounds(890, 430, 110, 23);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Show Bill Details");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(690, 360, 160, 40);
 
-        dispatchbtn.setText("Dispatch");
-        dispatchbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dispatchbtnActionPerformed(evt);
+        mealdispatchLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mealdispatch.png"))); // NOI18N
+        mealdispatchLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        mealdispatchLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mealdispatchLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(dispatchbtn);
-        dispatchbtn.setBounds(420, 320, 120, 30);
+        jPanel1.add(mealdispatchLabel);
+        mealdispatchLabel.setBounds(450, 320, 110, 40);
 
-        paidbillsbtn.setText("Paid Bills");
-        paidbillsbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paidbillsbtnActionPerformed(evt);
+        UpdateseatcancelLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pendingUpdate.png"))); // NOI18N
+        UpdateseatcancelLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        UpdateseatcancelLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdateseatcancelLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(paidbillsbtn);
-        paidbillsbtn.setBounds(690, 520, 160, 40);
+        jPanel1.add(UpdateseatcancelLabel);
+        UpdateseatcancelLabel.setBounds(240, 600, 110, 30);
+
+        searchIDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/searchid.png"))); // NOI18N
+        searchIDLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        searchIDLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchIDLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(searchIDLabel);
+        searchIDLabel.setBounds(910, 420, 95, 34);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Pending Bill:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(680, 500, 90, 40);
+
+        totalbillshow.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        totalbillshow.setForeground(new java.awt.Color(255, 255, 255));
+        totalbillshow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(totalbillshow);
+        totalbillshow.setBounds(800, 500, 140, 40);
+
+        paidbillLabel.setForeground(new java.awt.Color(255, 255, 255));
+        paidbillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paidbills.png"))); // NOI18N
+        paidbillLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        paidbillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paidbillLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(paidbillLabel);
+        paidbillLabel.setBounds(690, 590, 120, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -257,7 +285,24 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CancelRequestUpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelRequestUpdateBtnActionPerformed
+    private void mealdispatchLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mealdispatchLabelMouseClicked
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            DefaultTableModel model;
+            model=(DefaultTableModel) MillDetailTable.getModel(); 
+            model.setRowCount(0);
+            String query5=String.format("Delete from Student_Mill");
+            try {
+                resultSet6=statement.executeQuery(query5);
+            } catch (SQLException ex) {
+                Logger.getLogger(Office_Employee_Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_mealdispatchLabelMouseClicked
+
+    private void UpdateseatcancelLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateseatcancelLabelMouseClicked
+         int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
         String query3=String.format("select count(*) as c from Response_Issue where Stuff_ID='%s' and Issue_Status=1",stuff_id);
        try {
            resultSet = statement.executeQuery(query3);
@@ -292,38 +337,44 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
                       String query4=String.format("update Response_Issue set Issue_Status=3,Issue_Cost='%d' where S_ID='%s'",total,stuid);
                       resultSet2 = statement.executeQuery(query4);
                  }
+                 
+                 
             }
+           JFrame f=new JFrame();  
+           JOptionPane.showMessageDialog(f,"Updated!!!!!!!!!");  
        } catch (SQLException ex) {
            Logger.getLogger(Office_Employee_Interface.class.getName()).log(Level.SEVERE, null, ex);
        }
-            
-    }//GEN-LAST:event_CancelRequestUpdateBtnActionPerformed
+      }
+        showdata();
+    }//GEN-LAST:event_UpdateseatcancelLabelMouseClicked
 
-    private void idSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idSearchBtnActionPerformed
-       String St_id=studentID_Search_field.getText();
-       Student_Bill_details sbd=new Student_Bill_details(St_id);
-       sbd.setVisible(true);
-    }//GEN-LAST:event_idSearchBtnActionPerformed
+    private void searchIDLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIDLabelMouseClicked
+        String Stu_id=studentID_Search_field.getText();
+       // System.out.println(Stu_id);
+        try {
+          
+           String query2=String.format("select * from Bills where S_ID='%s'",Stu_id);
+           resultSet7=statement.executeQuery(query2);
+           resultSet7.next();
+           
+           int hallbill=resultSet7.getInt("Hall_Bill");
+           int messbill=resultSet7.getInt("Mess_Bill");
+           int laundrybill=resultSet7.getInt("Laundary_Bill");
+           int fine=resultSet7.getInt("Fine");
+           int addbill=resultSet7.getInt("Additional_Bill");
+           int total=hallbill+messbill+laundrybill+fine+addbill;
+           String totalbill=total+"";
+           totalbillshow.setText(totalbill);
+       } catch (SQLException ex) {
+           Logger.getLogger(Office_Employee_Interface.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }//GEN-LAST:event_searchIDLabelMouseClicked
 
-    private void dispatchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dispatchbtnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (response == JOptionPane.YES_OPTION) {
-            DefaultTableModel model;
-            model=(DefaultTableModel) MillDetailTable.getModel(); 
-            model.setRowCount(0);
-            String query5=String.format("Delete from Student_Mill");
-            try {
-                resultSet6=statement.executeQuery(query5);
-            } catch (SQLException ex) {
-                Logger.getLogger(Office_Employee_Interface.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_dispatchbtnActionPerformed
-
-    private void paidbillsbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidbillsbtnActionPerformed
-        PaidReceipts PR=new PaidReceipts();
+    private void paidbillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidbillLabelMouseClicked
+         PaidReceipts PR=new PaidReceipts();
         PR.setVisible(true);
-    }//GEN-LAST:event_paidbillsbtnActionPerformed
+    }//GEN-LAST:event_paidbillLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -361,18 +412,20 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CancelRequestUpdateBtn;
     private javax.swing.JTable MillDetailTable;
-    private javax.swing.JButton dispatchbtn;
-    private javax.swing.JButton idSearchBtn;
+    private javax.swing.JLabel UpdateseatcancelLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton paidbillsbtn;
+    private javax.swing.JLabel mealdispatchLabel;
+    private javax.swing.JLabel paidbillLabel;
+    private javax.swing.JLabel searchIDLabel;
     private javax.swing.JTable seatcanceltable;
     private javax.swing.JTextField studentID_Search_field;
+    private javax.swing.JLabel totalbillshow;
     // End of variables declaration//GEN-END:variables
 }
