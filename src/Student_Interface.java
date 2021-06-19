@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 public class Student_Interface extends javax.swing.JFrame {
- Connection conn;
+    Connection conn;
    Statement statement;
    ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
@@ -97,6 +97,7 @@ public class Student_Interface extends javax.swing.JFrame {
         addmealBtnLabel = new javax.swing.JLabel();
         seeBillLabel = new javax.swing.JLabel();
         logOutLabel = new javax.swing.JLabel();
+        changepassLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -297,6 +298,14 @@ public class Student_Interface extends javax.swing.JFrame {
             }
         });
 
+        changepassLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/changepass.png"))); // NOI18N
+        changepassLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changepassLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changepassLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -306,13 +315,14 @@ public class Student_Interface extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seeBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addmealBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(complaincancelBtnLabel))
-                .addGap(98, 98, 98))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(complaincancelBtnLabel)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(seeBillLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(changepassLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(88, 88, 88)
+                        .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -322,7 +332,7 @@ public class Student_Interface extends javax.swing.JFrame {
                 .addComponent(complaincancelBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -330,8 +340,10 @@ public class Student_Interface extends javax.swing.JFrame {
                         .addComponent(addmealBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(seeBillLabel)
-                .addGap(10, 10, 10)
-                .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(changepassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -376,6 +388,12 @@ public class Student_Interface extends javax.swing.JFrame {
           this.setVisible(false);
           LI.setVisible(true);
     }//GEN-LAST:event_logOutLabelMouseClicked
+
+    private void changepassLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changepassLabelMouseClicked
+       PasswordChangeInterface PC=new PasswordChangeInterface(stupassedid);
+       this.setVisible(false);
+       PC.setVisible(true);
+    }//GEN-LAST:event_changepassLabelMouseClicked
 
 
 
@@ -512,6 +530,7 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel Mother_Title;
     private javax.swing.JLabel Regularity_Title;
     private javax.swing.JLabel addmealBtnLabel;
+    private javax.swing.JLabel changepassLabel;
     private javax.swing.JLabel complaincancelBtnLabel;
     private javax.swing.JLabel deptLabel;
     private javax.swing.JLabel dobLabel;

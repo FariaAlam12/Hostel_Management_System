@@ -131,6 +131,8 @@ public class Stuff_Interface extends javax.swing.JFrame {
         AssignmentsBtnLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logOut = new javax.swing.JLabel();
+        changepassbtn = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -240,6 +242,21 @@ public class Stuff_Interface extends javax.swing.JFrame {
         jPanel1.add(logOut);
         logOut.setBounds(530, 440, 56, 70);
 
+        changepassbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/stuffpasschange.png"))); // NOI18N
+        changepassbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changepassbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changepassbtnMouseClicked(evt);
+            }
+        });
+        jPanel1.add(changepassbtn);
+        changepassbtn.setBounds(30, 420, 70, 81);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel4.setText("Change Password");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 390, 120, 20);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -258,7 +275,9 @@ public class Stuff_Interface extends javax.swing.JFrame {
     private void AssignmentsBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentsBtnLabelMouseClicked
         if(rank.equals("Provost") || rank.equals("Deputy Provost") || rank.equals("Assistant Provost"))
         {
-            
+            Provost_interface PI=new Provost_interface(stuff_id_passes);
+            this.setVisible(false);
+            PI.setVisible(true);
         }
         
         else if(rank.equals("Manager"))
@@ -287,6 +306,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
         this.setVisible(false);
         LI.setVisible(true);
     }//GEN-LAST:event_logOutMouseClicked
+
+    private void changepassbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changepassbtnMouseClicked
+       PasswordChangeInterface PC=new PasswordChangeInterface(stuff_id_passes);
+       this.setVisible(false);
+       PC.setVisible(true);
+    }//GEN-LAST:event_changepassbtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -327,10 +352,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel AssignmentsBtnLabel;
     private javax.swing.JLabel altphnfield;
     private javax.swing.JLabel altphnlabel;
+    private javax.swing.JLabel changepassbtn;
     private javax.swing.JLabel idfield;
     private javax.swing.JLabel idtitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logOut;

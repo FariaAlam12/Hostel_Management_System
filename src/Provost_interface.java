@@ -1,20 +1,99 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author HP
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+
 public class Provost_interface extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Provost_interface
-     */
+     Connection conn;
+     Statement statement,statement2;
+     ResultSet resultSet,resultSet2,resultSet3;
+     ResultSetMetaData resultsetMetaData;
+    String Stuff_id_passes;
     public Provost_interface() {
         initComponents();
+    }
+    public Provost_interface(String St_id) {
+        initComponents();
+        OracleConnection OC=new OracleConnection();
+        String[] stringArray = OC.connection();
+                try{
+           conn=DriverManager.getConnection(stringArray[0],stringArray[1],stringArray[2]);
+            if(conn!=null)
+            {
+                
+                System.out.println("Connection Sucessful in Stuff Interface");
+                statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                 statement2=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                //resultSet=res;
+                Stuff_id_passes=St_id;
+   
+            } 
+        }catch(SQLException e){
+            System.out.println("Connection failed");
+        }
+                
+         showdata();
+    }
+    
+    void showdata()
+    {
+         String query=String.format("select count(*) as c from student_information where S_Status=1");
+         try {
+             resultSet = statement.executeQuery(query);
+             resultSet.next();
+             int rowcount=resultSet.getInt("c");
+             String s=rowcount+"";
+             totalStudentLabel.setText(s);
+             
+             ///Setting peding bills
+              String query2=String.format("select * from Bills");
+              resultSet2 = statement2.executeQuery(query2);
+              int grandtotal=0;
+              while(resultSet2.next())
+              {
+                   int hallbill=resultSet2.getInt("Hall_Bill");
+                  int messbill=resultSet2.getInt("Mess_Bill");
+                  int laundrybill=resultSet2.getInt("Laundary_Bill");
+                  int fine=resultSet2.getInt("Fine");
+                  int addbill=resultSet2.getInt("Additional_Bill");
+                 int total=hallbill+messbill+laundrybill+fine+addbill;
+                 grandtotal=grandtotal+total;
+              }
+              String pendingtotoal=grandtotal+"";
+              TotalPendingLabel.setText(pendingtotoal);
+              
+              //setting cancel /complain issues
+                String query3=String.format("select Issue_Name from Response_Issue where issue_status=0");
+                 resultSet3 = statement2.executeQuery(query3);
+                 int seatcancel=0,complain=0;
+                 while(resultSet3.next())
+                 {
+                   String issue_name=resultSet3.getString("Issue_Name");
+                   if(issue_name.equals("Seat Cancel"))
+                   {
+                       seatcancel++;
+                   }
+                   else
+                   {
+                       complain++;
+                   }
+                 }
+                 String stcancel=seatcancel+"";
+                 String comp=complain+"";
+                 seatcancelLabel.setText(stcancel);
+                 complainLabel.setText(comp);
+             
+         } catch (SQLException ex) {
+             Logger.getLogger(Provost_interface.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
     }
 
     /**
@@ -26,21 +105,128 @@ public class Provost_interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        profilebacklabel = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        totalStudentLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        TotalPendingLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        seatcancelLabel = new javax.swing.JLabel();
+        complainLabel = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(720, 598));
+        setUndecorated(true);
+
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
+        jPanel1.setLayout(null);
+
+        jPanel2.setBackground(new java.awt.Color(24, 44, 97));
+
+        profilebacklabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/profileIcon.png"))); // NOI18N
+        profilebacklabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        profilebacklabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profilebacklabelMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Overview Of Hall Matters");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
+                .addComponent(profilebacklabel)
+                .addGap(30, 30, 30))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profilebacklabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 720, 120);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Total Students of Hall:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(30, 200, 220, 30);
+
+        totalStudentLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        totalStudentLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(totalStudentLabel);
+        totalStudentLabel.setBounds(320, 200, 100, 30);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Total Pending Bill Amount:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 270, 250, 30);
+
+        TotalPendingLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TotalPendingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(TotalPendingLabel);
+        TotalPendingLabel.setBounds(320, 270, 90, 30);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Total Seat Cancel issues:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(30, 330, 240, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Total Complain Issues:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(30, 390, 220, 40);
+
+        seatcancelLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        seatcancelLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(seatcancelLabel);
+        seatcancelLabel.setBounds(320, 330, 80, 30);
+
+        complainLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        complainLabel.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(complainLabel);
+        complainLabel.setBounds(320, 390, 90, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void profilebacklabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilebacklabelMouseClicked
+        Stuff_Interface SI= new Stuff_Interface(Stuff_id_passes);
+      this.setVisible(false);
+      SI.setVisible(true);
+    }//GEN-LAST:event_profilebacklabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +264,17 @@ public class Provost_interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TotalPendingLabel;
+    private javax.swing.JLabel complainLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel profilebacklabel;
+    private javax.swing.JLabel seatcancelLabel;
+    private javax.swing.JLabel totalStudentLabel;
     // End of variables declaration//GEN-END:variables
 }
