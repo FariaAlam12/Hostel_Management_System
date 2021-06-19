@@ -71,7 +71,6 @@ public class ApplicationForm extends javax.swing.JFrame {
         motherlabel = new javax.swing.JLabel();
         genderlabel = new javax.swing.JLabel();
         addresslabel = new javax.swing.JLabel();
-        submitBtn = new javax.swing.JButton();
         namefeild = new javax.swing.JTextField();
         idfeild = new javax.swing.JTextField();
         emailfeild = new javax.swing.JTextField();
@@ -95,13 +94,14 @@ public class ApplicationForm extends javax.swing.JFrame {
         mother_invalid = new javax.swing.JLabel();
         address_invalid = new javax.swing.JLabel();
         warning = new javax.swing.JLabel();
+        submitBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fulllpanel.setBackground(new java.awt.Color(255, 255, 255));
         fulllpanel.setLayout(null);
 
-        upperpanel.setBackground(new java.awt.Color(71, 179, 155));
+        upperpanel.setBackground(new java.awt.Color(118, 230, 155));
 
         upperlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         upperlabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -150,7 +150,7 @@ public class ApplicationForm extends javax.swing.JFrame {
         reglabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         reglabel.setText("Regularity Status:");
         fulllpanel.add(reglabel);
-        reglabel.setBounds(50, 315, 110, 20);
+        reglabel.setBounds(50, 315, 130, 20);
 
         phonenotitle.setBackground(new java.awt.Color(255, 255, 255));
         phonenotitle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -182,15 +182,6 @@ public class ApplicationForm extends javax.swing.JFrame {
         addresslabel.setText("Address: ");
         fulllpanel.add(addresslabel);
         addresslabel.setBounds(50, 620, 80, 15);
-
-        submitBtn.setText("Submit");
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
-            }
-        });
-        fulllpanel.add(submitBtn);
-        submitBtn.setBounds(340, 730, 140, 40);
 
         namefeild.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         namefeild.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -336,6 +327,16 @@ public class ApplicationForm extends javax.swing.JFrame {
         fulllpanel.add(warning);
         warning.setBounds(570, 740, 300, 20);
 
+        submitBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SubmitApplication.png"))); // NOI18N
+        submitBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        submitBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitBtnLabelMouseClicked(evt);
+            }
+        });
+        fulllpanel.add(submitBtnLabel);
+        submitBtnLabel.setBounds(410, 710, 100, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -350,226 +351,6 @@ public class ApplicationForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-       // String name= namefeild.getText();
-     //   String id = idfeild.getText();
-      //  String email= emailfeild.getText();
-      
-        String dept=deptcombobox.getSelectedItem().toString();
-        String reg=regularitycombobox.getSelectedItem().toString();
-        java.util.Date date=jDateChooser1.getDate();
-        java.sql.Date sDate = new java.sql.Date(date.getTime()); 
-        String gen=gendercombobox.getSelectedItem().toString();
-        
-        
-       // String phone= phonefeild.getText();
-       // String altphone = alternatefeild.getText();
-       // String father= fatherfeild.getText();
-       // String mother= motherfeild.getText();
-        
-      //  String add=addressarea.getText();
-        
-        // Convert to sql date
-        
-        
-        int flag=1;
-        JFrame f=new JFrame(); 
-        /*
-        //  Checking Name format
-        for(int i=0;i<name.length();i++)
-        {
-            if ((name.charAt(i)>='A' && name.charAt(i)<='Z') || (name.charAt(i)>='a' && name.charAt(i)<='z') || (name.charAt(i)=='.')|| (name.charAt(i)==' ') )
-            {
-                continue;
-            }
-            else
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Format of name is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
-                namefeild.setText("");
-                break;
-            }
-        }
-        
-        //  Checking ID format
-        for(int i=0;i<id.length();i++)
-        {
-            if (id.charAt(i)>='0' && id.charAt(i)<='9')
-            {
-                continue;
-            }
-            else
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Id should contain only number","Alert",JOptionPane.WARNING_MESSAGE);
-                idfeild.setText("");
-                break;
-            }
-        }
-        
-        //  Checking Email format
-        if(! email.contains("@gmail.com"))
-        {
-            flag=0;
-            JOptionPane.showMessageDialog(f,"Format of email is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
-            emailfeild.setText("");
-        }
-        
-        //  Checking Phone Number format
-        if(phone.length()==11)
-        {
-            String phnstrt="";
-            phnstrt=phnstrt+phone.charAt(0);
-            phnstrt=phnstrt+phone.charAt(1);
-            phnstrt=phnstrt+phone.charAt(2);
-            if(!(phnstrt!="013"|| phnstrt!="015"||phnstrt!="016"|| phnstrt!="017"||phnstrt!="018"|| phnstrt!="019"))
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Invalid format of phone number","Alert",JOptionPane.WARNING_MESSAGE);
-                phonefeild.setText("");
-            }
-        }
-        
-       
-        else
-        {
-            flag=0;
-            JOptionPane.showMessageDialog(f,"Phone number should contain 11 digit","Alert",JOptionPane.WARNING_MESSAGE);
-            phonefeild.setText("");
-        }
-        
-        
-        //  Checking Alternative Phone Number format
-        if(altphone.length()>0)
-        {
-            String altphnstrt="";
-            altphnstrt=altphnstrt+altphone.charAt(0);
-            altphnstrt=altphnstrt+altphone.charAt(1);
-            altphnstrt=altphnstrt+altphone.charAt(2);
-            if(!(altphnstrt!="013"|| altphnstrt!="015"||altphnstrt!="016"|| altphnstrt!="017"||altphnstrt!="018"|| altphnstrt!="019"))
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Invalid format of alternate phone number","Alert",JOptionPane.WARNING_MESSAGE);
-                alternatefeild.setText("");
-            }
-        }
-       
-
-        //  Checking Father's Name format
-        for(int i=0;i<father.length();i++)
-        {
-            if ((father.charAt(i)>='A' && father.charAt(i)<='Z')||(father.charAt(i)>='a' && father.charAt(i)<='z')||father.charAt(i)=='.'|| father.charAt(i)==' ')
-            {
-                continue;
-            }
-            else
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Format of Father's name is incorrect","Alert",JOptionPane.PLAIN_MESSAGE);
-                fatherfeild.setText("");
-                break;
-            }
-        }
-        
-        //  Checking mother's Name format
-        for(int i=0;i<mother.length();i++)
-        {
-            if ((mother.charAt(i)>='A' && mother.charAt(i)<='Z')||(mother.charAt(i)>='a' && mother.charAt(i)<='z')||mother.charAt(i)=='.'|| mother.charAt(i)==' ')
-            {
-                continue;
-            }
-            else
-            {
-                flag=0;
-                JOptionPane.showMessageDialog(f,"Format of Mother's name is incorrect","Alert",JOptionPane.WARNING_MESSAGE);
-                motherfeild.setText("");
-                break;
-            }
-        }
-        
-               
-        */
-        
-        
-         if(name.isEmpty() || id.isEmpty() || email.isEmpty() || phone.isEmpty() || father.isEmpty() || mother.isEmpty() || add.isEmpty())
-         {
-                
-                //flag=0;
-                warning.setVisible(true);
-                //JOptionPane.showMessageDialog(f,"One of the required field is empty","Alert",JOptionPane.WARNING_MESSAGE);
-         }
-         
-        
-        else
-        {
-            warning.setVisible(false);
-            String query=String.format("insert into student_information values('%s','%s','@'||hall_pass_seq.nextval||'#','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0','NA')",id,name,email,dept,reg,father,mother,sDate,gen,add);
-            
-            
-            try {
-                id_invalid.setVisible(false);
-                resultSet = statement.executeQuery(query);
-                this.setVisible(false);
-                JOptionPane.showMessageDialog(f,"Application Received!!!");
-            } catch (SQLException ex) {
-                //System.out.println("Failed to insert");
-                id_invalid.setText("ID already exist");
-                id_invalid.setVisible(true);
-                //JOptionPane.showMessageDialog(f,"ID already exist","Alert",JOptionPane.WARNING_MESSAGE);
-                idfeild.setText("");
-                //Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-
-            ///Phone no insert
-             String query3="insert into Student_Contact values(?,?)";
-            try {
-                PreparedStatement ps=conn.prepareStatement(query3);
-                 ps.setString(1,id);
-                 ps.setString(2,phone);
-                 ps.executeUpdate();
-
-            } catch (SQLException ex) {
-                System.out.println("Phone no not inserted");
-                Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            ///AlternativePhone no insert(if any)
-            if(altphone.length()>0)
-            {
-                 String query4="insert into Student_Contact values(?,?)";
-                try {
-                    PreparedStatement ps2=conn.prepareStatement(query4);
-                      ps2.setString(1,id);
-                    ps2.setString(2,altphone);
-                    ps2.executeUpdate();
-
-                } catch (SQLException ex) {
-                    System.out.println("Alt Phone no not inserted");
-                    Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
-            
-       }
-       
-       
-        
-//        System.out.println("Name: "+name);
-//        System.out.println("ID: "+id);
-//        System.out.println("email: "+email);
-//        System.out.println("dept: "+dept);
-//        System.out.println("reg: "+reg);
-//        System.out.println("phone: "+phone);
-//        System.out.println("altphone: "+altphone);
-//        System.out.println("father: "+father);
-//        System.out.println("mother: "+mother);      
-//        System.out.println("Gender: "+gen);
-//        System.out.println("Address: "+add);  
-//          System.out.println("Date "+s_dob);
-    }//GEN-LAST:event_submitBtnActionPerformed
 
     private void namefeildFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namefeildFocusLost
          name_invalid.setVisible(false);
@@ -806,6 +587,78 @@ public class ApplicationForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addressareaFocusLost
 
+    private void submitBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLabelMouseClicked
+        String dept=deptcombobox.getSelectedItem().toString();
+        String reg=regularitycombobox.getSelectedItem().toString();
+        java.util.Date date=jDateChooser1.getDate();
+        java.sql.Date sDate = new java.sql.Date(date.getTime()); 
+        String gen=gendercombobox.getSelectedItem().toString();
+        int flag=1;
+        JFrame f=new JFrame();  
+        
+        if(name.isEmpty() || id.isEmpty() || email.isEmpty() || phone.isEmpty() || father.isEmpty() || mother.isEmpty() || add.isEmpty())
+        {
+            warning.setVisible(true);
+        }
+         
+        else
+        {
+            warning.setVisible(false);
+            String query=String.format("insert into student_information values('%s','%s','@'||hall_pass_seq.nextval||'#','%s','%s','%s','%s','%s',to_date('%tF %n','yyyy-mm-dd'),'%s','%s','0','NA')",id,name,email,dept,reg,father,mother,sDate,gen,add);
+            
+            try {
+                id_invalid.setVisible(false);
+                resultSet = statement.executeQuery(query);
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(f,"Application Received!!!");
+            } catch (SQLException ex) {
+                id_invalid.setText("ID already exist");
+                id_invalid.setVisible(true);
+                idfeild.setText("");
+            }
+            
+
+            ///Phone no insert
+             String query3="insert into Student_Contact values(?,?)";
+            try {
+                PreparedStatement ps=conn.prepareStatement(query3);
+                 ps.setString(1,id);
+                 ps.setString(2,phone);
+                 ps.executeUpdate();
+                 if(altphone.length()==0)
+                 {
+                      LogIn LI=new LogIn();
+                      this.setVisible(false);
+                      LI.setVisible(true);
+                 }
+
+            } catch (SQLException ex) {
+                System.out.println("Phone no not inserted");
+                Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            ///AlternativePhone no insert(if any)
+            if(altphone.length()>0)
+            {
+                 String query4="insert into Student_Contact values(?,?)";
+                try {
+                    PreparedStatement ps2=conn.prepareStatement(query4);
+                    ps2.setString(1,id);
+                    ps2.setString(2,altphone);
+                    ps2.executeUpdate();
+                    LogIn LI=new LogIn();
+                    this.setVisible(false);
+                    LI.setVisible(true);
+
+                } catch (SQLException ex) {
+                    System.out.println("Alt Phone no not inserted");
+                    Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } 
+       }
+    }//GEN-LAST:event_submitBtnLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -876,7 +729,7 @@ public class ApplicationForm extends javax.swing.JFrame {
     private javax.swing.JLabel phonenotitle;
     private javax.swing.JLabel reglabel;
     private javax.swing.JComboBox<String> regularitycombobox;
-    private javax.swing.JButton submitBtn;
+    private javax.swing.JLabel submitBtnLabel;
     private javax.swing.JLabel upperlabel;
     private javax.swing.JPanel upperpanel;
     private javax.swing.JLabel warning;

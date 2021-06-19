@@ -8,13 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MonthlyBillAdd extends javax.swing.JFrame {
 
         Connection conn;
    Statement statement;
-   ResultSet resultSet;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4;
    ResultSetMetaData resultsetMetaData;
     public MonthlyBillAdd() {
         initComponents();
@@ -40,15 +42,14 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
     {
         DefaultTableModel model;
         model=(DefaultTableModel) monthlyBill.getModel(); 
-        String query=String.format("select S_ID,S_Name from Student_Information where S_Status='1'");
+        String query=String.format("select S_ID from Bills where Hall_Bill>0");
             try {
                 resultSet = statement.executeQuery(query);
                 String stuid,name;
                 while(resultSet.next())
                 {
                        stuid=resultSet.getString("S_ID");
-                       name=resultSet.getString("S_Name");
-                       model.insertRow(model.getRowCount(),new Object[]{stuid,name,2200,false});
+                       model.insertRow(model.getRowCount(),new Object[]{stuid,200,false});
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(MonthlyBillAdd.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,14 +68,16 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         monthlyBill = new javax.swing.JTable();
-        addfinebtn = new javax.swing.JButton();
-        addmonthlybillbtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        addMonthlyBillBtn = new javax.swing.JLabel();
+        addtofine = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(874, 424));
 
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
         jPanel1.setLayout(null);
 
         monthlyBill.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,14 +85,14 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Name", "Hall Bill", "Assign"
+                "Student ID", "Fine Amount", "Assign"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,38 +103,50 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        monthlyBill.setGridColor(new java.awt.Color(255, 255, 255));
+        monthlyBill.setRowHeight(30);
         jScrollPane1.setViewportView(monthlyBill);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(30, 120, 772, 180);
+        jScrollPane1.setBounds(40, 170, 772, 180);
 
-        addfinebtn.setText("Add To Fine");
-        addfinebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addfinebtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addfinebtn);
-        addfinebtn.setBounds(340, 380, 110, 23);
-
-        addmonthlybillbtn.setText("ADD");
-        addmonthlybillbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addmonthlybillbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addmonthlybillbtn);
-        addmonthlybillbtn.setBounds(270, 30, 160, 23);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fine Table");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 80, 80, 20);
+        jLabel1.setBounds(50, 140, 120, 20);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Add monthly Bill for All Student");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 30, 240, 30);
+        jLabel2.setBounds(50, 80, 300, 30);
+
+        addMonthlyBillBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addmonthlyBill.png"))); // NOI18N
+        addMonthlyBillBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addMonthlyBillBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMonthlyBillBtnMouseClicked(evt);
+            }
+        });
+        jPanel1.add(addMonthlyBillBtn);
+        addMonthlyBillBtn.setBounds(350, 70, 120, 60);
+
+        addtofine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addMealCose.png"))); // NOI18N
+        addtofine.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addtofine.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addtofineMouseClicked(evt);
+            }
+        });
+        jPanel1.add(addtofine);
+        addtofine.setBounds(380, 370, 70, 60);
+
+        jLabel3.setFont(new java.awt.Font("Tempus Sans ITC", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Add Fine");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(290, 390, 90, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,26 +156,14 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addfinebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addfinebtnActionPerformed
-//         String query=String.format("select count(*) as c from Student_Information where S_Status!='0'");
-//            try {
-//                resultSet = statement.executeQuery(query);
-//                resultSet.next();
-//                int rowcount=resultSet.getInt("c");
-//                
-//            } catch (SQLException ex) {
-//                Logger.getLogger(MonthlyBillAdd.class.getName()).log(Level.SEVERE, null, ex);
-//            }    
-    }//GEN-LAST:event_addfinebtnActionPerformed
-
-    private void addmonthlybillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmonthlybillbtnActionPerformed
+    private void addMonthlyBillBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMonthlyBillBtnMouseClicked
        //   Adding Monthly Bill to all Student
         CallableStatement cstmt = null;
         try {
@@ -181,7 +184,41 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
              Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
          }
-    }//GEN-LAST:event_addmonthlybillbtnActionPerformed
+    }//GEN-LAST:event_addMonthlyBillBtnMouseClicked
+
+    private void addtofineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addtofineMouseClicked
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) { 
+        String query=String.format("select count(*) as c from Bills where Hall_Bill>0");
+            try {
+                resultSet2 = statement.executeQuery(query);
+                resultSet2.next();
+                int rowcount=resultSet2.getInt("c");
+                for(int i=0;i<rowcount;i++)
+                {
+                    String idd= ((String)monthlyBill.getValueAt(i,0)).toString();
+                    Integer fine_amn=((Integer)monthlyBill.getValueAt(i,1));
+                    Boolean chk= ((Boolean)monthlyBill.getValueAt(i,2)).booleanValue();
+                    if(chk)
+                    {
+                        String query2=String.format("Select Fine from Bills where S_ID='%s'",idd);
+                        resultSet3=statement.executeQuery(query2);
+                        resultSet3.next();
+                        int fine=resultSet3.getInt("Fine");
+                        fine+=fine_amn;
+                        String query3=String.format("Update Bills set Fine=%d where S_ID='%s'",fine,idd);
+                        resultSet4=statement.executeQuery(query3);
+                    }
+                }
+                JFrame f=new JFrame();  
+                JOptionPane.showMessageDialog(f,"Fine Added");
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(MonthlyBillAdd.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+          
+    }//GEN-LAST:event_addtofineMouseClicked
 
     /**
      * @param args the command line arguments
@@ -219,10 +256,11 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addfinebtn;
-    private javax.swing.JButton addmonthlybillbtn;
+    private javax.swing.JLabel addMonthlyBillBtn;
+    private javax.swing.JLabel addtofine;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable monthlyBill;

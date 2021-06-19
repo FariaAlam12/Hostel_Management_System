@@ -1,5 +1,7 @@
 
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,20 +25,20 @@ public class ManagerInterface extends javax.swing.JFrame {
     
    Connection conn;
    Statement statement,statement2;
-   ResultSet resultSet,resultSet2,resultSet3,resultSet6,resultSet4,resultSet7,resultSet5;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet6,resultSet4,resultSet7,resultSet5,resultSetPass;
    
    ResultSetMetaData resultsetMetaData;
    int rowcount;
-   
+   String StuffId;
     public ManagerInterface() {
         initComponents();
     }
 
-    public ManagerInterface(String ID) {
+    public ManagerInterface(String ID,ResultSet Res) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
-        
+        this.resultSetPass=Res;
         try{
            conn=DriverManager.getConnection(stringArray[0],stringArray[1],stringArray[2]);
             if(conn!=null)
@@ -214,23 +216,34 @@ public class ManagerInterface extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pendinglist = new javax.swing.JTable();
-        addStdBtn = new javax.swing.JButton();
-        vacantRoomButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        assignworkbtn = new javax.swing.JButton();
-        stufflistbtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         issueTable = new javax.swing.JTable();
-        assignedworklistbtn = new javax.swing.JButton();
-        mothlybilladdbtn = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        gotoprofile = new javax.swing.JLabel();
+        vacantRoomBtnLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        addStudentBtnLabel = new javax.swing.JLabel();
+        addbillBtnLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        showstufflistBtnLabel = new javax.swing.JLabel();
+        assignedWorkBtnLabel = new javax.swing.JLabel();
+        assignedworkstatusBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Seat Applicant List");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 100, 130, 40);
+        jLabel1.setBounds(20, 110, 210, 40);
 
         pendinglist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -255,50 +268,18 @@ public class ManagerInterface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        pendinglist.setGridColor(new java.awt.Color(255, 255, 255));
+        pendinglist.setRowHeight(30);
         jScrollPane1.setViewportView(pendinglist);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 150, 1180, 300);
+        jScrollPane1.setBounds(20, 160, 1180, 230);
 
-        addStdBtn.setText("Add Selected Students");
-        addStdBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStdBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(addStdBtn);
-        addStdBtn.setBounds(500, 490, 190, 23);
-
-        vacantRoomButton.setText("Vacant Rooms");
-        vacantRoomButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                vacantRoomButtonMouseClicked(evt);
-            }
-        });
-        jPanel1.add(vacantRoomButton);
-        vacantRoomButton.setBounds(310, 490, 160, 23);
-
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Student Complain Or Seat Cancellation");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(90, 520, 220, 20);
-
-        assignworkbtn.setText("Assign Work");
-        assignworkbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignworkbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(assignworkbtn);
-        assignworkbtn.setBounds(540, 880, 110, 23);
-
-        stufflistbtn.setText("Show Stuff List");
-        stufflistbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stufflistbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(stufflistbtn);
-        stufflistbtn.setBounds(340, 880, 120, 23);
+        jLabel2.setBounds(50, 530, 360, 20);
 
         issueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -319,31 +300,135 @@ public class ManagerInterface extends javax.swing.JFrame {
         jScrollPane3.setViewportView(issueTable);
 
         jPanel1.add(jScrollPane3);
-        jScrollPane3.setBounds(40, 560, 930, 280);
+        jScrollPane3.setBounds(20, 570, 930, 280);
 
-        assignedworklistbtn.setText("Assigned Work Status");
-        assignedworklistbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignedworklistbtnActionPerformed(evt);
+        jPanel2.setBackground(new java.awt.Color(24, 44, 97));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Your Assigned Works");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ManagerUpperPanelIcon.png"))); // NOI18N
+
+        gotoprofile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/profileIcon.png"))); // NOI18N
+        gotoprofile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gotoprofile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gotoprofileMouseClicked(evt);
             }
         });
-        jPanel1.add(assignedworklistbtn);
-        assignedworklistbtn.setBounds(730, 881, 180, 30);
 
-        mothlybilladdbtn.setText("Add Bills");
-        mothlybilladdbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mothlybilladdbtnActionPerformed(evt);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
+                .addComponent(gotoprofile, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gotoprofile, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 1230, 105);
+
+        vacantRoomBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vacantroom.png"))); // NOI18N
+        vacantRoomBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        vacantRoomBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vacantRoomBtnLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(mothlybilladdbtn);
-        mothlybilladdbtn.setBounds(460, 30, 90, 30);
+        jPanel1.add(vacantRoomBtnLabel);
+        vacantRoomBtnLabel.setBounds(60, 430, 180, 50);
+
+        jLabel6.setFont(new java.awt.Font("Tempus Sans ITC", 1, 13)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("See vacant Rooms");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(90, 400, 100, 30);
+
+        jLabel5.setFont(new java.awt.Font("Tempus Sans ITC", 1, 13)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Add Selected Student");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(430, 410, 140, 20);
+
+        addStudentBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addMealCose.png"))); // NOI18N
+        addStudentBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addStudentBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addStudentBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(addStudentBtnLabel);
+        addStudentBtnLabel.setBounds(450, 430, 70, 80);
+
+        addbillBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addbills.png"))); // NOI18N
+        addbillBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addbillBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addbillBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(addbillBtnLabel);
+        addbillBtnLabel.setBounds(720, 430, 130, 60);
+
+        jLabel7.setFont(new java.awt.Font("Tempus Sans ITC", 1, 13)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Add Bills or FIne:");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(720, 410, 190, 20);
+
+        showstufflistBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/showStuffList.png"))); // NOI18N
+        showstufflistBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showstufflistBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showstufflistBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(showstufflistBtnLabel);
+        showstufflistBtnLabel.setBounds(970, 600, 160, 50);
+
+        assignedWorkBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AssignedWork.png"))); // NOI18N
+        assignedWorkBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        assignedWorkBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignedWorkBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(assignedWorkBtnLabel);
+        assignedWorkBtnLabel.setBounds(970, 660, 130, 50);
+
+        assignedworkstatusBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignedworkStatus.png"))); // NOI18N
+        assignedworkstatusBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        assignedworkstatusBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignedworkstatusBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(assignedworkstatusBtnLabel);
+        assignedworkstatusBtnLabel.setBounds(970, 720, 180, 50);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1182, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1223, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,9 +439,13 @@ public class ManagerInterface extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    //Add All the approved students
-    private void addStdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStdBtnActionPerformed
-       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    private void vacantRoomBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacantRoomBtnLabelMouseClicked
+         VacantRoomList vr=new VacantRoomList();
+        vr.setVisible(true);
+    }//GEN-LAST:event_vacantRoomBtnLabelMouseClicked
+
+    private void addStudentBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStudentBtnLabelMouseClicked
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
        
         for(int i=0;i<rowcount;i++)
@@ -414,7 +503,8 @@ public class ManagerInterface extends javax.swing.JFrame {
                          
                            
                          //Add the id to bill table
-                         String query3="insert into Bills values(?,?,?,?,?,?,?)";
+                        
+                         String query3="insert into Bills (S_ID,Bill_Status,Hall_Bill,Mess_Bill,Laundary_Bill,Fine,Additional_Bill) values(?,?,?,?,?,?,?)";
                          PreparedStatement ps=conn.prepareStatement(query3);
                          ps.setString(1,idd);
                          ps.setInt(2,0);
@@ -451,21 +541,28 @@ public class ManagerInterface extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(f,"Added To Database");  
       
       showInfo();
-       
-    }//GEN-LAST:event_addStdBtnActionPerformed
+    }//GEN-LAST:event_addStudentBtnLabelMouseClicked
 
-    private void vacantRoomButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vacantRoomButtonMouseClicked
-        VacantRoomList vr=new VacantRoomList();
-        vr.setVisible(true);
-    }//GEN-LAST:event_vacantRoomButtonMouseClicked
+    private void addbillBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addbillBtnLabelMouseClicked
+        MonthlyBillAdd MDA=new MonthlyBillAdd();
+        this.setVisible(false);
+        MDA.setVisible(true);
+    }//GEN-LAST:event_addbillBtnLabelMouseClicked
 
-    private void stufflistbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stufflistbtnActionPerformed
+    private void gotoprofileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoprofileMouseClicked
+      Stuff_Interface SI= new Stuff_Interface(resultSetPass);
+      this.setVisible(false);
+      SI.setVisible(true);
+    }//GEN-LAST:event_gotoprofileMouseClicked
+
+    private void showstufflistBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showstufflistBtnLabelMouseClicked
         StuffListInterface sl=new StuffListInterface();
         sl.setVisible(true);
-    }//GEN-LAST:event_stufflistbtnActionPerformed
+        
+    }//GEN-LAST:event_showstufflistBtnLabelMouseClicked
 
-    private void assignworkbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignworkbtnActionPerformed
-      int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+    private void assignedWorkBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedWorkBtnLabelMouseClicked
+       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
         
@@ -499,20 +596,13 @@ public class ManagerInterface extends javax.swing.JFrame {
      }
         JFrame f=new JFrame();  
          JOptionPane.showMessageDialog(f,"Assigned To Stuff"); 
-     showInfo();     
-        
-    }//GEN-LAST:event_assignworkbtnActionPerformed
+     showInfo();    
+    }//GEN-LAST:event_assignedWorkBtnLabelMouseClicked
 
-    private void assignedworklistbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignedworklistbtnActionPerformed
-       Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface();
+    private void assignedworkstatusBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedworkstatusBtnLabelMouseClicked
+        Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface();
        aws.setVisible(true);
-    }//GEN-LAST:event_assignedworklistbtnActionPerformed
-
-    private void mothlybilladdbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mothlybilladdbtnActionPerformed
-        MonthlyBillAdd MDA=new MonthlyBillAdd();
-        this.setVisible(false);
-        MDA.setVisible(true);
-    }//GEN-LAST:event_mothlybilladdbtnActionPerformed
+    }//GEN-LAST:event_assignedworkstatusBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -550,18 +640,25 @@ public class ManagerInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addStdBtn;
-    private javax.swing.JButton assignedworklistbtn;
-    private javax.swing.JButton assignworkbtn;
+    private javax.swing.JLabel addStudentBtnLabel;
+    private javax.swing.JLabel addbillBtnLabel;
+    private javax.swing.JLabel assignedWorkBtnLabel;
+    private javax.swing.JLabel assignedworkstatusBtnLabel;
+    private javax.swing.JLabel gotoprofile;
     private javax.swing.JTable issueTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton mothlybilladdbtn;
     private javax.swing.JTable pendinglist;
-    private javax.swing.JButton stufflistbtn;
-    private javax.swing.JButton vacantRoomButton;
+    private javax.swing.JLabel showstufflistBtnLabel;
+    private javax.swing.JLabel vacantRoomBtnLabel;
     // End of variables declaration//GEN-END:variables
 }

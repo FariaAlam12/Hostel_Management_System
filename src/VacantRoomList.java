@@ -93,6 +93,7 @@ public class VacantRoomList extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setLayout(null);
 
         vacantListTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,15 +119,18 @@ public class VacantRoomList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        vacantListTable.setGridColor(new java.awt.Color(255, 255, 255));
+        vacantListTable.setRowHeight(30);
         jScrollPane1.setViewportView(vacantListTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 100, 452, 280);
+        jScrollPane1.setBounds(90, 100, 452, 250);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Vacant Seat List");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(210, 30, 190, 30);
+        jLabel1.setBounds(190, 40, 220, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,6 +148,7 @@ public class VacantRoomList extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

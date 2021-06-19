@@ -72,13 +72,16 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         assignedworklisttable = new javax.swing.JTable();
-        submitbtn = new javax.swing.JButton();
+        submitupdateBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(914, 518));
         getContentPane().setLayout(null);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(27, 124, 161));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Assigned Work List");
 
         assignedworklisttable.setModel(new javax.swing.table.DefaultTableModel(
@@ -106,49 +109,52 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(assignedworklisttable);
 
+        submitupdateBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/submitupdate.png"))); // NOI18N
+        submitupdateBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitupdateBtnLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(320, 320, 320)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 813, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addGap(353, 353, 353)
+                        .addComponent(submitupdateBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(submitupdateBtnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addGap(35, 35, 35))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 0, 930, 440);
-
-        submitbtn.setText("Submit Update");
-        submitbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitbtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(submitbtn);
-        submitbtn.setBounds(390, 440, 120, 30);
+        jPanel2.setBounds(0, 0, 930, 500);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void submitbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbtnActionPerformed
-       
-           String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
+    private void submitupdateBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitupdateBtnLabelMouseClicked
+          String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
            try {
             resultSet = statement.executeQuery(query);
             resultSet.next();
@@ -171,8 +177,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_submitbtnActionPerformed
+    }//GEN-LAST:event_submitupdateBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -214,6 +219,6 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton submitbtn;
+    private javax.swing.JLabel submitupdateBtnLabel;
     // End of variables declaration//GEN-END:variables
 }

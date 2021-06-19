@@ -15,14 +15,14 @@ import javax.swing.JOptionPane;
 public class ComplainInterface extends javax.swing.JFrame {
     Connection conn;
    Statement statement;
-   ResultSet resultSet;
+   ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
     String id;
     public ComplainInterface() {
         initComponents();
     }
     
-    public ComplainInterface(String idd) {
+    public ComplainInterface(String idd,ResultSet res) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -37,7 +37,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
-        
+        resultSetPass=res;
         id=idd;
          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE );
         seatcancelbtn.setActionCommand("Seat Cancel");
@@ -65,20 +65,22 @@ public class ComplainInterface extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         decriptionArea = new javax.swing.JTextArea();
-        submitBtn = new javax.swing.JButton();
         foodbtn = new javax.swing.JRadioButton();
         electricitybtn = new javax.swing.JRadioButton();
         internetbtn = new javax.swing.JRadioButton();
         laundybtn = new javax.swing.JRadioButton();
+        submitBtnLabel = new javax.swing.JLabel();
+        crossBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(520, 474));
-        setPreferredSize(new java.awt.Dimension(520, 474));
+        setMinimumSize(new java.awt.Dimension(518, 500));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(518, 500));
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Issue Type");
 
@@ -87,26 +89,14 @@ public class ComplainInterface extends javax.swing.JFrame {
 
         IssueBtnGrp.add(cleanbtn);
         cleanbtn.setText("Clean Issue");
-        cleanbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cleanbtnActionPerformed(evt);
-            }
-        });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Issue Description");
 
         decriptionArea.setColumns(20);
         decriptionArea.setRows(5);
         jScrollPane1.setViewportView(decriptionArea);
-
-        submitBtn.setText("Submit");
-        submitBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitBtnActionPerformed(evt);
-            }
-        });
 
         IssueBtnGrp.add(foodbtn);
         foodbtn.setText("Food Issue");
@@ -120,40 +110,58 @@ public class ComplainInterface extends javax.swing.JFrame {
         IssueBtnGrp.add(laundybtn);
         laundybtn.setText("Laundry Issue");
 
+        submitBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SubmitApplication.png"))); // NOI18N
+        submitBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitBtnLabelMouseClicked(evt);
+            }
+        });
+
+        crossBtnLabel.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        crossBtnLabel.setForeground(new java.awt.Color(255, 255, 255));
+        crossBtnLabel.setText("X");
+        crossBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crossBtnLabelMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(195, 195, 195)
+                .addComponent(submitBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(seatcancelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(foodbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(internetbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(62, 62, 62)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(laundybtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cleanbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(electricitybtn, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(submitBtn))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(seatcancelbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(foodbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(internetbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(laundybtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cleanbtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(electricitybtn, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(crossBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(crossBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seatcancelbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,24 +174,24 @@ public class ComplainInterface extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(internetbtn)
                     .addComponent(laundybtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(submitBtn)
-                .addGap(42, 42, 42))
+                .addGap(18, 18, 18)
+                .addComponent(submitBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 520, 471);
+        jPanel1.setBounds(0, 0, 520, 500);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String issusename=IssueBtnGrp.getSelection().getActionCommand();
+    private void submitBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLabelMouseClicked
+         String issusename=IssueBtnGrp.getSelection().getActionCommand();
         System.out.println(issusename);
         String description=decriptionArea.getText();
         int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
@@ -214,11 +222,14 @@ public class ComplainInterface extends javax.swing.JFrame {
         IssueBtnGrp.clearSelection();
         decriptionArea.setText("");
         }
-    }//GEN-LAST:event_submitBtnActionPerformed
+    }//GEN-LAST:event_submitBtnLabelMouseClicked
 
-    private void cleanbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanbtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cleanbtnActionPerformed
+    private void crossBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crossBtnLabelMouseClicked
+       Student_Interface SI=new Student_Interface(resultSetPass);
+       this.setVisible(false);
+       SI.setVisible(true);
+        
+    }//GEN-LAST:event_crossBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -258,6 +269,7 @@ public class ComplainInterface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup IssueBtnGrp;
     private javax.swing.JRadioButton cleanbtn;
+    private javax.swing.JLabel crossBtnLabel;
     private javax.swing.JTextArea decriptionArea;
     private javax.swing.JRadioButton electricitybtn;
     private javax.swing.JRadioButton foodbtn;
@@ -268,6 +280,6 @@ public class ComplainInterface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton laundybtn;
     private javax.swing.JRadioButton seatcancelbtn;
-    private javax.swing.JButton submitBtn;
+    private javax.swing.JLabel submitBtnLabel;
     // End of variables declaration//GEN-END:variables
 }

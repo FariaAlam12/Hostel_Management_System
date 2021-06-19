@@ -19,7 +19,7 @@ public class Stuff_Interface extends javax.swing.JFrame {
 
     Connection conn;
    Statement statement;
-   ResultSet resultSet;
+   ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
    
    String rank,id;
@@ -118,86 +118,143 @@ public class Stuff_Interface extends javax.swing.JFrame {
         ranktitle = new javax.swing.JLabel();
         nametitle = new javax.swing.JLabel();
         idtitle = new javax.swing.JLabel();
-        assignbtn = new javax.swing.JButton();
         rankfield = new javax.swing.JLabel();
         namefield = new javax.swing.JLabel();
         idfield = new javax.swing.JLabel();
         phnfield = new javax.swing.JLabel();
         altphnlabel = new javax.swing.JLabel();
         altphnfield = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        AssignmentsBtnLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        logOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        phnlabel.setText("Phone Number:");
+        phnlabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        phnlabel.setText("Phone Number :");
         jPanel1.add(phnlabel);
-        phnlabel.setBounds(50, 210, 90, 30);
+        phnlabel.setBounds(40, 280, 140, 30);
 
+        ranktitle.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         ranktitle.setText("Rank :");
         jPanel1.add(ranktitle);
-        ranktitle.setBounds(60, 90, 70, 30);
+        ranktitle.setBounds(40, 120, 70, 30);
 
-        nametitle.setText("Name");
+        nametitle.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        nametitle.setText("Name :");
         jPanel1.add(nametitle);
-        nametitle.setBounds(60, 130, 70, 30);
+        nametitle.setBounds(40, 170, 70, 30);
 
-        idtitle.setText("ID");
+        idtitle.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        idtitle.setText("ID :");
         jPanel1.add(idtitle);
-        idtitle.setBounds(60, 170, 70, 30);
+        idtitle.setBounds(40, 220, 70, 30);
 
-        assignbtn.setText("Assignment");
-        assignbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(assignbtn);
-        assignbtn.setBounds(230, 380, 170, 23);
-
+        rankfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         rankfield.setText("rank");
         jPanel1.add(rankfield);
-        rankfield.setBounds(140, 100, 140, 14);
+        rankfield.setBounds(220, 130, 140, 20);
 
+        namefield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         namefield.setText("name");
         jPanel1.add(namefield);
-        namefield.setBounds(130, 140, 200, 14);
+        namefield.setBounds(220, 180, 200, 20);
 
+        idfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         idfield.setText("id");
         jPanel1.add(idfield);
-        idfield.setBounds(120, 180, 160, 14);
+        idfield.setBounds(220, 240, 160, 20);
 
+        phnfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         phnfield.setText("phn");
         jPanel1.add(phnfield);
-        phnfield.setBounds(140, 220, 200, 14);
+        phnfield.setBounds(220, 290, 200, 20);
 
-        altphnlabel.setText("Alternative Phn :");
+        altphnlabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        altphnlabel.setText("Alternative Phone  :");
         jPanel1.add(altphnlabel);
-        altphnlabel.setBounds(40, 280, 90, 14);
+        altphnlabel.setBounds(40, 330, 170, 40);
 
+        altphnfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         altphnfield.setText("alt phn");
         jPanel1.add(altphnfield);
-        altphnfield.setBounds(140, 280, 210, 20);
+        altphnfield.setBounds(220, 340, 210, 20);
+
+        jPanel2.setBackground(new java.awt.Color(24, 44, 97));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Your Information");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(336, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 600, 100);
+
+        AssignmentsBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assignment.png"))); // NOI18N
+        AssignmentsBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        AssignmentsBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AssignmentsBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(AssignmentsBtnLabel);
+        AssignmentsBtnLabel.setBounds(230, 410, 130, 100);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel2.setText("Assignments");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(260, 390, 80, 20);
+
+        logOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logOutFromStudent.png"))); // NOI18N
+        logOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutMouseClicked(evt);
+            }
+        });
+        jPanel1.add(logOut);
+        logOut.setBounds(530, 440, 56, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void assignbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignbtnActionPerformed
-        if(rank.equals("Manager"))
+    private void AssignmentsBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentsBtnLabelMouseClicked
+         if(rank.equals("Manager"))
         {
-            ManagerInterface MI=new ManagerInterface(id);
+            ManagerInterface MI=new ManagerInterface(id,resultSetPass);
             this.setVisible(false);
             MI.setVisible(true);
         }
@@ -213,9 +270,13 @@ public class Stuff_Interface extends javax.swing.JFrame {
             this.setVisible(false);
             AWI.setVisible(true);
         }
-        
-        
-    }//GEN-LAST:event_assignbtnActionPerformed
+    }//GEN-LAST:event_AssignmentsBtnLabelMouseClicked
+
+    private void logOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutMouseClicked
+        LogIn LI=new LogIn();
+        this.setVisible(false);
+        LI.setVisible(true);
+    }//GEN-LAST:event_logOutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -253,12 +314,16 @@ public class Stuff_Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AssignmentsBtnLabel;
     private javax.swing.JLabel altphnfield;
     private javax.swing.JLabel altphnlabel;
-    private javax.swing.JButton assignbtn;
     private javax.swing.JLabel idfield;
     private javax.swing.JLabel idtitle;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel logOut;
     private javax.swing.JLabel namefield;
     private javax.swing.JLabel nametitle;
     private javax.swing.JLabel phnfield;

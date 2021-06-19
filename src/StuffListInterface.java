@@ -77,7 +77,10 @@ public class StuffListInterface extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1110, 399));
 
-        stufflistlabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
+
+        stufflistlabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        stufflistlabel.setForeground(new java.awt.Color(255, 255, 255));
         stufflistlabel.setText("Stuff List");
 
         stufflisttable.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,6 +91,8 @@ public class StuffListInterface extends javax.swing.JFrame {
                 "Stuff ID", "Stuff Name", "Stuff Rank", "Asigned Room Lower", "Assigned Room Upper"
             }
         ));
+        stufflisttable.setGridColor(new java.awt.Color(255, 255, 255));
+        stufflisttable.setRowHeight(30);
         jScrollPane1.setViewportView(stufflisttable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -95,18 +100,21 @@ public class StuffListInterface extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(stufflistlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 911, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(465, 465, 465)
+                        .addComponent(stufflistlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(stufflistlabel)
-                .addGap(32, 32, 32)
+                .addGap(37, 37, 37)
+                .addComponent(stufflistlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
         );

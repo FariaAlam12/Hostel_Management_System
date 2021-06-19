@@ -118,7 +118,7 @@ public class MenuSelection extends javax.swing.JFrame {
                break_check.setEnabled(false);
                launch_check.setEnabled(false);
                dinner_check.setEnabled(false);
-               add_mill_btn.setEnabled(false);
+               addMealBtnLabel.setEnabled(false);
            }
            else
            {
@@ -157,73 +157,94 @@ public class MenuSelection extends javax.swing.JFrame {
         launch_check = new javax.swing.JCheckBox();
         dinner_check = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        add_mill_btn = new javax.swing.JButton();
+        addMealBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(502, 381));
 
+        jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setLayout(null);
 
         tomorrowtitle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        tomorrowtitle.setForeground(new java.awt.Color(255, 255, 255));
         tomorrowtitle.setText("Tom");
         jPanel1.add(tomorrowtitle);
         tomorrowtitle.setBounds(41, 36, 110, 22);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText(" Menu & Cost");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(150, 40, 120, 17);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Breakfast:");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(40, 130, 70, 22);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Launch:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(41, 188, 50, 14);
+        jLabel3.setBounds(41, 188, 60, 20);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Dinner:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(41, 251, 40, 14);
+        jLabel4.setBounds(41, 251, 60, 17);
 
+        break_menu_label.setForeground(new java.awt.Color(255, 255, 255));
         break_menu_label.setText("breakfast menu");
         jPanel1.add(break_menu_label);
         break_menu_label.setBounds(120, 130, 170, 20);
 
+        launch_menu_label.setForeground(new java.awt.Color(255, 255, 255));
         launch_menu_label.setText("Launch Menu");
         jPanel1.add(launch_menu_label);
         launch_menu_label.setBounds(120, 190, 180, 20);
 
+        dinner_menu_label.setForeground(new java.awt.Color(255, 255, 255));
         dinner_menu_label.setText("dinner Menu");
         jPanel1.add(dinner_menu_label);
-        dinner_menu_label.setBounds(110, 250, 190, 20);
+        dinner_menu_label.setBounds(120, 250, 170, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Time");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(40, 84, 50, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Menu");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(130, 80, 50, 20);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cost");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(300, 84, 50, 20);
+        jLabel7.setBounds(310, 80, 50, 20);
 
+        cost_breakfast.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cost_breakfast.setForeground(new java.awt.Color(255, 255, 255));
         cost_breakfast.setText("c-b");
         jPanel1.add(cost_breakfast);
-        cost_breakfast.setBounds(300, 130, 30, 14);
+        cost_breakfast.setBounds(320, 130, 30, 14);
 
+        cost_launch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cost_launch.setForeground(new java.awt.Color(255, 255, 255));
         cost_launch.setText("c-l");
         jPanel1.add(cost_launch);
-        cost_launch.setBounds(300, 190, 30, 14);
+        cost_launch.setBounds(320, 190, 30, 14);
 
+        cost_dinner.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cost_dinner.setForeground(new java.awt.Color(255, 255, 255));
         cost_dinner.setText("c-d");
         jPanel1.add(cost_dinner);
-        cost_dinner.setBounds(300, 250, 30, 14);
+        cost_dinner.setBounds(320, 250, 30, 14);
         jPanel1.add(break_check);
         break_check.setBounds(420, 120, 20, 23);
         jPanel1.add(launch_check);
@@ -232,18 +253,20 @@ public class MenuSelection extends javax.swing.JFrame {
         dinner_check.setBounds(420, 240, 21, 21);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Taken");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(410, 80, 60, 17);
 
-        add_mill_btn.setText("Add");
-        add_mill_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                add_mill_btnActionPerformed(evt);
+        addMealBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addMealCose.png"))); // NOI18N
+        addMealBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addMealBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMealBtnLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(add_mill_btn);
-        add_mill_btn.setBounds(210, 300, 70, 23);
+        jPanel1.add(addMealBtnLabel);
+        addMealBtnLabel.setBounds(210, 300, 60, 70);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,8 +283,8 @@ public class MenuSelection extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void add_mill_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_mill_btnActionPerformed
-        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+    private void addMealBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMealBtnLabelMouseClicked
+         int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
            break_check.setSelected(false);
@@ -321,9 +344,9 @@ public class MenuSelection extends javax.swing.JFrame {
        break_check.setEnabled(false);
        launch_check.setEnabled(false);
        dinner_check.setEnabled(false);
-       add_mill_btn.setEnabled(false); 
+       addMealBtnLabel.setEnabled(false); 
        }
-    }//GEN-LAST:event_add_mill_btnActionPerformed
+    }//GEN-LAST:event_addMealBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -361,7 +384,7 @@ public class MenuSelection extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add_mill_btn;
+    private javax.swing.JLabel addMealBtnLabel;
     private javax.swing.JCheckBox break_check;
     private javax.swing.JLabel break_menu_label;
     private javax.swing.JLabel cost_breakfast;

@@ -99,11 +99,13 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         pending_complete_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        updateBtn = new javax.swing.JButton();
+        updateBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1086, 559));
         getContentPane().setLayout(null);
+
+        jPanel1.setBackground(new java.awt.Color(27, 124, 161));
 
         pending_complete_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,15 +130,19 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        pending_complete_table.setGridColor(new java.awt.Color(255, 255, 255));
+        pending_complete_table.setRowHeight(30);
         jScrollPane1.setViewportView(pending_complete_table);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Pending Or Completed List");
 
-        updateBtn.setText("Update");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
+        updateBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pendingUpdate.png"))); // NOI18N
+        updateBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        updateBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                updateBtnLabelMouseClicked(evt);
             }
         });
 
@@ -145,14 +151,17 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(376, 376, 376)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(470, 470, 470)
-                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(376, 376, 376)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(481, 481, 481)
+                        .addComponent(updateBtnLabel)))
+                .addGap(92, 92, 92))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,19 +170,20 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addComponent(updateBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 998, 550);
+        jPanel1.setBounds(0, 0, 1090, 550);
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
+    private void updateBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnLabelMouseClicked
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
        if (response == JOptionPane.YES_OPTION) {
         
@@ -303,7 +313,7 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
        
         }
        showData();
-    }//GEN-LAST:event_updateBtnActionPerformed
+    }//GEN-LAST:event_updateBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -345,6 +355,6 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable pending_complete_table;
-    private javax.swing.JButton updateBtn;
+    private javax.swing.JLabel updateBtnLabel;
     // End of variables declaration//GEN-END:variables
 }

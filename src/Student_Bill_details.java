@@ -114,120 +114,154 @@ public class Student_Bill_details extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         imagefield = new javax.swing.JTextField();
-        choosebtn = new javax.swing.JButton();
-        seechoosedreciptbtn = new javax.swing.JButton();
         imagelabel = new javax.swing.JLabel();
-        Pay = new javax.swing.JButton();
+        seeChooseReceiptBtnLabel = new javax.swing.JLabel();
+        uploadImageBtn = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        chooseFileBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(770, 470));
 
+        jPanel1.setBackground(new java.awt.Color(24, 44, 97));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bill  Details of ");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(20, 70, 100, 40);
+        jLabel1.setBounds(10, 50, 130, 40);
 
-        namelabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        namelabel.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        namelabel.setForeground(new java.awt.Color(255, 255, 255));
         namelabel.setText("name");
         jPanel1.add(namelabel);
-        namelabel.setBounds(120, 70, 230, 40);
+        namelabel.setBounds(140, 50, 220, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Hall Bill");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(90, 170, 70, 30);
+        jLabel2.setBounds(60, 160, 70, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Mess Bill");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(90, 214, 70, 30);
+        jLabel3.setBounds(60, 220, 70, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Laundry Bill");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(90, 264, 100, 30);
+        jLabel4.setBounds(60, 270, 100, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Additional Bill");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(90, 314, 100, 30);
+        jLabel5.setBounds(60, 320, 100, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fine");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(90, 360, 70, 20);
+        jLabel6.setBounds(60, 370, 70, 20);
 
+        hallbilllabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        hallbilllabel.setForeground(new java.awt.Color(255, 255, 255));
         hallbilllabel.setText("hb");
         jPanel1.add(hallbilllabel);
-        hallbilllabel.setBounds(210, 170, 50, 20);
+        hallbilllabel.setBounds(220, 160, 50, 30);
 
+        messbilllabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        messbilllabel.setForeground(new java.awt.Color(255, 255, 255));
         messbilllabel.setText("mb");
         jPanel1.add(messbilllabel);
-        messbilllabel.setBounds(210, 220, 60, 30);
+        messbilllabel.setBounds(220, 220, 60, 30);
 
+        laundrybilllabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        laundrybilllabel.setForeground(new java.awt.Color(255, 255, 255));
         laundrybilllabel.setText("lb");
         jPanel1.add(laundrybilllabel);
         laundrybilllabel.setBounds(220, 270, 50, 20);
 
+        additionalbill.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        additionalbill.setForeground(new java.awt.Color(255, 255, 255));
         additionalbill.setText("ad");
         jPanel1.add(additionalbill);
         additionalbill.setBounds(220, 310, 60, 30);
 
+        finalabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        finalabel.setForeground(new java.awt.Color(255, 255, 255));
         finalabel.setText("fin");
         jPanel1.add(finalabel);
         finalabel.setBounds(220, 360, 50, 30);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Total");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(90, 404, 60, 20);
+        jLabel12.setBounds(60, 410, 60, 20);
 
+        totalbilllabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        totalbilllabel.setForeground(new java.awt.Color(255, 255, 255));
         totalbilllabel.setText("to");
         jPanel1.add(totalbilllabel);
-        totalbilllabel.setBounds(220, 400, 80, 30);
+        totalbilllabel.setBounds(220, 410, 80, 30);
 
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jPanel1.add(jLabel7);
         jLabel7.setBounds(352, 70, 2, 660);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Pay Bill :");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(370, 30, 70, 20);
+        jLabel8.setBounds(400, 50, 70, 20);
         jPanel1.add(imagefield);
         imagefield.setBounds(370, 80, 230, 30);
-
-        choosebtn.setText("Choose File");
-        choosebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choosebtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(choosebtn);
-        choosebtn.setBounds(610, 90, 130, 20);
-
-        seechoosedreciptbtn.setText("See Choosed Receipt");
-        seechoosedreciptbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                seechoosedreciptbtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(seechoosedreciptbtn);
-        seechoosedreciptbtn.setBounds(380, 130, 200, 23);
         jPanel1.add(imagelabel);
         imagelabel.setBounds(380, 170, 340, 618);
 
-        Pay.setText("Pay");
-        Pay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PayActionPerformed(evt);
+        seeChooseReceiptBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ChooseReceipt.png"))); // NOI18N
+        seeChooseReceiptBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        seeChooseReceiptBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seeChooseReceiptBtnLabelMouseClicked(evt);
             }
         });
-        jPanel1.add(Pay);
-        Pay.setBounds(600, 130, 130, 23);
+        jPanel1.add(seeChooseReceiptBtnLabel);
+        seeChooseReceiptBtnLabel.setBounds(370, 120, 230, 40);
+
+        uploadImageBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UploadImage.png"))); // NOI18N
+        uploadImageBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        uploadImageBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uploadImageBtnMouseClicked(evt);
+            }
+        });
+        jPanel1.add(uploadImageBtn);
+        uploadImageBtn.setBounds(630, 120, 120, 40);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("X");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(730, 0, 30, 50);
+
+        chooseFileBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chooseImageFiel.png"))); // NOI18N
+        chooseFileBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        chooseFileBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chooseFileBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(chooseFileBtnLabel);
+        chooseFileBtnLabel.setBounds(610, 80, 150, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,21 +278,13 @@ public class Student_Bill_details extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void choosebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choosebtnActionPerformed
-        JFileChooser choose=new JFileChooser();
-        choose.showOpenDialog(null);
-        File fl=choose.getSelectedFile();
-        String filename=fl.getAbsolutePath();
-        imagefield.setText(filename);
-    }//GEN-LAST:event_choosebtnActionPerformed
-
-    private void seechoosedreciptbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seechoosedreciptbtnActionPerformed
-         String filename=imagefield.getText();
+    private void seeChooseReceiptBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeChooseReceiptBtnLabelMouseClicked
+        String filename=imagefield.getText();
          ImageIcon image = new ImageIcon(filename);
          imagelabel.setIcon(image);
-    }//GEN-LAST:event_seechoosedreciptbtnActionPerformed
+    }//GEN-LAST:event_seeChooseReceiptBtnLabelMouseClicked
 
-    private void PayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayActionPerformed
+    private void uploadImageBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadImageBtnMouseClicked
         String filename=imagefield.getText();
         if(filename.equals(""))
         {
@@ -284,7 +310,15 @@ public class Student_Bill_details extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_PayActionPerformed
+    }//GEN-LAST:event_uploadImageBtnMouseClicked
+
+    private void chooseFileBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFileBtnLabelMouseClicked
+         JFileChooser choose=new JFileChooser();
+        choose.showOpenDialog(null);
+        File fl=choose.getSelectedFile();
+        String filename=fl.getAbsolutePath();
+        imagefield.setText(filename);
+    }//GEN-LAST:event_chooseFileBtnLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -322,9 +356,8 @@ public class Student_Bill_details extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Pay;
     private javax.swing.JLabel additionalbill;
-    private javax.swing.JButton choosebtn;
+    private javax.swing.JLabel chooseFileBtnLabel;
     private javax.swing.JLabel finalabel;
     private javax.swing.JLabel hallbilllabel;
     private javax.swing.JTextField imagefield;
@@ -338,11 +371,13 @@ public class Student_Bill_details extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel laundrybilllabel;
     private javax.swing.JLabel messbilllabel;
     private javax.swing.JLabel namelabel;
-    private javax.swing.JButton seechoosedreciptbtn;
+    private javax.swing.JLabel seeChooseReceiptBtnLabel;
     private javax.swing.JLabel totalbilllabel;
+    private javax.swing.JLabel uploadImageBtn;
     // End of variables declaration//GEN-END:variables
 }

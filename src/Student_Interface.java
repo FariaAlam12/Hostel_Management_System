@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class Student_Interface extends javax.swing.JFrame {
  Connection conn;
    Statement statement;
-   ResultSet resultSet;
+   ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
    String id;
     public Student_Interface() {
@@ -44,7 +44,7 @@ public class Student_Interface extends javax.swing.JFrame {
                  statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               
                  resultSet=res;
-                 
+                 resultSetPass=res;
                 
                 
             }
@@ -65,6 +65,7 @@ public class Student_Interface extends javax.swing.JFrame {
         fullPanel = new javax.swing.JPanel();
         headerPanel = new javax.swing.JPanel();
         yourInfoLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         ID_Title = new javax.swing.JLabel();
         IdLabel = new javax.swing.JLabel();
@@ -92,20 +93,23 @@ public class Student_Interface extends javax.swing.JFrame {
         roomLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        ComplainButton = new javax.swing.JButton();
-        Selectmillbtn = new javax.swing.JButton();
-        billcheckbtn = new javax.swing.JButton();
+        complaincancelBtnLabel = new javax.swing.JLabel();
+        addmealBtnLabel = new javax.swing.JLabel();
+        seeBillLabel = new javax.swing.JLabel();
+        logOutLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         fullPanel.setBackground(new java.awt.Color(255, 255, 255));
         fullPanel.setLayout(null);
 
-        headerPanel.setBackground(new java.awt.Color(71, 179, 155));
+        headerPanel.setBackground(new java.awt.Color(24, 44, 97));
 
         yourInfoLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         yourInfoLabel.setForeground(new java.awt.Color(255, 255, 255));
         yourInfoLabel.setText("Your Information");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/yourinformation.png"))); // NOI18N
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -114,18 +118,22 @@ public class Student_Interface extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(yourInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(481, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(yourInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         fullPanel.add(headerPanel);
-        headerPanel.setBounds(0, 0, 740, 130);
+        headerPanel.setBounds(0, 0, 740, 170);
 
         nameLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         fullPanel.add(nameLabel);
@@ -253,28 +261,39 @@ public class Student_Interface extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Other Activities");
+        jLabel1.setText("Your Activities");
 
-        ComplainButton.setText("Complain/Seat Cancel");
-        ComplainButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComplainButtonActionPerformed(evt);
+        complaincancelBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complainBtn.png"))); // NOI18N
+        complaincancelBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        complaincancelBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                complaincancelBtnLabelMouseClicked(evt);
             }
         });
 
-        Selectmillbtn.setText("Add Meal");
-        Selectmillbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SelectmillbtnActionPerformed(evt);
+        addmealBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/addmeal.png"))); // NOI18N
+        addmealBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addmealBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addmealBtnLabelMouseClicked(evt);
             }
         });
 
-        billcheckbtn.setText("See Bills");
-        billcheckbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                billcheckbtnActionPerformed(evt);
+        seeBillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/seebill.png"))); // NOI18N
+        seeBillLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        seeBillLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                seeBillLabelMouseClicked(evt);
+            }
+        });
+
+        logOutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logOutFromStudent.png"))); // NOI18N
+        logOutLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logOutLabelMouseClicked(evt);
             }
         });
 
@@ -282,35 +301,42 @@ public class Student_Interface extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(ComplainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(264, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Selectmillbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(billcheckbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73))))
+                    .addComponent(seeBillLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addmealBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(complaincancelBtnLabel))
+                .addGap(98, 98, 98))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComplainButton)
-                    .addComponent(Selectmillbtn)
-                    .addComponent(billcheckbtn))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(complaincancelBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addmealBtnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(seeBillLabel)
+                .addGap(10, 10, 10)
+                .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         fullPanel.add(jPanel1);
-        jPanel1.setBounds(0, 560, 740, 270);
+        jPanel1.setBounds(0, 560, 740, 290);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,33 +346,34 @@ public class Student_Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+            .addComponent(fullPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ComplainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComplainButtonActionPerformed
-        
-        ComplainInterface CI=new ComplainInterface(id);
+    private void complaincancelBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaincancelBtnLabelMouseClicked
+        ComplainInterface CI=new ComplainInterface(id,resultSetPass);
+        this.setVisible(false);
         CI.setVisible(true);
-           
-    }//GEN-LAST:event_ComplainButtonActionPerformed
+    }//GEN-LAST:event_complaincancelBtnLabelMouseClicked
 
-    private void SelectmillbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectmillbtnActionPerformed
-        
-       
-        
-        MenuSelection MS=new MenuSelection(id);
-        MS.setVisible(true);
-    }//GEN-LAST:event_SelectmillbtnActionPerformed
+    private void addmealBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmealBtnLabelMouseClicked
+       MenuSelection MS=new MenuSelection(id);
+       MS.setVisible(true);
+    }//GEN-LAST:event_addmealBtnLabelMouseClicked
 
-    private void billcheckbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_billcheckbtnActionPerformed
-
-       Student_Bill_details sbd=new Student_Bill_details(id);
+    private void seeBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeBillLabelMouseClicked
+        Student_Bill_details sbd=new Student_Bill_details(id);
        sbd.setVisible(true);
-    }//GEN-LAST:event_billcheckbtnActionPerformed
+    }//GEN-LAST:event_seeBillLabelMouseClicked
+
+    private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
+          LogIn LI=new LogIn();
+          this.setVisible(false);
+          LI.setVisible(true);
+    }//GEN-LAST:event_logOutLabelMouseClicked
 
 
 
@@ -472,7 +499,6 @@ public class Student_Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AlternateLabel;
     private javax.swing.JLabel Alternate_Title;
-    private javax.swing.JButton ComplainButton;
     private javax.swing.JLabel DOB_Tiitle;
     private javax.swing.JLabel Dept_Tiltle;
     private javax.swing.JLabel Email_Title;
@@ -482,8 +508,8 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel IdLabel;
     private javax.swing.JLabel Mother_Title;
     private javax.swing.JLabel Regularity_Title;
-    private javax.swing.JButton Selectmillbtn;
-    private javax.swing.JButton billcheckbtn;
+    private javax.swing.JLabel addmealBtnLabel;
+    private javax.swing.JLabel complaincancelBtnLabel;
     private javax.swing.JLabel deptLabel;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JLabel emailLabel;
@@ -494,7 +520,9 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel homeLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logOutLabel;
     private javax.swing.JLabel motherLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel phonennoLabel;
@@ -502,6 +530,7 @@ public class Student_Interface extends javax.swing.JFrame {
     private javax.swing.JLabel regularityLabel;
     private javax.swing.JLabel roomLabel;
     private javax.swing.JLabel room_Title;
+    private javax.swing.JLabel seeBillLabel;
     private javax.swing.JLabel yourInfoLabel;
     // End of variables declaration//GEN-END:variables
 }
