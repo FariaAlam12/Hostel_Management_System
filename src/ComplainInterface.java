@@ -22,7 +22,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         initComponents();
     }
     
-    public ComplainInterface(String idd,ResultSet res) {
+    public ComplainInterface(String stu_id) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -37,8 +37,8 @@ public class ComplainInterface extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
-        resultSetPass=res;
-        id=idd;
+        //resultSetPass=res;
+        id=stu_id;
          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE );
         seatcancelbtn.setActionCommand("Seat Cancel");
         cleanbtn.setActionCommand("Clean Issue");
@@ -111,6 +111,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         laundybtn.setText("Laundry Issue");
 
         submitBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SubmitApplication.png"))); // NOI18N
+        submitBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 submitBtnLabelMouseClicked(evt);
@@ -120,6 +121,7 @@ public class ComplainInterface extends javax.swing.JFrame {
         crossBtnLabel.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         crossBtnLabel.setForeground(new java.awt.Color(255, 255, 255));
         crossBtnLabel.setText("X");
+        crossBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         crossBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 crossBtnLabelMouseClicked(evt);
@@ -225,7 +227,7 @@ public class ComplainInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_submitBtnLabelMouseClicked
 
     private void crossBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crossBtnLabelMouseClicked
-       Student_Interface SI=new Student_Interface(resultSetPass);
+       Student_Interface SI=new Student_Interface(id);
        this.setVisible(false);
        SI.setVisible(true);
         

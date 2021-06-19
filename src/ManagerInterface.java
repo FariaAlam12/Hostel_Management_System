@@ -29,16 +29,16 @@ public class ManagerInterface extends javax.swing.JFrame {
    
    ResultSetMetaData resultsetMetaData;
    int rowcount;
-   String StuffId;
+   String StuffId,StuffIdpassed;
     public ManagerInterface() {
         initComponents();
     }
 
-    public ManagerInterface(String ID,ResultSet Res) {
+    public ManagerInterface(String Stuff_ID) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
-        this.resultSetPass=Res;
+        //this.resultSetPass=Res;
         try{
            conn=DriverManager.getConnection(stringArray[0],stringArray[1],stringArray[2]);
             if(conn!=null)
@@ -47,6 +47,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                 System.out.println("Connection Sucessful in Manager Interface");
                 statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
                 statement2=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                StuffIdpassed=Stuff_ID;
             }
             
             
@@ -234,6 +235,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         assignedworkstatusBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(27, 124, 161));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -546,13 +548,13 @@ public class ManagerInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_addStudentBtnLabelMouseClicked
 
     private void addbillBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addbillBtnLabelMouseClicked
-        MonthlyBillAdd MDA=new MonthlyBillAdd();
+        MonthlyBillAdd MDA=new MonthlyBillAdd(StuffIdpassed);
         this.setVisible(false);
         MDA.setVisible(true);
     }//GEN-LAST:event_addbillBtnLabelMouseClicked
 
     private void gotoprofileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gotoprofileMouseClicked
-      Stuff_Interface SI= new Stuff_Interface(resultSetPass);
+      Stuff_Interface SI= new Stuff_Interface(StuffIdpassed);
       this.setVisible(false);
       SI.setVisible(true);
     }//GEN-LAST:event_gotoprofileMouseClicked
@@ -602,7 +604,8 @@ public class ManagerInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_assignedWorkBtnLabelMouseClicked
 
     private void assignedworkstatusBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedworkstatusBtnLabelMouseClicked
-        Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface();
+        Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface(StuffIdpassed);
+        this.setVisible(false);
        aws.setVisible(true);
     }//GEN-LAST:event_assignedworkstatusBtnLabelMouseClicked
 

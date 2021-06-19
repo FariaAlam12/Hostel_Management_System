@@ -26,11 +26,11 @@ public class Student_Interface extends javax.swing.JFrame {
    Statement statement;
    ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
-   String id;
+   String id,stupassedid;
     public Student_Interface() {
         initComponents();
     }
-    public Student_Interface(ResultSet res) {
+    public Student_Interface(String st_id) {
         initComponents();
         
         OracleConnection OC=new OracleConnection();
@@ -43,9 +43,9 @@ public class Student_Interface extends javax.swing.JFrame {
                 System.out.println("Connection Sucessful in Student_Interface");
                  statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
               
-                 resultSet=res;
-                 resultSetPass=res;
-                
+                 //resultSet=res;
+                 //resultSetPass=res;
+                stupassedid=st_id;
                 
             }
             
@@ -354,18 +354,20 @@ public class Student_Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void complaincancelBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_complaincancelBtnLabelMouseClicked
-        ComplainInterface CI=new ComplainInterface(id,resultSetPass);
+        ComplainInterface CI=new ComplainInterface(stupassedid);
         this.setVisible(false);
         CI.setVisible(true);
     }//GEN-LAST:event_complaincancelBtnLabelMouseClicked
 
     private void addmealBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addmealBtnLabelMouseClicked
-       MenuSelection MS=new MenuSelection(id);
+       MenuSelection MS=new MenuSelection(stupassedid);
+       this.setVisible(false);
        MS.setVisible(true);
     }//GEN-LAST:event_addmealBtnLabelMouseClicked
 
     private void seeBillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seeBillLabelMouseClicked
-        Student_Bill_details sbd=new Student_Bill_details(id);
+        Student_Bill_details sbd=new Student_Bill_details(stupassedid);
+        this.setVisible(false);
        sbd.setVisible(true);
     }//GEN-LAST:event_seeBillLabelMouseClicked
 
@@ -383,8 +385,9 @@ public class Student_Interface extends javax.swing.JFrame {
 
     void showInfo()
     {
-        
+      String query=String.format("select * from student_information where S_ID='%s'",stupassedid);  
      try {
+         resultSet = statement.executeQuery(query);
          resultSet.next();
          String name=resultSet.getString("S_Name");
          id=resultSet.getString("S_ID");

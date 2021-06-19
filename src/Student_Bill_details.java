@@ -117,11 +117,12 @@ public class Student_Bill_details extends javax.swing.JFrame {
         imagelabel = new javax.swing.JLabel();
         seeChooseReceiptBtnLabel = new javax.swing.JLabel();
         uploadImageBtn = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        crossbtnLabel = new javax.swing.JLabel();
         chooseFileBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(770, 470));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,11 +248,17 @@ public class Student_Bill_details extends javax.swing.JFrame {
         jPanel1.add(uploadImageBtn);
         uploadImageBtn.setBounds(630, 120, 120, 40);
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("X");
-        jPanel1.add(jLabel9);
-        jLabel9.setBounds(730, 0, 30, 50);
+        crossbtnLabel.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        crossbtnLabel.setForeground(new java.awt.Color(255, 255, 255));
+        crossbtnLabel.setText("X");
+        crossbtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crossbtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crossbtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(crossbtnLabel);
+        crossbtnLabel.setBounds(730, 0, 30, 50);
 
         chooseFileBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chooseImageFiel.png"))); // NOI18N
         chooseFileBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -320,6 +327,12 @@ public class Student_Bill_details extends javax.swing.JFrame {
         imagefield.setText(filename);
     }//GEN-LAST:event_chooseFileBtnLabelMouseClicked
 
+    private void crossbtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crossbtnLabelMouseClicked
+       Student_Interface SI=new Student_Interface(Stu_id);
+       this.setVisible(false);
+       SI.setVisible(true);
+    }//GEN-LAST:event_crossbtnLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -358,6 +371,7 @@ public class Student_Bill_details extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel additionalbill;
     private javax.swing.JLabel chooseFileBtnLabel;
+    private javax.swing.JLabel crossbtnLabel;
     private javax.swing.JLabel finalabel;
     private javax.swing.JLabel hallbilllabel;
     private javax.swing.JTextField imagefield;
@@ -371,7 +385,6 @@ public class Student_Bill_details extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel laundrybilllabel;
     private javax.swing.JLabel messbilllabel;

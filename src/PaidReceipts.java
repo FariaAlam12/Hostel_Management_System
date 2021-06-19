@@ -21,7 +21,8 @@ public class PaidReceipts extends javax.swing.JFrame {
    Statement statement,statement2;
    ResultSet resultSet,resultSet2,resultSet3;
    ResultSetMetaData resultsetMetaData;
-    public PaidReceipts() {
+   String Stuff_id_passed;
+    public PaidReceipts(String Stuff_id) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -40,6 +41,7 @@ public class PaidReceipts extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
+        Stuff_id_passed=Stuff_id;
         showData();
     }
     
@@ -82,9 +84,12 @@ public class PaidReceipts extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         viewreceiptLabel = new javax.swing.JLabel();
         clearbilllabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        corssbtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(857, 479));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(27, 124, 161));
         jPanel1.setLayout(null);
@@ -116,15 +121,15 @@ public class PaidReceipts extends javax.swing.JFrame {
         jScrollPane1.setViewportView(PaidReceiptTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 70, 530, 360);
+        jScrollPane1.setBounds(60, 110, 530, 360);
         jPanel1.add(imageLabel);
-        imageLabel.setBounds(630, 30, 340, 618);
+        imageLabel.setBounds(640, 100, 340, 618);
 
         jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Paid Bill List");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(30, 20, 170, 30);
+        jLabel1.setBounds(70, 70, 170, 30);
 
         viewreceiptLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/viewreceipt.png"))); // NOI18N
         viewreceiptLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -134,7 +139,7 @@ public class PaidReceipts extends javax.swing.JFrame {
             }
         });
         jPanel1.add(viewreceiptLabel);
-        viewreceiptLabel.setBounds(60, 480, 150, 40);
+        viewreceiptLabel.setBounds(80, 520, 150, 40);
 
         clearbilllabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/clearbill.png"))); // NOI18N
         clearbilllabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -144,17 +149,35 @@ public class PaidReceipts extends javax.swing.JFrame {
             }
         });
         jPanel1.add(clearbilllabel);
-        clearbilllabel.setBounds(260, 480, 130, 40);
+        clearbilllabel.setBounds(280, 520, 130, 40);
+
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Paid Receipt");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(640, 74, 160, 20);
+
+        corssbtn.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        corssbtn.setForeground(new java.awt.Color(255, 255, 255));
+        corssbtn.setText("X");
+        corssbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        corssbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                corssbtnMouseClicked(evt);
+            }
+        });
+        jPanel1.add(corssbtn);
+        corssbtn.setBounds(990, 10, 20, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1013, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
         );
 
         pack();
@@ -301,6 +324,12 @@ public class PaidReceipts extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clearbilllabelMouseClicked
 
+    private void corssbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_corssbtnMouseClicked
+      Office_Employee_Interface OEW=new Office_Employee_Interface(Stuff_id_passed);
+      this.setVisible(false);
+      OEW.setVisible(true);
+    }//GEN-LAST:event_corssbtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -331,7 +360,7 @@ public class PaidReceipts extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PaidReceipts().setVisible(true);
+                //new PaidReceipts().setVisible(true);
             }
         });
     }
@@ -339,8 +368,10 @@ public class PaidReceipts extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PaidReceiptTable;
     private javax.swing.JLabel clearbilllabel;
+    private javax.swing.JLabel corssbtn;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel viewreceiptLabel;

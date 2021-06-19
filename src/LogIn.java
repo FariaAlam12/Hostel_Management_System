@@ -197,12 +197,12 @@ public class LogIn extends javax.swing.JFrame {
        if(id.charAt(0)=='2')
        {
        
-        String query=String.format("select * from student_information where S_ID='%s' and S_Pass='%s'",id,pass);
+        String query=String.format("select S_ID from student_information where S_ID='%s' and S_Pass='%s'",id,pass);
        try {
            resultSet = statement.executeQuery(query);
            if(resultSet.next()==false)
            {
-               System.out.println("Not found");
+               //System.out.println("Not found");
                JFrame f=new JFrame();  
                JOptionPane.showMessageDialog(f,"Incorrect Id or Pass","Alert",JOptionPane.WARNING_MESSAGE);
                userNameTextField.setText("");
@@ -210,8 +210,11 @@ public class LogIn extends javax.swing.JFrame {
            }
            else 
            {
-           resultSet.beforeFirst();//if statement 
-           Student_Interface st=new Student_Interface(resultSet);
+           resultSet.beforeFirst();//if statement
+           resultSet.next();
+           String studentid=resultSet.getString("S_ID");
+          // System.out.println(studentid);
+           Student_Interface st=new Student_Interface(studentid);
            this.setVisible(false);
            st.setVisible(true);
            
@@ -225,15 +228,15 @@ public class LogIn extends javax.swing.JFrame {
        } 
        
        
-       
+       //employee login 
        else
        {
-           String query=String.format("select * from Stuff_Information where Stuff_ID='%s' and Stuff_Pass='%s'",id,pass);
+           String query=String.format("select Stuff_ID from Stuff_Information where Stuff_ID='%s' and Stuff_Pass='%s'",id,pass);
        try {
            resultSet = statement.executeQuery(query);
            if(resultSet.next()==false)
            {
-               System.out.println("Not found");
+               //System.out.println("Not found");
                JFrame f=new JFrame();  
                JOptionPane.showMessageDialog(f,"Incorrect Id or Pass","Alert",JOptionPane.WARNING_MESSAGE);
                userNameTextField.setText("");
@@ -242,7 +245,9 @@ public class LogIn extends javax.swing.JFrame {
            else 
            {
            resultSet.beforeFirst();//if statement 
-           Stuff_Interface stu=new Stuff_Interface(resultSet);
+           resultSet.next();
+           String stuffid=resultSet.getString("Stuff_ID");
+           Stuff_Interface stu=new Stuff_Interface(stuffid);
            this.setVisible(false);
            stu.setVisible(true);
            

@@ -133,8 +133,13 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         totalbillshow = new javax.swing.JLabel();
         paidbillLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        ProfileBackLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setLayout(null);
@@ -143,7 +148,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Student Mill Details");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(40, 30, 200, 40);
+        jLabel1.setBounds(80, 110, 200, 40);
 
         MillDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,13 +177,13 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jScrollPane1.setViewportView(MillDetailTable);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(70, 80, 870, 220);
+        jScrollPane1.setBounds(70, 170, 870, 220);
 
         jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Seat Calcellation Requests:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(40, 350, 210, 40);
+        jLabel2.setBounds(70, 470, 210, 40);
 
         seatcanceltable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,15 +212,15 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jScrollPane2.setViewportView(seatcanceltable);
 
         jPanel1.add(jScrollPane2);
-        jScrollPane2.setBounds(60, 420, 490, 150);
+        jScrollPane2.setBounds(60, 520, 490, 150);
         jPanel1.add(studentID_Search_field);
-        studentID_Search_field.setBounds(680, 420, 180, 40);
+        studentID_Search_field.setBounds(660, 520, 180, 40);
 
         jLabel3.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Show Bill Details");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(690, 360, 160, 40);
+        jLabel3.setBounds(660, 470, 160, 40);
 
         mealdispatchLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mealdispatch.png"))); // NOI18N
         mealdispatchLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -225,7 +230,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(mealdispatchLabel);
-        mealdispatchLabel.setBounds(450, 320, 110, 40);
+        mealdispatchLabel.setBounds(450, 410, 110, 40);
 
         UpdateseatcancelLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pendingUpdate.png"))); // NOI18N
         UpdateseatcancelLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -235,7 +240,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(UpdateseatcancelLabel);
-        UpdateseatcancelLabel.setBounds(240, 600, 110, 30);
+        UpdateseatcancelLabel.setBounds(240, 680, 110, 30);
 
         searchIDLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/searchid.png"))); // NOI18N
         searchIDLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -245,19 +250,19 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(searchIDLabel);
-        searchIDLabel.setBounds(910, 420, 95, 34);
+        searchIDLabel.setBounds(900, 520, 95, 34);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Pending Bill:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(680, 500, 90, 40);
+        jLabel5.setBounds(680, 610, 140, 40);
 
         totalbillshow.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         totalbillshow.setForeground(new java.awt.Color(255, 255, 255));
         totalbillshow.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(totalbillshow);
-        totalbillshow.setBounds(800, 500, 140, 40);
+        totalbillshow.setBounds(900, 610, 140, 40);
 
         paidbillLabel.setForeground(new java.awt.Color(255, 255, 255));
         paidbillLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/paidbills.png"))); // NOI18N
@@ -268,7 +273,53 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             }
         });
         jPanel1.add(paidbillLabel);
-        paidbillLabel.setBounds(690, 590, 120, 40);
+        paidbillLabel.setBounds(900, 670, 120, 40);
+
+        jLabel4.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("See Paid Bill Receipts");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(680, 680, 180, 30);
+
+        jPanel2.setBackground(new java.awt.Color(27, 124, 161));
+
+        jLabel6.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Your Assigned Work");
+
+        ProfileBackLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/profile2.png"))); // NOI18N
+        ProfileBackLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ProfileBackLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ProfileBackLabelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 763, Short.MAX_VALUE)
+                .addComponent(ProfileBackLabel)
+                .addGap(28, 28, 28))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ProfileBackLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 15, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(0, 0, 1110, 90);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,7 +329,9 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -372,9 +425,16 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_searchIDLabelMouseClicked
 
     private void paidbillLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paidbillLabelMouseClicked
-         PaidReceipts PR=new PaidReceipts();
+         PaidReceipts PR=new PaidReceipts(stuff_id);
+         this.setVisible(false);
         PR.setVisible(true);
     }//GEN-LAST:event_paidbillLabelMouseClicked
+
+    private void ProfileBackLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileBackLabelMouseClicked
+      Stuff_Interface SI=new Stuff_Interface(stuff_id);
+      this.setVisible(false);
+      SI.setVisible(true);
+    }//GEN-LAST:event_ProfileBackLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -413,12 +473,16 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable MillDetailTable;
+    private javax.swing.JLabel ProfileBackLabel;
     private javax.swing.JLabel UpdateseatcancelLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel mealdispatchLabel;

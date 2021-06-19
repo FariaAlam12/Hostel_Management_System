@@ -23,7 +23,8 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
    ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5,resultSet6,resultSet7,resultSet8;
     ResultSetMetaData resultsetMetaData;
     int rowcount;
-    public Assigned_Work_Status_interface() {
+    String stuff_passed_id;
+    public Assigned_Work_Status_interface(String Stuff_id) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -35,12 +36,14 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
                 
                 System.out.println("Connection Sucessful in Assigned_Work_Status_interface");
                 statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+                
             }
             
             
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
+        stuff_passed_id=Stuff_id;
          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE );
          showData();
     }
@@ -100,9 +103,11 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
         pending_complete_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         updateBtnLabel = new javax.swing.JLabel();
+        crossbtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1086, 559));
+        setUndecorated(true);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(27, 124, 161));
@@ -146,6 +151,16 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
             }
         });
 
+        crossbtn.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        crossbtn.setForeground(new java.awt.Color(255, 255, 255));
+        crossbtn.setText("X");
+        crossbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crossbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crossbtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -153,21 +168,29 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(376, 376, 376)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(481, 481, 481)
                         .addComponent(updateBtnLabel)))
-                .addGap(92, 92, 92))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(376, 376, 376)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(crossbtn)
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(crossbtn)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -315,6 +338,12 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
        showData();
     }//GEN-LAST:event_updateBtnLabelMouseClicked
 
+    private void crossbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crossbtnMouseClicked
+       ManagerInterface MI=new ManagerInterface(stuff_passed_id);
+       this.setVisible(false);
+       MI.setVisible(true);
+    }//GEN-LAST:event_crossbtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -345,12 +374,13 @@ public class Assigned_Work_Status_interface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Assigned_Work_Status_interface().setVisible(true);
+                //new Assigned_Work_Status_interface().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel crossbtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

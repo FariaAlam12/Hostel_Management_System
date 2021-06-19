@@ -22,12 +22,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
    ResultSet resultSet,resultSetPass;
    ResultSetMetaData resultsetMetaData;
    
-   String rank,id;
+   String rank,id,stuff_id_passes;
    
     public Stuff_Interface() {
         initComponents();
     }
-    public Stuff_Interface(ResultSet res) {
+    public Stuff_Interface(String Stuff_id) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -40,7 +40,8 @@ public class Stuff_Interface extends javax.swing.JFrame {
                 
                 System.out.println("Connection Sucessful in Stuff Interface");
                 statement=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-                resultSet=res;
+                //resultSet=res;
+                stuff_id_passes=Stuff_id;
    
             } 
         }catch(SQLException e){
@@ -50,8 +51,9 @@ public class Stuff_Interface extends javax.swing.JFrame {
     }
 
     void showInfo(){
-        
+        String query=String.format("select * from Stuff_Information where Stuff_ID='%s'",stuff_id_passes);
         try {
+            resultSet = statement.executeQuery(query);
             resultSet.next();
             rank=resultSet.getString("Stuff_Rank");
             String name=resultSet.getString("Stuff_Name");
@@ -131,6 +133,7 @@ public class Stuff_Interface extends javax.swing.JFrame {
         logOut = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,7 +172,7 @@ public class Stuff_Interface extends javax.swing.JFrame {
         idfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         idfield.setText("id");
         jPanel1.add(idfield);
-        idfield.setBounds(220, 240, 160, 20);
+        idfield.setBounds(220, 230, 160, 20);
 
         phnfield.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         phnfield.setText("phn");
@@ -223,11 +226,12 @@ public class Stuff_Interface extends javax.swing.JFrame {
         AssignmentsBtnLabel.setBounds(230, 410, 130, 100);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel2.setText("Assignments");
+        jLabel2.setText("Your Assignments");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(260, 390, 80, 20);
+        jLabel2.setBounds(240, 390, 110, 20);
 
         logOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logOutFromStudent.png"))); // NOI18N
+        logOut.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 logOutMouseClicked(evt);
@@ -252,21 +256,27 @@ public class Stuff_Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AssignmentsBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AssignmentsBtnLabelMouseClicked
-         if(rank.equals("Manager"))
+        if(rank.equals("Provost") || rank.equals("Deputy Provost") || rank.equals("Assistant Provost"))
         {
-            ManagerInterface MI=new ManagerInterface(id,resultSetPass);
+            
+        }
+        
+        else if(rank.equals("Manager"))
+        {
+            ManagerInterface MI=new ManagerInterface(stuff_id_passes);
             this.setVisible(false);
             MI.setVisible(true);
         }
         else if(rank.equals("Office Employee"))
         {
-            Office_Employee_Interface OEI=new Office_Employee_Interface(id);
+            Office_Employee_Interface OEI=new Office_Employee_Interface(stuff_id_passes);
             this.setVisible(false);
             OEI.setVisible(true);
         }
+        
         else
         {
-            AssignedWorkInterface AWI=new AssignedWorkInterface(id);
+            AssignedWorkInterface AWI=new AssignedWorkInterface(stuff_id_passes);
             this.setVisible(false);
             AWI.setVisible(true);
         }

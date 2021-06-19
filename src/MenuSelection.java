@@ -158,9 +158,11 @@ public class MenuSelection extends javax.swing.JFrame {
         dinner_check = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         addMealBtnLabel = new javax.swing.JLabel();
+        corssbtlLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(502, 381));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
         jPanel1.setLayout(null);
@@ -268,6 +270,18 @@ public class MenuSelection extends javax.swing.JFrame {
         jPanel1.add(addMealBtnLabel);
         addMealBtnLabel.setBounds(210, 300, 60, 70);
 
+        corssbtlLabel.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        corssbtlLabel.setForeground(new java.awt.Color(255, 255, 255));
+        corssbtlLabel.setText("X");
+        corssbtlLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        corssbtlLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                corssbtlLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(corssbtlLabel);
+        corssbtlLabel.setBounds(470, 10, 20, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -348,6 +362,12 @@ public class MenuSelection extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_addMealBtnLabelMouseClicked
 
+    private void corssbtlLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_corssbtlLabelMouseClicked
+        Student_Interface SI=new Student_Interface(id);
+       this.setVisible(false);
+       SI.setVisible(true);
+    }//GEN-LAST:event_corssbtlLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -387,6 +407,7 @@ public class MenuSelection extends javax.swing.JFrame {
     private javax.swing.JLabel addMealBtnLabel;
     private javax.swing.JCheckBox break_check;
     private javax.swing.JLabel break_menu_label;
+    private javax.swing.JLabel corssbtlLabel;
     private javax.swing.JLabel cost_breakfast;
     private javax.swing.JLabel cost_dinner;
     private javax.swing.JLabel cost_launch;

@@ -18,7 +18,8 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
    Statement statement;
    ResultSet resultSet,resultSet2,resultSet3,resultSet4;
    ResultSetMetaData resultsetMetaData;
-    public MonthlyBillAdd() {
+   String Stuff_id_passed;
+    public MonthlyBillAdd(String Stuff_id) {
         initComponents();
         OracleConnection OC=new OracleConnection();
         String[] stringArray = OC.connection();
@@ -35,6 +36,7 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         }catch(SQLException e){
             System.out.println("Connection failed");
         }
+        Stuff_id_passed=Stuff_id;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE );
         showData();
     }
@@ -73,9 +75,11 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         addMonthlyBillBtn = new javax.swing.JLabel();
         addtofine = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        crossbtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(874, 424));
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(27, 124, 161));
         jPanel1.setLayout(null);
@@ -147,6 +151,18 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         jLabel3.setText("Add Fine");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(290, 390, 90, 20);
+
+        crossbtnLabel.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        crossbtnLabel.setForeground(new java.awt.Color(255, 255, 255));
+        crossbtnLabel.setText("X");
+        crossbtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crossbtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crossbtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(crossbtnLabel);
+        crossbtnLabel.setBounds(840, 10, 20, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,6 +236,13 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
           
     }//GEN-LAST:event_addtofineMouseClicked
 
+    private void crossbtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crossbtnLabelMouseClicked
+      ManagerInterface MI=new ManagerInterface(Stuff_id_passed);
+      this.setVisible(false);
+      MI.setVisible(true);
+      
+    }//GEN-LAST:event_crossbtnLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +273,7 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MonthlyBillAdd().setVisible(true);
+               // new MonthlyBillAdd().setVisible(true);
             }
         });
     }
@@ -258,6 +281,7 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addMonthlyBillBtn;
     private javax.swing.JLabel addtofine;
+    private javax.swing.JLabel crossbtnLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
