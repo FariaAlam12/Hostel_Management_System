@@ -1,7 +1,11 @@
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -10,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -39,6 +44,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
             System.out.println("Connection failed");
         }
         id=idd;
+        noimagelabel.setVisible(false);
         showData();
     }
     
@@ -46,6 +52,8 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     {
        DefaultTableModel model;
        model=(DefaultTableModel) assignedworklisttable.getModel(); 
+       model.setRowCount(0);
+       imagelabel.setVisible(false);
        String query1=String.format("select RI.S_ID,SI.Room_No,RI.Issue_Descr,RI.Issue_Cost from Student_Information SI inner join Response_Issue RI on SI.S_ID=RI.S_ID and RI.issue_status=1 and RI.Stuff_ID in(select Stuff_ID from Response_Issue where Stuff_ID='%s')",id);
         try {
             resultSet = statement.executeQuery(query1);
@@ -56,7 +64,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
                stuid=resultSet.getString("S_ID");
                sturoom=resultSet.getString("Room_No");
                issue=resultSet.getString("Issue_Descr");
-               model.insertRow(model.getRowCount(),new Object[]{stuid,sturoom,issue,"",false,""});
+               model.insertRow(model.getRowCount(),new Object[]{stuid,sturoom,issue,0,"",false});
            }
         } catch (SQLException ex) {
             Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,6 +91,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         imagelabel = new javax.swing.JLabel();
         chooseFileBtnLabel = new javax.swing.JLabel();
         viewreceiptLabel = new javax.swing.JLabel();
+        noimagelabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1330, 837));
@@ -102,11 +111,11 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Room No", "Issue Description", "Issue Cost", "Solve Status", "Image"
+                "Student ID", "Room No", "Issue Description", "Issue Cost", "Image", "Solve Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, true, true, true
@@ -126,6 +135,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         jScrollPane1.setBounds(10, 160, 813, 319);
 
         submitupdateBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/submitupdate.png"))); // NOI18N
+        submitupdateBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitupdateBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 submitupdateBtnLabelMouseClicked(evt);
@@ -136,7 +146,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(24, 44, 97));
 
-        jLabel1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Your Assigned Work");
 
@@ -154,8 +164,8 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 910, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 900, Short.MAX_VALUE)
                 .addComponent(profilebackLabel)
                 .addGap(43, 43, 43))
         );
@@ -173,8 +183,10 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1);
         jPanel1.setBounds(0, 0, 1330, 97);
+
+        imagelabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jPanel2.add(imagelabel);
-        imagelabel.setBounds(880, 180, 340, 618);
+        imagelabel.setBounds(880, 190, 340, 618);
 
         chooseFileBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chooseImageFiel.png"))); // NOI18N
         chooseFileBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -196,13 +208,17 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
         jPanel2.add(viewreceiptLabel);
         viewreceiptLabel.setBounds(1040, 130, 150, 40);
 
+        noimagelabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        noimagelabel.setForeground(new java.awt.Color(255, 255, 255));
+        noimagelabel.setText("NO RECEIPT SELECTED");
+        jPanel2.add(noimagelabel);
+        noimagelabel.setBounds(940, 230, 230, 70);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1330, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +230,10 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitupdateBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitupdateBtnLabelMouseClicked
-          String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
+          
+        int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+        String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
            try {
             resultSet = statement.executeQuery(query);
             resultSet.next();
@@ -225,19 +244,39 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
                
                 String stuid= ((String)assignedworklisttable.getValueAt(i,0)).toString();
                 Integer cost= (Integer)assignedworklisttable.getValueAt(i, 3);
-                 Boolean chk= ((Boolean)assignedworklisttable.getValueAt(i,4)).booleanValue();
+                Boolean chk= ((Boolean)assignedworklisttable.getValueAt(i,5)).booleanValue();
+                String image_location= ((String)assignedworklisttable.getValueAt(i,4)).toString(); 
                  if(chk)
                  {
-                     
+                     if(!(image_location.equals("")))
+                     {
+                           PreparedStatement pstmt = conn.prepareStatement("update Response_Issue set Issue_Status=2,Issue_Cost=?,RECEIPT=? where S_ID=?");
+                           pstmt.setInt(1, cost);
+                           InputStream in = new FileInputStream(image_location);
+                           pstmt.setBlob(2, in);
+                           pstmt.setString(3, stuid);
+                           pstmt.execute();
+                     }
+                     else
+                     {
+                         PreparedStatement pstmt = conn.prepareStatement("update Response_Issue set Issue_Status=2,Issue_Cost=? where S_ID=?");
+                         pstmt.setInt(1, cost);
+                         pstmt.setString(2, stuid);
+                         pstmt.execute();
+                     }
                      //updating response issue table
-                      String query2=String.format("update Response_Issue set Issue_Status=2,Issue_Cost=%d where S_ID='%s'",cost,stuid);
-                       resultSet2 = statement.executeQuery(query2);
+                     // String query2=String.format("update Response_Issue set Issue_Status=2,Issue_Cost=%d where S_ID='%s'",cost,stuid);
+                     //  resultSet2 = statement.executeQuery(query2);
                  }
                
             }
         } catch (SQLException ex) {
             Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }
+      showData();
     }//GEN-LAST:event_submitupdateBtnLabelMouseClicked
 
     private void profilebackLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilebackLabelMouseClicked
@@ -247,83 +286,32 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_profilebackLabelMouseClicked
 
     private void chooseFileBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseFileBtnLabelMouseClicked
-         String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
-           try {
-            resultSet = statement.executeQuery(query);
-            resultSet.next();
-            int no_of_row=resultSet.getInt("c");
-          
-            while(present_row<no_of_row)
-            {
-                 Boolean chk= ((Boolean)assignedworklisttable.getValueAt(present_row,4)).booleanValue();
-                 if(chk)
-                 {
-                    JFileChooser choose=new JFileChooser();
-                    choose.showOpenDialog(null);
-                    File fl=choose.getSelectedFile();
-                    String filename=fl.getAbsolutePath();
-                    assignedworklisttable.setValueAt(filename, present_row, 5);
-                    present_row++; 
-                    break;
-                 }
-             present_row++;  
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        DefaultTableModel model=(DefaultTableModel) assignedworklisttable.getModel();
+        int selectedRowIndex=assignedworklisttable.getSelectedRow();
+        JFileChooser choose=new JFileChooser();
+        choose.showOpenDialog(null);
+        File fl=choose.getSelectedFile();
+        String filename=fl.getAbsolutePath();
+        assignedworklisttable.setValueAt(filename, selectedRowIndex, 4);
     }//GEN-LAST:event_chooseFileBtnLabelMouseClicked
 
     private void viewreceiptLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewreceiptLabelMouseClicked
-             String query=String.format("select count(*) as c from Response_Issue where Issue_Status=1 and Stuff_ID='%s'",id);
-           try {
-            resultSet = statement.executeQuery(query);
-            resultSet.next();
-            int no_of_row=resultSet.getInt("c");
-          
-            for(int i=no_of_row-1;i>=0;i--)
-            {
-                 Boolean chk= ((Boolean)assignedworklisttable.getValueAt(i,4)).booleanValue();
-                 if(chk)
-                 {
-                    String filename=((String)assignedworklisttable.getValueAt(i,5)).toString();
-                    ImageIcon image = new ImageIcon(filename);
-                    imagelabel.setIcon(image);
-                    break;
-                 }
-               
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AssignedWorkInterface.class.getName()).log(Level.SEVERE, null, ex);
+        DefaultTableModel model=(DefaultTableModel) assignedworklisttable.getModel();
+        int selectedRowIndex=assignedworklisttable.getSelectedRow();
+        String img_file_name= ((String)assignedworklisttable.getValueAt(selectedRowIndex,4)).toString();
+        if(!(img_file_name.equals("")))
+        {
+            noimagelabel.setVisible(false);
+            imagelabel.setVisible(true);
+            ImageIcon image = new ImageIcon(img_file_name);
+            imagelabel.setIcon(image);
         }
-
-//        String query=String.format("select count(*) as c from Bills where RECEIPT IS NOT NULL");
-//        try {
-//            resultSet = statement.executeQuery(query);
-//            resultSet.next();
-//            int rowcount=resultSet.getInt("c");
-//            for(int i=0;i<rowcount;i++)
-//            {
-//                Boolean chk= ((Boolean)PaidReceiptTable.getValueAt(i,2)).booleanValue();
-//                if(chk)
-//                {
-//                    String studidd= ((String)PaidReceiptTable.getValueAt(i,0)).toString();
-//                    String query1=String.format("select RECEIPT from Bills where S_ID='%s'",studidd);
-//                    resultSet2= statement2.executeQuery(query1);
-//                    resultSet2.next();
-//                    byte[] img = resultSet2.getBytes("RECEIPT");
-//                    ImageIcon image = new ImageIcon(img);
-//                    Image im = image.getImage();
-//                    Image myImg = im.getScaledInstance(imageLabel.getWidth(), imageLabel.getHeight(),Image.SCALE_SMOOTH);
-//                    ImageIcon newImage = new ImageIcon(myImg);
-//                    imageLabel.setIcon(newImage);
-//
-//                    break;
-//                }
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PaidReceipts.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        else
+        {
+            imagelabel.setVisible(false);
+            noimagelabel.setVisible(true);
+        }
     }//GEN-LAST:event_viewreceiptLabelMouseClicked
 
     /**
@@ -370,6 +358,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel noimagelabel;
     private javax.swing.JLabel profilebackLabel;
     private javax.swing.JLabel submitupdateBtnLabel;
     private javax.swing.JLabel viewreceiptLabel;
