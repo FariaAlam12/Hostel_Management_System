@@ -205,7 +205,7 @@ public class ComplainInterface extends javax.swing.JFrame {
        }
         else if (response == JOptionPane.YES_OPTION) {
         try {
-            String query="insert into Response_Issue values(?,?,?,?,?,?)";
+            String query="insert into Response_Issue(Issue_Name,S_ID,Stuff_ID,Issue_Status,Issue_Descr,Issue_Cost) values(?,?,?,?,?,?)";
             //System.out.println(description);
             PreparedStatement ps=conn.prepareStatement(query);
             ps.setString(1,issusename);
