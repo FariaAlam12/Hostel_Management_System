@@ -502,23 +502,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                                      Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                         }
-                         
-                           
-                         //Add the id to bill table
-                        
-                         String query3="insert into Bills (S_ID,Bill_Status,Hall_Bill,Mess_Bill,Laundary_Bill,Fine,Additional_Bill) values(?,?,?,?,?,?,?)";
-                         PreparedStatement ps=conn.prepareStatement(query3);
-                         ps.setString(1,idd);
-                         ps.setInt(2,0);
-                         ps.setInt(3,0);
-                         ps.setInt(4,0);
-                         ps.setInt(5,0);
-                         ps.setInt(6,0);
-                         ps.setInt(7,0);
-                         ps.executeUpdate();
-                        
-                    
-                    
+         
                       String message="Hello Dear "+S_name+",\n"+"Congratulations.Your Application for hall seat has been approved.\nYour login id : "+idd
                                 +"\nYour Login pass : "+idd+"\nYour Room No: "+room_noo
                                  +"\nYou can change your pass later\nThanks \nBest Regards\nPseudo Hall Authority";
