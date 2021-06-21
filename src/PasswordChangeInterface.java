@@ -6,18 +6,20 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 
 public class PasswordChangeInterface extends javax.swing.JFrame {
-     Connection conn;
+   Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSetPass;
+   ResultSet resultSet,resultSetPass,resultSet2;
    ResultSetMetaData resultsetMetaData;
-    String Passed_id, newpass;
+   String Passed_id, newpass,mail,Confirmation_Code;
     public PasswordChangeInterface(String St_id) {
         initComponents();
         
@@ -40,9 +42,8 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
         matchLabel.setVisible(false);
         curpasswarning.setVisible(false);
         passlengthlimit.setVisible(false);
-          newpassText.setText("");
+        newpassText.setText("");
         confirmnewpassText.setText("");
-        
     }
 
     
@@ -123,35 +124,36 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(matchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(156, 156, 156)
-                            .addComponent(passchangebtn)
-                            .addGap(18, 18, 18)
-                            .addComponent(curpasswarning, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(19, 19, 19)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(newpassText)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(currpassText, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(corssLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(newpassText, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(currpassText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                             .addGap(10, 10, 10)
                                             .addComponent(passlengthlimit, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(confirmnewpassText, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(0, 0, Short.MAX_VALUE))))))
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(corssLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(confirmnewpassText, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(matchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(147, 147, 147)
+                                .addComponent(passchangebtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(curpasswarning, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,16 +177,17 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(confirmnewpassText))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(matchLabel)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(passchangebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(passchangebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(matchLabel)
-                        .addGap(49, 49, 49)
-                        .addComponent(curpasswarning)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addComponent(curpasswarning)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,24 +224,52 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
                        
                             if(newpass.equals(confirmpass))
                             {
-                             int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                             if (response == JOptionPane.YES_OPTION) 
-                             {
-                                  String query2=String.format("update student_information set S_Pass='%s' where S_ID='%s'",confirmpass,Passed_id);
-                                  resultSet = statement.executeQuery(query2);
-                                  this.setVisible(false);
-                                  LogIn LI=new LogIn();
-                                  LI.setVisible(true);
-                             }
-                             else
-                             {
-                                 currpassText.setText("");
-                                 newpassText.setText("");
-                                 confirmnewpassText.setText("");
-                                  matchLabel.setVisible(false);
-                                  curpasswarning.setVisible(false);
-                                  passlengthlimit.setVisible(false);
-                             }
+                                
+                                    int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                                    if (response == JOptionPane.YES_OPTION) 
+                                    {
+                                        
+                                         //Generating Random Number
+                                         Random rnd = new Random();
+                                         int number = rnd.nextInt(999999);
+                                         Confirmation_Code=String.format("%06d", number);
+                                         
+                                         //Sending Mainl
+                                         String query3=String.format("select S_Email from student_information where S_ID='%s'",Passed_id);
+                                         resultSet2 = statement.executeQuery(query3);
+                                         resultSet2.next();
+                                         mail=resultSet2.getString("S_Email");
+                                         String message="Dear Student,\n"+"Your Password Change Confirmation Code is : "+Confirmation_Code;
+                                         String sub="Password Change Confirmation Code"; 
+                                         SendEmail SE=new SendEmail();
+                                         SE.main(mail,sub,message);
+                                         
+                                          String givenConfirmationCOde = JOptionPane.showInputDialog(null, "Please enter your name.");
+                                         if(givenConfirmationCOde.equals(Confirmation_Code))
+                                         {
+                                             String query2=String.format("update student_information set S_Pass='%s' where S_ID='%s'",confirmpass,Passed_id);
+                                             resultSet = statement.executeQuery(query2);
+                                             JFrame f=new JFrame();  
+                                             JOptionPane.showMessageDialog(f,"Password Changed Successfully.");
+                                             this.setVisible(false);
+                                             LogIn LI=new LogIn();
+                                             LI.setVisible(true);     
+                                         }
+                                         else
+                                         {
+                                             JFrame f=new JFrame();  
+                                             JOptionPane.showMessageDialog(f,"Confirmation Code Doesn't Match.");
+                                         }
+                                    }
+                                    else
+                                    {
+                                        currpassText.setText("");
+                                        newpassText.setText("");
+                                        confirmnewpassText.setText("");
+                                         matchLabel.setVisible(false);
+                                         curpasswarning.setVisible(false);
+                                         passlengthlimit.setVisible(false);
+                                    }
                             }
                             else
                             {
