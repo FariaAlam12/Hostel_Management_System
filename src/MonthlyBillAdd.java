@@ -181,6 +181,8 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
 
     private void addMonthlyBillBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMonthlyBillBtnMouseClicked
        //   Adding Monthly Bill to all Student
+       int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) { 
         CallableStatement cstmt = null;
         try {
              String SQL = "{call addbills}";
@@ -197,7 +199,8 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
             } catch (SQLException ex) {
              Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
-         }
+          }
+        }
     }//GEN-LAST:event_addMonthlyBillBtnMouseClicked
 
     private void addtofineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addtofineMouseClicked

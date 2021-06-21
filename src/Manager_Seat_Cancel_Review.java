@@ -193,7 +193,7 @@ public class Manager_Seat_Cancel_Review extends javax.swing.JFrame {
                     String studidd= ((String)pending_complete_table.getValueAt(i,1)).toString();
                     String stuffid= ((String)pending_complete_table.getValueAt(i,2)).toString();
                     String issue_st= ((String)pending_complete_table.getValueAt(i,3)).toString();
-                    Boolean chk= ((Boolean)pending_complete_table.getValueAt(i,7)).booleanValue();
+                    Boolean chk= ((Boolean)pending_complete_table.getValueAt(i,6)).booleanValue();
 
                     if(chk)
                     {

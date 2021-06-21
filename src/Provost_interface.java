@@ -223,7 +223,7 @@ public class Provost_interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void profilebacklabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profilebacklabelMouseClicked
-        Stuff_Interface SI= new Stuff_Interface(Stuff_id_passes);
+      Stuff_Interface SI= new Stuff_Interface(Stuff_id_passes);
       this.setVisible(false);
       SI.setVisible(true);
     }//GEN-LAST:event_profilebacklabelMouseClicked

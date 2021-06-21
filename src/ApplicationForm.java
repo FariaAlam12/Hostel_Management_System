@@ -286,7 +286,7 @@ public class ApplicationForm extends javax.swing.JFrame {
         regularitycombobox.setBounds(280, 320, 350, 30);
 
         gendercombobox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        gendercombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male", " " }));
+        gendercombobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         fulllpanel.add(gendercombobox);
         gendercombobox.setBounds(280, 670, 350, 30);
 
@@ -626,6 +626,7 @@ public class ApplicationForm extends javax.swing.JFrame {
             
             try {
                 id_invalid.setVisible(false);
+               // System.out.println("Enter to try");
                 resultSet = statement.executeQuery(query);
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(f,"Application Received!!!");

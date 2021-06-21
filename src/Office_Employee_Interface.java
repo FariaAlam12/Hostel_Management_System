@@ -185,7 +185,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Seat Calcellation Requests:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(70, 470, 210, 40);
+        jLabel2.setBounds(70, 470, 290, 40);
 
         seatcanceltable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

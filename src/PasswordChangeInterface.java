@@ -244,7 +244,7 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
                                          SendEmail SE=new SendEmail();
                                          SE.main(mail,sub,message);
                                          
-                                          String givenConfirmationCOde = JOptionPane.showInputDialog(null, "Please enter your name.");
+                                          String givenConfirmationCOde = JOptionPane.showInputDialog(null, "Please enter your Confirmation Code.");
                                          if(givenConfirmationCOde.equals(Confirmation_Code))
                                          {
                                              String query2=String.format("update student_information set S_Pass='%s' where S_ID='%s'",confirmpass,Passed_id);
