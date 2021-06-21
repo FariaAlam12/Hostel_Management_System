@@ -187,6 +187,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         showstufflistBtnLabel = new javax.swing.JLabel();
         assignedWorkBtnLabel = new javax.swing.JLabel();
+        Assigned_Work_Seat_cancel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -235,7 +236,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Student Complain Or Seat Cancellation");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(50, 530, 360, 20);
+        jLabel2.setBounds(50, 530, 420, 20);
 
         issueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -316,7 +317,7 @@ public class ManagerInterface extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("See vacant Rooms");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(90, 400, 100, 30);
+        jLabel6.setBounds(90, 400, 150, 30);
 
         jLabel5.setFont(new java.awt.Font("Tempus Sans ITC", 1, 13)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -369,6 +370,15 @@ public class ManagerInterface extends javax.swing.JFrame {
         });
         jPanel1.add(assignedWorkBtnLabel);
         assignedWorkBtnLabel.setBounds(970, 660, 130, 50);
+
+        Assigned_Work_Seat_cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignedworkStatus.png"))); // NOI18N
+        Assigned_Work_Seat_cancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Assigned_Work_Seat_cancelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Assigned_Work_Seat_cancel);
+        Assigned_Work_Seat_cancel.setBounds(980, 750, 160, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -526,6 +536,12 @@ public class ManagerInterface extends javax.swing.JFrame {
      showInfo();    
     }//GEN-LAST:event_assignedWorkBtnLabelMouseClicked
 
+    private void Assigned_Work_Seat_cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Assigned_Work_Seat_cancelMouseClicked
+        Manager_Seat_Cancel_Review MSCR=new Manager_Seat_Cancel_Review(StuffIdpassed);
+        this.setVisible(false);
+        MSCR.setVisible(true);
+    }//GEN-LAST:event_Assigned_Work_Seat_cancelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -562,6 +578,7 @@ public class ManagerInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Assigned_Work_Seat_cancel;
     private javax.swing.JLabel addStudentBtnLabel;
     private javax.swing.JLabel addbillBtnLabel;
     private javax.swing.JLabel assignedWorkBtnLabel;

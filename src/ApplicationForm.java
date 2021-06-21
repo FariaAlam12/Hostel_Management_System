@@ -60,6 +60,7 @@ public class ApplicationForm extends javax.swing.JFrame {
         fulllpanel = new javax.swing.JPanel();
         upperpanel = new javax.swing.JPanel();
         upperlabel = new javax.swing.JLabel();
+        CrossBtn = new javax.swing.JLabel();
         nametitle = new javax.swing.JLabel();
         idlabel = new javax.swing.JLabel();
         emaillabel = new javax.swing.JLabel();
@@ -97,6 +98,7 @@ public class ApplicationForm extends javax.swing.JFrame {
         submitBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         fulllpanel.setBackground(new java.awt.Color(255, 255, 255));
         fulllpanel.setLayout(null);
@@ -107,6 +109,15 @@ public class ApplicationForm extends javax.swing.JFrame {
         upperlabel.setForeground(new java.awt.Color(255, 255, 255));
         upperlabel.setText("Fill Up The Required Info");
 
+        CrossBtn.setFont(new java.awt.Font("Tempus Sans ITC", 3, 24)); // NOI18N
+        CrossBtn.setForeground(new java.awt.Color(255, 255, 255));
+        CrossBtn.setText("X");
+        CrossBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrossBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout upperpanelLayout = new javax.swing.GroupLayout(upperpanel);
         upperpanel.setLayout(upperpanelLayout);
         upperpanelLayout.setHorizontalGroup(
@@ -114,13 +125,20 @@ public class ApplicationForm extends javax.swing.JFrame {
             .addGroup(upperpanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(upperlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(661, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 596, Short.MAX_VALUE)
+                .addComponent(CrossBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         upperpanelLayout.setVerticalGroup(
             upperpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(upperpanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(upperlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(upperpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(upperpanelLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(CrossBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, upperpanelLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(upperlabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -659,6 +677,12 @@ public class ApplicationForm extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_submitBtnLabelMouseClicked
 
+    private void CrossBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrossBtnMouseClicked
+       LogIn LI=new LogIn();
+       this.setVisible(false);
+       LI.setVisible(true);
+    }//GEN-LAST:event_CrossBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -695,6 +719,7 @@ public class ApplicationForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CrossBtn;
     private javax.swing.JLabel address_invalid;
     private javax.swing.JTextArea addressarea;
     private javax.swing.JLabel addresslabel;
