@@ -232,7 +232,6 @@ public class ManagerInterface extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         showstufflistBtnLabel = new javax.swing.JLabel();
         assignedWorkBtnLabel = new javax.swing.JLabel();
-        assignedworkstatusBtnLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -416,16 +415,6 @@ public class ManagerInterface extends javax.swing.JFrame {
         jPanel1.add(assignedWorkBtnLabel);
         assignedWorkBtnLabel.setBounds(970, 660, 130, 50);
 
-        assignedworkstatusBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assignedworkStatus.png"))); // NOI18N
-        assignedworkstatusBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        assignedworkstatusBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                assignedworkstatusBtnLabelMouseClicked(evt);
-            }
-        });
-        jPanel1.add(assignedworkstatusBtnLabel);
-        assignedworkstatusBtnLabel.setBounds(970, 720, 180, 50);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -587,12 +576,6 @@ public class ManagerInterface extends javax.swing.JFrame {
      showInfo();    
     }//GEN-LAST:event_assignedWorkBtnLabelMouseClicked
 
-    private void assignedworkstatusBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedworkstatusBtnLabelMouseClicked
-        Assigned_Work_Status_interface aws=new Assigned_Work_Status_interface(StuffIdpassed);
-        this.setVisible(false);
-       aws.setVisible(true);
-    }//GEN-LAST:event_assignedworkstatusBtnLabelMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -632,7 +615,6 @@ public class ManagerInterface extends javax.swing.JFrame {
     private javax.swing.JLabel addStudentBtnLabel;
     private javax.swing.JLabel addbillBtnLabel;
     private javax.swing.JLabel assignedWorkBtnLabel;
-    private javax.swing.JLabel assignedworkstatusBtnLabel;
     private javax.swing.JLabel gotoprofile;
     private javax.swing.JTable issueTable;
     private javax.swing.JLabel jLabel1;

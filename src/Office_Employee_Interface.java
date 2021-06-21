@@ -137,6 +137,8 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         ProfileBackLabel = new javax.swing.JLabel();
+        assignedworkstatusBtnLabel = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -283,7 +285,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(27, 124, 161));
 
-        jLabel6.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Your Assigned Work");
 
@@ -301,8 +303,8 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 763, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 709, Short.MAX_VALUE)
                 .addComponent(ProfileBackLabel)
                 .addGap(28, 28, 28))
         );
@@ -321,6 +323,22 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 1110, 90);
 
+        assignedworkstatusBtnLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/workstatus.png"))); // NOI18N
+        assignedworkstatusBtnLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        assignedworkstatusBtnLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignedworkstatusBtnLabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(assignedworkstatusBtnLabel);
+        assignedworkstatusBtnLabel.setBounds(900, 730, 180, 50);
+
+        jLabel7.setFont(new java.awt.Font("Tempus Sans ITC", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Assigned Work Status");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(680, 734, 200, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -329,9 +347,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
 
         pack();
@@ -436,6 +452,12 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
       SI.setVisible(true);
     }//GEN-LAST:event_ProfileBackLabelMouseClicked
 
+    private void assignedworkstatusBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignedworkstatusBtnLabelMouseClicked
+        Paid_receipt aws=new Paid_receipt(stuff_id);
+        this.setVisible(false);
+        aws.setVisible(true);
+    }//GEN-LAST:event_assignedworkstatusBtnLabelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -475,12 +497,14 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     private javax.swing.JTable MillDetailTable;
     private javax.swing.JLabel ProfileBackLabel;
     private javax.swing.JLabel UpdateseatcancelLabel;
+    private javax.swing.JLabel assignedworkstatusBtnLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
