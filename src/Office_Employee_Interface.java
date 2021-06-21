@@ -401,8 +401,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
                       int fine=resultSet5.getInt("Fine");
                       int addbill=resultSet5.getInt("Additional_Bill");
                       int total=hallbill+messbill+laundrybill+fine+addbill;
-                      System.out.println(total);
- 
+
                       String query4=String.format("update Response_Issue set Issue_Status=3,Issue_Cost='%d' where S_ID='%s'",total,stuid);
                       resultSet2 = statement.executeQuery(query4);
                  }
@@ -420,7 +419,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
 
     private void searchIDLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIDLabelMouseClicked
         String Stu_id=studentID_Search_field.getText();
-       // System.out.println(Stu_id);
+     
         try {
           
            String query2=String.format("select * from Bills where S_ID='%s'",Stu_id);

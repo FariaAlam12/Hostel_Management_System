@@ -314,7 +314,7 @@ public class Paid_receipt extends javax.swing.JFrame {
                                     cstmt = conn.prepareCall (SQL);
                                     cstmt.setString(1,room_no);
                                     cstmt.setInt(2,count_seat);
-                                    System.out.println("Executing stored procedure...");
+                                   
                                     cstmt.execute();
 
                                 }

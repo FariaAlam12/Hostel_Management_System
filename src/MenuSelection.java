@@ -62,7 +62,7 @@ public class MenuSelection extends javax.swing.JFrame {
         int pos=day.indexOf(current_day);
         pos=(pos+1)%7;
         next_day=day.get(pos);
-        System.out.println(next_day);
+       
         tomorrowtitle.setText(next_day+"'s");
         
         // For showing tomorrow's menu and cost
@@ -97,7 +97,7 @@ public class MenuSelection extends javax.swing.JFrame {
            resultSet4 = statement.executeQuery(query4);
            if(resultSet4.next())
            {
-               System.out.println("kaj kore");
+              
                int bs=0,ls=0,ds=0;
                bs=resultSet4.getInt("Breakfast_Status");
                ls=resultSet4.getInt("Launch_Status");
@@ -122,7 +122,7 @@ public class MenuSelection extends javax.swing.JFrame {
            }
            else
            {
-               System.out.println("kaj kore na");
+               
            }
        } catch (SQLException ex) {
            Logger.getLogger(MenuSelection.class.getName()).log(Level.SEVERE, null, ex);

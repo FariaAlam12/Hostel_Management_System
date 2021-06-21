@@ -194,19 +194,19 @@ public class ComplainInterface extends javax.swing.JFrame {
 
     private void submitBtnLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLabelMouseClicked
          String issusename=IssueBtnGrp.getSelection().getActionCommand();
-        System.out.println(issusename);
+        
         String description=decriptionArea.getText();
         int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.NO_OPTION) {
-            //System.out.println("No button clicked");
+           
             decriptionArea.setText("");
             IssueBtnGrp.clearSelection();
        }
         else if (response == JOptionPane.YES_OPTION) {
         try {
             String query="insert into Response_Issue(Issue_Name,S_ID,Stuff_ID,Issue_Status,Issue_Descr,Issue_Cost) values(?,?,?,?,?,?)";
-            //System.out.println(description);
+         
             PreparedStatement ps=conn.prepareStatement(query);
             ps.setString(1,issusename);
             ps.setString(2,id);

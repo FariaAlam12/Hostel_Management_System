@@ -633,7 +633,7 @@ public class ApplicationForm extends javax.swing.JFrame {
                  }
 
             } catch (SQLException ex) {
-                System.out.println("Phone no not inserted");
+                
                 Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -651,7 +651,7 @@ public class ApplicationForm extends javax.swing.JFrame {
                     LI.setVisible(true);
 
                 } catch (SQLException ex) {
-                    System.out.println("Alt Phone no not inserted");
+                   
                     Logger.getLogger(ApplicationForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 

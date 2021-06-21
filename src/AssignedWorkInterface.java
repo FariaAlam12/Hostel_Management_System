@@ -264,9 +264,7 @@ public class AssignedWorkInterface extends javax.swing.JFrame {
                          pstmt.setString(2, stuid);
                          pstmt.execute();
                      }
-                     //updating response issue table
-                     // String query2=String.format("update Response_Issue set Issue_Status=2,Issue_Cost=%d where S_ID='%s'",cost,stuid);
-                     //  resultSet2 = statement.executeQuery(query2);
+                     
                  }
                
             }

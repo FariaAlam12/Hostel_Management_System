@@ -185,9 +185,7 @@ public class MonthlyBillAdd extends javax.swing.JFrame {
         try {
              String SQL = "{call addbills}";
              cstmt = conn.prepareCall (SQL);
-             //cstmt.setString(1,room_noo);
-             //cstmt.setInt(2,count_seat);
-             System.out.println("Executing Add bills procedure..." );
+          
              cstmt.execute();
             }
         catch (SQLException e) {

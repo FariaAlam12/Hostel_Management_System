@@ -130,11 +130,6 @@ public class LogIn extends javax.swing.JFrame {
         user_name.setBounds(510, 80, 134, 50);
 
         userNameTextField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTextFieldActionPerformed(evt);
-            }
-        });
         rightPanel.add(userNameTextField);
         userNameTextField.setBounds(475, 151, 208, 67);
 
@@ -182,17 +177,10 @@ public class LogIn extends javax.swing.JFrame {
         logInButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("./button1.png")));
     }//GEN-LAST:event_logInButtonMouseExited
 
-    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNameTextFieldActionPerformed
-
     private void logInButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logInButtonMouseClicked
        String id=userNameTextField.getText();
        String pass=passwordTextField.getText();
-       
-        //System.out.println("ID:"+id);
-       // System.out.println("Pass:"+pass);
-       
+
        // Student login
        if(id.charAt(0)=='2')
        {
@@ -202,7 +190,7 @@ public class LogIn extends javax.swing.JFrame {
            resultSet = statement.executeQuery(query);
            if(resultSet.next()==false)
            {
-               //System.out.println("Not found");
+              
                JFrame f=new JFrame();  
                JOptionPane.showMessageDialog(f,"Incorrect Id or Pass","Alert",JOptionPane.WARNING_MESSAGE);
                userNameTextField.setText("");
@@ -213,14 +201,11 @@ public class LogIn extends javax.swing.JFrame {
            resultSet.beforeFirst();//if statement
            resultSet.next();
            String studentid=resultSet.getString("S_ID");
-          // System.out.println(studentid);
+         
            Student_Interface st=new Student_Interface(studentid);
            this.setVisible(false);
            st.setVisible(true);
-           
-//           while(resultSet.next()){
-//               System.out.println(resultSet.getString("S_ID")+resultSet.getString("S_Name"));
-//           }
+
            }
         } catch (SQLException ex) {
            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -236,7 +221,7 @@ public class LogIn extends javax.swing.JFrame {
            resultSet = statement.executeQuery(query);
            if(resultSet.next()==false)
            {
-               //System.out.println("Not found");
+             
                JFrame f=new JFrame();  
                JOptionPane.showMessageDialog(f,"Incorrect Id or Pass","Alert",JOptionPane.WARNING_MESSAGE);
                userNameTextField.setText("");
@@ -244,31 +229,18 @@ public class LogIn extends javax.swing.JFrame {
            }
            else 
            {
-           resultSet.beforeFirst();//if statement 
+           resultSet.beforeFirst();
            resultSet.next();
            String stuffid=resultSet.getString("Stuff_ID");
            Stuff_Interface stu=new Stuff_Interface(stuffid);
            this.setVisible(false);
            stu.setVisible(true);
-           
-//           while(resultSet.next()){
-//               System.out.println(resultSet.getString("S_ID")+resultSet.getString("S_Name"));
-//           }
+ 
            }
         } catch (SQLException ex) {
            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
        }
        }
-      
-       
-       
-       
-       
-       
-                           
-        
-       
-        
 
     }//GEN-LAST:event_logInButtonMouseClicked
 

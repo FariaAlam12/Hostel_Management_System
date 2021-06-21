@@ -103,7 +103,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                while(resultSet5.next())
                {
                    String room_no=resultSet5.getString("Room_No");
-                  // System.out.println(stuff_name);
+                 
                    comboBox.addItem(room_no);
                }
                 stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
@@ -125,70 +125,25 @@ public class ManagerInterface extends javax.swing.JFrame {
        
        try {
           resultSet4 = statement2.executeQuery(query2);
-          //int rowcnt=resultSet4.getInt("c");
-           //System.out.println(rowcnt);
+       
             String stuid,issuename,issuedescription,roomno;
             TableColumn stuffColumn = issueTable.getColumnModel().getColumn(4);
              JComboBox comboBox = new JComboBox();
            while(resultSet4.next())
            {    
-               //Taking for stuff combolist
-           //    TableColumn stuffColumn = issueTable.getColumnModel().getColumn(4);
-              
-               
+
                stuid=resultSet4.getString("S_ID");
                issuename=resultSet4.getString("Issue_Name");
                issuedescription=resultSet4.getString("Issue_Descr");
                roomno=resultSet4.getString("Room_No");
                model2.insertRow(model2.getRowCount(),new Object[]{stuid,roomno,issuename,issuedescription,"     --Select Stuff-- "});
-               
-               /*
-               //Considering on Issue Status and room no extracting suff
-               String query4 = null;
-               
-               if(issuename.equals("Seat Cancel"))
-               {
-                  query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Office Employee' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-               else if(issuename.equals("Clean Issue"))
-               {
-                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Cleaner' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-                else if(issuename.equals("Food Issue"))
-               {
-                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Cook' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-                else if(issuename.equals("Electricity Issue"))
-               {
-                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Electrician' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-                else if(issuename.equals("Internet Issue"))
-               {
-                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='ISP' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-               //else if(issuename.equals("Laundry Issue"))
-               else
-                {
-                   query4=String.format("select Stuff_Name from Stuff_Information where Stuff_Rank='Laundry Man' and ('%s' between Assigned_Room_Lower and Assigned_Room_Upper)",roomno);
-               }
-               
-              resultSet5= statement.executeQuery(query4);
-               
-             //  String stuff_name;
-               while(resultSet5.next())
-               {
-                   String stuff_name=resultSet5.getString("Stuff_Name");
-                   System.out.println(stuff_name);
-                   comboBox.addItem(stuff_name);
-               }
-               stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
-               */
+
                String query4=String.format("select Stuff_ID from Stuff_Information where Manager_ID='101914004'");
                resultSet5 = statement.executeQuery(query4);
                while(resultSet5.next())
                {
                    String stuff_name=resultSet5.getString("Stuff_ID");
-                  // System.out.println(stuff_name);
+                 
                    comboBox.addItem(stuff_name);
                }
                 stuffColumn.setCellEditor(new DefaultCellEditor(comboBox));
@@ -199,7 +154,7 @@ public class ManagerInterface extends javax.swing.JFrame {
            
        } catch (SQLException ex) {
            //Logger.getLogger(ManagerInterface.class.getName()).log(Level.SEVERE, null, ex);
-           System.out.println("Resultset4");
+          
        }
    
     }
@@ -443,10 +398,9 @@ public class ManagerInterface extends javax.swing.JFrame {
         {
             String idd= ((String)pendinglist.getValueAt(i,0)).toString();
             String S_name= ((String)pendinglist.getValueAt(i,1)).toString();
-             String mail= ((String)pendinglist.getValueAt(i,2)).toString();
-             System.out.println(mail);
+            String mail= ((String)pendinglist.getValueAt(i,2)).toString();
             String room_noo=((String)pendinglist.getValueAt(i,10)).toString();
-            //room_noo=room_noo.substring(1);  // Removing extra space for the front of the string
+          
             Boolean chk= ((Boolean)pendinglist.getValueAt(i,11)).booleanValue();
             int count_seat=0;
             if(chk && !room_noo.equals("--Select Room--"))
@@ -465,11 +419,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                       resultSet2 = statement.executeQuery(query2);
                       resultSet2.next();
                     count_seat=resultSet2.getInt("Cur_No_Seat");
-                    System.out.println(count_seat);
-//                    count_seat++;
-//                    String query3=String.format("update Room_Information set Cur_No_Seat='%d' where Room_No='%s'",count_seat,room_noo);
-//                    resultSet3 = statement.executeQuery(query3);
-                    
+                   
                         // Using procedure to update room information table
                          CallableStatement cstmt = null;
                            try {
@@ -477,7 +427,7 @@ public class ManagerInterface extends javax.swing.JFrame {
                                  cstmt = conn.prepareCall (SQL);
                                 cstmt.setString(1,room_noo);
                                 cstmt.setInt(2,count_seat);
-                                System.out.println("Executing stored procedure..." );
+                              
                                  cstmt.execute();
    
                             }
@@ -548,18 +498,18 @@ public class ManagerInterface extends javax.swing.JFrame {
            resultSet = statement.executeQuery(query);
             resultSet.next();
            int no_of_row=resultSet.getInt("c");
-           System.out.println(no_of_row);
+          
            for(int i=0;i<no_of_row;i++)
            {
                
                String stuid= ((String)issueTable.getValueAt(i,0)).toString();
-            //System.out.println(stuid);
+          
             
             String stuffid=((String)issueTable.getValueAt(i,4)).toString();
             //stuffid=stuffid.substring(1);
             if(!stuffid.equals("     --Select Stuff-- "))
              {
-                System.out.println(stuffid);
+               
                 String query5=String.format("update Response_Issue set Issue_Status=1,Stuff_ID='%s' where S_ID='%s'",stuffid,stuid);
                 resultSet6 = statement.executeQuery(query5);
                  

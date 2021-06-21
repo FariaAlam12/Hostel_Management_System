@@ -211,7 +211,7 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
              String curpass=currpassText.getText();
             
              String confirmpass=confirmnewpassText.getText();
-             System.out.println(confirmpass);
+            
              if(Passed_id.charAt(0)=='2')
              {
                  String query=String.format("select S_Pass from student_information where S_ID='%s'",Passed_id);
@@ -290,7 +290,7 @@ public class PasswordChangeInterface extends javax.swing.JFrame {
              //employees
              else
              {
-                 System.out.println("Else");
+                 
                  String query=String.format("select Stuff_Pass from Stuff_Information where Stuff_ID='%s'",Passed_id);
                  try {
                    resultSet = statement.executeQuery(query);
