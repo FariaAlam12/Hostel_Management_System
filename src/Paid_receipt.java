@@ -61,7 +61,7 @@ public class Paid_receipt extends javax.swing.JFrame {
         model.setRowCount(0);
         no_Receipt.setVisible(false);
         imageLabel.setVisible(false);
-        String  query=String.format("select * from Response_Issue where Issue_Status!=0");
+        String  query=String.format("select * from Response_Issue where Issue_Status!=0 and Issue_Name!='Seat Cancel'");
         String issue_name,stu_id,stuff_id,Issue_des;
         int Issue_status,issue_cost;
        try {

@@ -92,7 +92,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
        //For Seat cancel table 
          model2=(DefaultTableModel) seatcanceltable.getModel();
          model2.setRowCount(0);
-         String query2=String.format("select S_ID,Issue_Descr from Response_Issue where Stuff_ID='%s' and Issue_Status=1",stuff_id);
+         String query2=String.format("select S_ID,Issue_Descr from Response_Issue where Stuff_ID='%s' and Issue_Status=1 and Issue_Name='Seat Cancel'",stuff_id);
          
        try {
            resultSet = statement.executeQuery(query2);
@@ -372,7 +372,7 @@ public class Office_Employee_Interface extends javax.swing.JFrame {
     private void UpdateseatcancelLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdateseatcancelLabelMouseClicked
          int response = JOptionPane.showConfirmDialog(null, "Are you Confirm?", "Confirm",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (response == JOptionPane.YES_OPTION) {
-        String query3=String.format("select count(*) as c from Response_Issue where Stuff_ID='%s' and Issue_Status=1",stuff_id);
+        String query3=String.format("select count(*) as c from Response_Issue where Stuff_ID='%s' and Issue_Status=1 and Issue_Name='Seat Cancel'",stuff_id);
        try {
            resultSet = statement.executeQuery(query3);
            resultSet.next();
