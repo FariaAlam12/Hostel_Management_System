@@ -20,7 +20,7 @@ public class Paid_receipt extends javax.swing.JFrame {
 
     Connection conn;
    Statement statement;
-   ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5,resultSet6,resultSet7,resultSet8;
+   ResultSet resultSet,resultSet2,resultSet3,resultSet4,resultSet5,resultSet6,resultSet7,resultSet8,resultSet9;
     ResultSetMetaData resultsetMetaData;
     int rowcount;
     String stuff_passed_id;
@@ -251,9 +251,9 @@ public class Paid_receipt extends javax.swing.JFrame {
 
             String query=String.format("select count(*) as c from Response_Issue where Issue_Status!=0");
             try {
-                resultSet = statement.executeQuery(query);
-                resultSet.next();
-                rowcount=resultSet.getInt("c");
+                resultSet9 = statement.executeQuery(query);
+                resultSet9.next();
+                rowcount=resultSet9.getInt("c");
                 for(int i=0;i<rowcount;i++)
                 {
                     String issue_name=((String)pending_complete_table.getValueAt(i,0)).toString();
@@ -274,7 +274,7 @@ public class Paid_receipt extends javax.swing.JFrame {
                             addi_bill+=issue_cost;
                             query7=String.format("update Bills set Additional_Bill='%d' where S_ID='%s'",addi_bill,studidd);
                             resultSet8= statement.executeQuery(query7);
-
+                              System.out.println("Hello");
                             String query2=String.format("Delete from Response_Issue where S_ID='%s' and Stuff_ID='%s'",studidd,stuffid);
                             resultSet2 = statement.executeQuery(query2);
                         }

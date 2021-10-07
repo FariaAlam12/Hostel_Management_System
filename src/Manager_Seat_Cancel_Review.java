@@ -53,7 +53,7 @@ public class Manager_Seat_Cancel_Review extends javax.swing.JFrame {
         model=(DefaultTableModel) pending_complete_table.getModel(); 
         model.setRowCount(0);
         
-        String  query=String.format("select * from Response_Issue where Issue_Status=3 OR Issue_Status=4");
+        String  query=String.format("select * from Response_Issue where Issue_Status=3 OR Issue_Status=4 OR Issue_Status=0");
         String issue_name,stu_id,stuff_id,Issue_des;
         int Issue_status,issue_cost;
         try {
@@ -74,6 +74,10 @@ public class Manager_Seat_Cancel_Review extends javax.swing.JFrame {
                 else if(Issue_status==4)
                 {
                     model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Payment Clear",Issue_des,issue_cost,false});
+                } 
+                else if(Issue_status==0)
+                {
+                    model.insertRow(model.getRowCount(),new Object[]{issue_name,stu_id,stuff_id,"Pending",Issue_des,issue_cost,false});
                 } 
            }
             

@@ -32,8 +32,8 @@ public class OracleConnection {
         
         final String port="1521";
         final String db="xe";
-       final String user="Faria Alam";
-      final String password="4736910";
+       final String user="SYSTEM";
+      final String password="1234";
  //       final String user="emon49";
  //       final String password="emon49";
         final String jdbcUrl="jdbc:oracle:thin:@localhost:1521:xe";
